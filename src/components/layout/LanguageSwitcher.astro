@@ -1,0 +1,7 @@
+---
+const { currentLang } = Astro.props;
+---
+
+<a href={currentLang === "de" ? "/en/" : "/"}>
+    {currentLang === "de" ? "switch to Englisch" : "wechsele zur deutschen Seite"}
+</a>

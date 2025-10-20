@@ -1,0 +1,11 @@
+---
+import type { LocaleNavItem } from "../../types/NavItem";
+
+interface Props {
+    navItem: LocaleNavItem
+}
+
+const { navItem } = Astro.props; 
+---
+
+<li><a href={navItem.href}>{navItem.title}</a></li>

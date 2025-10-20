@@ -1,0 +1,8 @@
+{
+  "nav": {
+    "home": { "title": "Home", "href": "/en/" },
+    "about": { "title": "About me", "href": "/en/about/" },
+    "blog": { "title": "Blog", "href": "/en/blog/" },
+    "github": { "title": "My Github", "href": "https://www.github.com/mkuhles", "target": "_blank"}
+  }
+}
