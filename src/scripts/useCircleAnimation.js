@@ -11,7 +11,7 @@ export default function useCircleAnimation(skipInitialAnimation = false) {
   let radius = 0;
   let opacity = 0;
   let windowsize = [window.innerWidth, window.innerHeight];
-console.log(skipInitialAnimation);
+
   const [width, height] = windowsize;
   const vmin = width < height ? width : height;
   const maxRadius = vmin * 0.3; // 50px padding
@@ -35,12 +35,11 @@ console.log(skipInitialAnimation);
     arrangeCircleElements(angle, radius, opacity);
   }, 25);
 
-  window.addEventListener('beforeunload', () => {
-    window.removeEventListener('resize', handleResize);
+  // return cleanup so caller can stop the animation
+  return function stop() {
     clearInterval(interval);
-  });
-  
-  return;
+    window.removeEventListener('resize', handleResize);
+  };
 }
 
 function calculateNextState(previous, max, step) {

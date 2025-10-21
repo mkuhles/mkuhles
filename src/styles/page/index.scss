@@ -71,11 +71,6 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-
-    img {
-        max-width: 100%;
-        max-height: 100%;
-    }
   }
 
   .center-element {
@@ -89,6 +84,7 @@
     transform: translate(-50%, -50%);
     font-weight: bold;
     z-index: 100;
+    text-align: center;
   }
 
   .circle-element {

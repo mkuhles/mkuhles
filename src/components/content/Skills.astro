@@ -42,12 +42,27 @@ const skills = [
   ); // Fallback
 
 const container = document.getElementById('circle-container');
+let stopAnimation: (() => void) | undefined | null = null;
+
+function start() {
+    if (!stopAnimation) {
+        stopAnimation = useCircleAnimation(mq.matches); // startet animation und gibt cleanup zurück
+    }
+}
+  function stop() {
+    if (stopAnimation) {
+      stopAnimation();
+      stopAnimation = null;
+    }
+  }
+
 const onScroll = () => {
     if(!container) return;
     const rect = container.getBoundingClientRect();
     const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
-    if (inView) useCircleAnimation(mq.matches);
+    if (inView) start(); else stop();
 };
-
+  window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+  window.addEventListener('beforeunload', () => { window.removeEventListener('scroll', onScroll); stop(); });
 </script>
