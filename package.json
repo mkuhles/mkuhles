@@ -9,6 +9,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.14.7"
+    "@tailwindcss/vite": "^4.1.15",
+    "astro": "^5.14.7",
+    "sass": "^1.93.2",
+    "tailwindcss": "^4.1.15"
+  },
+  "devDependencies": {
+    "vite-imagetools": "^9.0.0"
   }
 }

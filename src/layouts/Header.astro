@@ -1,0 +1,40 @@
+---
+import type { NavEntry, LocaleNav, LocalesIndex } from "../types/NavItem.ts";
+import type { Language }  from "../types/Language.ts";
+import Navigation from "../components/layout/Navigation.astro";
+
+import nav from '../data/navigation.json';
+import locales from '../data/locales/index.js';
+import Section from "./Section.astro";
+
+interface Props {
+    pageTitle: string;
+    lang: Language["key"];
+}
+
+const {pageTitle, lang} = Astro.props;
+
+const locale = (locales as LocalesIndex)[lang] ?? (locales as LocalesIndex).de;
+const localeNav = (nav as NavEntry[]).map((item) => {
+    const t = (locale.nav as LocaleNav)[item.id];
+    return { title: t?.title ?? item.id, href: t?.href ?? item.slug, target: t?.target ?? "" };
+});
+---
+
+<header>
+    <Section type="header">
+        <Navigation className="header-nav" lang={lang} navItems={localeNav} /> 
+    </Section>
+</header>
+
+<style lang="scss" scoped>
+    .section {
+        &__content {
+            display: block;
+            background-color: red;
+        }
+        &__text {
+            width: 100%;
+        }
+    }
+</style>

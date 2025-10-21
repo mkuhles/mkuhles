@@ -1,13 +1,18 @@
 ---
+import "../../styles/page/index.scss";
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import type { CollectionEntry } from "astro:content";
+import Section from "../../layouts/Section.astro";
 
-async function getPostById(sections: CollectionEntry<'post'>[], wantedId: string) {
+import heroSrcset from '../../assets/images/foto-mkuhles.jpg?w=480;768;1200&format=webp;jpeg&as=srcset';
+import heroSrc from '../../assets/images/foto-mkuhles.jpg?w=1200&format=jpeg&as=src';
+
+async function getPostById(sections: CollectionEntry<'sections'>[], wantedId: string) {
   let entry = sections.find(e => e.id === wantedId);
   if (!entry) throw new Error(`Content not found for ${wantedId}`);
   const rendered = await entry.render();
-  return rendered.Content;
+  return {entry: entry, Content: rendered.Content};
 }
 
 export async function getStaticPaths() {
@@ -17,11 +22,14 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params;
 
-const sections = await getCollection('post');
-console.log(sections);
-const About = await getPostById(sections, `${lang}/about.md`);
+const sections = await getCollection('sections');
+const {entry: about, Content: About} = await getPostById(sections, `${lang}/about.md`);
+const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", className: "circle"}
 ---
 
 <BaseLayout title="Home" lang={lang}>
-	<About />
+	<Section type="about" entry={about} image={image}>
+    <About />
+  </Section>
+  
 </BaseLayout>

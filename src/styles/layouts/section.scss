@@ -1,0 +1,7 @@
+@import "../variables";
+
+.section {
+    max-width: 1000px;
+    margin: auto;
+    padding: var(--spacing);
+}
