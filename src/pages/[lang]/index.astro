@@ -7,6 +7,7 @@ import Section from "../../layouts/Section.astro";
 
 import heroSrcset from '../../assets/images/foto-mkuhles.jpg?w=480;768;1200&format=webp;jpeg&as=srcset';
 import heroSrc from '../../assets/images/foto-mkuhles.jpg?w=1200&format=jpeg&as=src';
+import Skills from "../../components/content/Skills.astro";
 
 async function getPostById(sections: CollectionEntry<'sections'>[], wantedId: string) {
   let entry = sections.find(e => e.id === wantedId);
@@ -28,8 +29,7 @@ const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", class
 ---
 
 <BaseLayout title="Home" lang={lang}>
-	<Section type="about" entry={about} image={image}>
-    <About />
-  </Section>
+	<Section type="about" entry={about} image={image}><About /></Section>
+  <Section type="skills"><Skills lang={lang} /></Section>
   
 </BaseLayout>

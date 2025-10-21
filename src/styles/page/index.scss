@@ -1,34 +1,98 @@
-  @import "../variables";
-  
-  .section--about {
-    max-width: 100%;
-    margin: auto;
+@use "../variables";
 
-    .section__content {
-      display: flex;
-      gap: var(--spacing);
-      align-items: center;
-    }
+/*
+  * about
+  */
+.section--about {
+  max-width: 100%;
+  margin: auto;
+  display: flex;
 
-    .section__image {
-      width: 40%;
-    }
-
-    .section__text {
-      font-size: 1.5rem;
-      // line-height: 1.5rem;
-
-      p {
-        vertical-align: middle;
-      }
-
-      strong {
-        font-size: 6rem;
-        display: block;
-        float: left;
-        line-height: .6em;
-        margin-right: .5rem;
-      }
-    }
-
+  .section__content {
+    display: flex;
+    gap: var(--spacing);
+    align-items: center;
   }
+
+  .section__image {
+    width: 40%;
+  }
+
+  .section__text {
+    font-size: 1.5rem;
+    // line-height: 1.5rem;
+
+    p {
+      vertical-align: middle;
+    }
+
+    strong {
+      font-size: 6rem;
+      display: block;
+      float: left;
+      line-height: .6em;
+      margin-right: .5rem;
+    }
+  }
+}
+
+/*
+ * Skills
+ */
+.section.section--skills {
+  padding: 0;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ #circle-container {
+  min-height: 100vmin;
+  position: relative;
+  width: var(--circle-diameter);
+  height: var(--circle-diameter);
+  border-radius: 50%;
+
+  .circle {
+    position: absolute;
+    width: var(--circle-element-diameter);
+    height: var(--circle-element-diameter);
+    max-width: var(--circle-element-max-diameter);
+    max-height: var(--circle-element-max-diameter);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+  }
+
+  .center-element {
+    position: absolute;
+    width: var(--center-element-diameter);
+    height: var(--center-element-diameter);
+    max-width: var(--center-element-max-diameter);
+    max-height: var(--center-element-max-diameter);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    z-index: 100;
+  }
+
+  .circle-element {
+    font-weight: bold;
+    opacity: 0;
+  }
+}

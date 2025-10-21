@@ -15,7 +15,6 @@ let { type, id = '', entry = null, image } = Astro.props;
 const className = 'section '
     + (type ? ` section--${type}` : "") 
     + (Astro.props.className ? ` ${Astro.props.className}` : '');
-console.log(entry);
 ---
 
 <section class={className} id={id}>

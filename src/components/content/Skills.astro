@@ -1,0 +1,53 @@
+---
+import SkillElement from "../SkillElement.astro"
+
+const {lang} = Astro.props;
+const skills = [
+    "mysql",
+    "bash scripts",
+    "git",
+    "css",
+    "json",
+    "jira",
+    "js",
+    "drupal",
+    "symfony",
+    "react",
+    "vue.js",
+    "astrojs",
+    "php",
+    "webpack",
+    "docker",
+    "wordpress"
+]
+---
+
+<div class="flex-center">
+    <div id="circle-container" class="circle-container">
+        <div class="center-element circle">{lang == 'de' ? "Ich kann" : "my skills"}</div>
+        {skills.map( (skill) => <SkillElement skill={skill} /> )}
+    </div>
+</div>
+
+<script>        
+  import useCircleAnimation from "../../scripts/useCircleAnimation";
+
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.documentElement.classList.toggle('reduced-motion', mq.matches);
+  mq.addEventListener?.('change', e =>
+    document.documentElement.classList.toggle('reduced-motion', e.matches)
+  );
+  mq.addListener?.(e =>
+    document.documentElement.classList.toggle('reduced-motion', e.matches)
+  ); // Fallback
+
+const container = document.getElementById('circle-container');
+const onScroll = () => {
+    if(!container) return;
+    const rect = container.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
+    if (inView) useCircleAnimation(mq.matches);
+};
+
+  onScroll();
+</script>
