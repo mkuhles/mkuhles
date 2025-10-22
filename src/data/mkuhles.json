@@ -6,7 +6,7 @@
     {"name":"css","knowledge":0.9},
     {"name":"json","knowledge":1},
     {"name":"jira","knowledge":0.5},
-    {"name":"vanilla js","knowledge":0.8},
+    {"name":"JavaScript","knowledge":0.8},
     {"name":"drupal","knowledge":0.7},
     {"name":"symfony","knowledge":0.6},
     {"name":"react","knowledge":0.7},
@@ -15,6 +15,7 @@
     {"name":"php","knowledge":0.8},
     {"name":"webpack","knowledge":0.3},
     {"name":"docker","knowledge":0.3},
-    {"name":"wordpress","knowledge":0.5}
+    {"name":"wordpress","knowledge":0.5},
+    {"name":"TypeScript","knowledge":0.6}
   ]
 }
