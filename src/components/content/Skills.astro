@@ -1,33 +1,43 @@
 ---
-import SkillElement from "../SkillElement.astro"
+import SkillElement from "./SkillElement.astro";
+import {skills} from "../../data/mkuhles.json";
+import { COLOR_SCALE } from "../../scripts/collorCalculations";
 
 const {lang} = Astro.props;
-const skills = [
-    "mysql",
-    "bash scripts",
-    "git",
-    "css",
-    "json",
-    "jira",
-    "js",
-    "drupal",
-    "symfony",
-    "react",
-    "vue.js",
-    "astrojs",
-    "php",
-    "webpack",
-    "docker",
-    "wordpress"
-]
+const colorScaleString = COLOR_SCALE.join();
 ---
-
 <div class="flex-center">
-    <div id="circle-container" class="circle-container">
-        <div class="center-element circle">{lang == 'de' ? "Ich kann" : "my skills"}</div>
-        {skills.map( (skill) => <SkillElement skill={skill} /> )}
-    </div>
+  <div class="scale">
+    <div class="scale__top">{"Grundlagen"}</div>
+    <div class="scale__bottom">{"Expertenwissen"}</div>
+  </div>
+  <div id="circle-container" class="circle-container">
+    <div class="center-element circle">{lang == 'de' ? "Ich kann" : "my skills"}</div>
+    {skills.map( (skill) => <SkillElement skill={skill} /> )}
+  </div>
 </div>
+
+<style define:vars={{colorScaleString}}>
+/* Legende als Verlauf */
+.scale {
+  position: relative;
+  width: 12px;
+  height: 80vmin;
+  background: linear-gradient(to bottom,
+    var(--colorScaleString));
+}
+.scale__top {
+  position: absolute;
+  top: 0;
+  left: 18px;
+}
+.scale__bottom {
+  position: absolute;
+  bottom: 0;
+  left: 18px;
+}
+
+</style>
 
 <script>        
   import useCircleAnimation from "../../scripts/useCircleAnimation";

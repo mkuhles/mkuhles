@@ -1,0 +1,12 @@
+---
+import { pickColor, textOn } from "../../scripts/collorCalculations";
+
+
+const { skill } = Astro.props;
+const bgcolor = pickColor(skill.knowledge);
+const color = textOn(bgcolor);
+---
+
+<div class="circle-element circle" style=`color:${color};background-color:${bgcolor};`>
+  {skill.name}
+</div>

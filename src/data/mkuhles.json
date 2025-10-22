@@ -1,0 +1,20 @@
+{
+  "skills": [
+    {"name":"mysql","knowledge":0.5},
+    {"name":"bash scripts","knowledge":0.2},
+    {"name":"git","knowledge":0.7},
+    {"name":"css","knowledge":0.9},
+    {"name":"json","knowledge":1},
+    {"name":"jira","knowledge":0.5},
+    {"name":"vanilla js","knowledge":0.8},
+    {"name":"drupal","knowledge":0.7},
+    {"name":"symfony","knowledge":0.6},
+    {"name":"react","knowledge":0.7},
+    {"name":"vue.js","knowledge":0.5},
+    {"name":"astrojs","knowledge":0.4},
+    {"name":"php","knowledge":0.8},
+    {"name":"webpack","knowledge":0.3},
+    {"name":"docker","knowledge":0.3},
+    {"name":"wordpress","knowledge":0.5}
+  ]
+}
