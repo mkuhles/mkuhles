@@ -6,7 +6,7 @@ const ANGLE_STEP = (2 * Math.PI) / STEP_NUMBER;
 const MAX_OPACITY = 1;
 const OPACITY_STEP = 1 / STEP_NUMBER;
 
-export default function useCircleAnimation(skipInitialAnimation = false) {
+export default function useCircleAnimation(skipInitialAnimation:boolean = false) {
   let angle = 0;
   let radius = 0;
   let opacity = 0;
@@ -42,7 +42,7 @@ export default function useCircleAnimation(skipInitialAnimation = false) {
   };
 }
 
-function calculateNextState(previous, max, step) {
+function calculateNextState(previous: number, max: number, step: number): number {
   if (previous >= max - step) {
     return max;
   }

@@ -1,6 +1,6 @@
-export default function arrangeCircleElements(globalAngle, globalRadius, globalOpacity) {
-    const elementsNodeList = document.querySelectorAll('.circle-element');
-    const elements = Array.from(elementsNodeList);
+export default function arrangeCircleElements(globalAngle: number, globalRadius: number, globalOpacity: number) {
+    const elementsNodeList = document.querySelectorAll<HTMLElement>('.circle-element');
+    const elements = Array.from(elementsNodeList) as HTMLElement[];
     const container = document.getElementById('circle-container');
     if (!container) return; // Ensure the container exists
     if (!elements.length) return;
