@@ -67,18 +67,17 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+    text-align: center;
+    font-size: var(--circle-element-font-size);
+    padding: var(--circle-element-padding);
   }
 
   .center-element {
     position: absolute;
-    width: var(--center-element-diameter);
-    height: var(--center-element-diameter);
-    max-width: var(--center-element-max-diameter);
-    max-height: var(--center-element-max-diameter);
+    width: var(--circle-element-diameter);
+    height: var(--circle-element-diameter);
+    max-width: var(--circle-element-max-diameter);
+    max-height: var(--circle-element-max-diameter);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
