@@ -12,20 +12,30 @@ export default function useCircleAnimation(skipInitialAnimation:boolean = false)
   let opacity = 0;
   let windowsize = [window.innerWidth, window.innerHeight];
 
-  const [width, height] = windowsize;
-  const vmin = width < height ? width : height;
-  const maxRadius = vmin * 0.3; // 50px padding
-  const radiusStep = maxRadius / STEP_NUMBER;
-  
-  if (skipInitialAnimation) {
-    arrangeCircleElements(MAX_ANGLE, maxRadius, MAX_OPACITY);
-    return;
+  let width, height, vmin, maxRadius, radiusStep;
+
+  function recomputeSizes() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    vmin = Math.min(width, height);
+    maxRadius = vmin * 0.3;
+    radiusStep = maxRadius / STEP_NUMBER;
+
+    // keep current radius within new bounds (don't restart animation)
+    if (radius > maxRadius) radius = maxRadius;
   }
 
   function handleResize() {
-    windowsize = [window.innerWidth, window.innerHeight];
+    recomputeSizes();
+    arrangeCircleElements(angle, radius, opacity);
   }
+  recomputeSizes();
   window.addEventListener('resize', handleResize);
+
+  if (skipInitialAnimation) {
+    arrangeCircleElements(MAX_ANGLE, maxRadius, MAX_OPACITY);
+    return function stopNoop() { /* nothing to cleanup */ };
+  }
 
   const interval = setInterval(() => {
     angle = calculateNextState(angle, MAX_ANGLE, ANGLE_STEP);
