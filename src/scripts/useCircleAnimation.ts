@@ -7,11 +7,7 @@ const MAX_OPACITY = 1;
 const OPACITY_STEP = 1 / STEP_NUMBER;
 
 export default function useCircleAnimation(skipInitialAnimation:boolean = false) {
-  let angle = 0;
-  let radius = 0;
-  let opacity = 0;
-  let windowsize = [window.innerWidth, window.innerHeight];
-
+  let angle = 0, radius = 0, opacity = 0;
   let width, height, vmin, maxRadius, radiusStep;
 
   function recomputeSizes() {
