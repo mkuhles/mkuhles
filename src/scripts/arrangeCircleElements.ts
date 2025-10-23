@@ -28,26 +28,20 @@ export default function arrangeCircleElements(globalAngle: number, globalRadius:
     const innerAngleStep = innerCount > 0 ? (2 * Math.PI) / innerCount : 0;
     const outerAngleStep = outerCount > 0 ? (2 * Math.PI) / outerCount : 0;
 
-    // positioniere innere Gruppe
-    innerElems.forEach((element, i) => {
-        const angle = i * innerAngleStep - globalAngle - Math.PI / 2;
-        const r = innerRadius;
-        const x = centerX + r * Math.cos(angle) - element.offsetWidth / 2;
-        const y = centerY + r * Math.sin(angle) - element.offsetHeight / 2;
-        element.style.left = `${x}px`;
-        element.style.top = `${y}px`;
-        element.style.opacity = typeof globalOpacity === 'number' ? globalOpacity : 1;
-    });
+    // helper to position a group of elements with its own angle step and radius
+    const opacityStr = typeof globalOpacity === 'number' ? String(globalOpacity) : '1';
+    function positionGroup(elems: HTMLElement[], angleStep: number, radiusVal: number, angleSign: number) {
+        elems.forEach((el, i) => {
+            const angle = i * angleStep + angleSign * globalAngle - Math.PI / 2;
+            const x = centerX + radiusVal * Math.cos(angle) - el.offsetWidth / 2;
+            const y = centerY + radiusVal * Math.sin(angle) - el.offsetHeight / 2;
+            el.style.left = `${x}px`;
+            el.style.top = `${y}px`;
+            el.style.opacity = opacityStr;
+        });
+    }
 
-    
-    // positioniere äußere Gruppe
-    outerElems.forEach((element, i) => {
-        const angle = i * outerAngleStep + globalAngle - Math.PI / 2;
-        const r = baseRadius;
-        const x = centerX + r * Math.cos(angle) - element.offsetWidth / 2;
-        const y = centerY + r * Math.sin(angle) - element.offsetHeight / 2;
-        element.style.left = `${x}px`;
-        element.style.top = `${y}px`;
-        element.style.opacity = typeof globalOpacity === 'number' ? globalOpacity : 1;
-    });
+    // positioniere innere und äußere Gruppe
+    positionGroup(innerElems, innerAngleStep, innerRadius, -1);
+    positionGroup(outerElems, outerAngleStep, baseRadius, +1);
 }

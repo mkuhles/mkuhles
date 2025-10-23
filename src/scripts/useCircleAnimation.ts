@@ -7,8 +7,8 @@ const MAX_OPACITY = 1;
 const OPACITY_STEP = 1 / STEP_NUMBER;
 
 export default function useCircleAnimation(skipInitialAnimation:boolean = false) {
-  let angle = 0, radius = 0, opacity = 0;
-  let width, height, vmin, maxRadius, radiusStep;
+  let angle: number = 0, radius: number = 0, opacity: number = 0;
+  let width: number, height: number, vmin: number, maxRadius: number, radiusStep: number;
 
   function recomputeSizes() {
     width = window.innerWidth;
@@ -19,13 +19,15 @@ export default function useCircleAnimation(skipInitialAnimation:boolean = false)
 
     // keep current radius within new bounds (don't restart animation)
     if (radius > maxRadius) radius = maxRadius;
+
+    return [width,height,vmin,maxRadius,radiusStep];
   }
 
   function handleResize() {
-    recomputeSizes();
+    [width,height,vmin,maxRadius,radiusStep] = recomputeSizes();
     arrangeCircleElements(angle, radius, opacity);
   }
-  recomputeSizes();
+  [width,height,vmin,maxRadius,radiusStep] = recomputeSizes();
   window.addEventListener('resize', handleResize);
 
   if (skipInitialAnimation) {
