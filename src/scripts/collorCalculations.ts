@@ -6,8 +6,15 @@ export const COLOR_SCALE = [
   '#476786', '#3E5C7A'
 ];
 
-export const lightFontColor = '#fff';
-export const darkFontColor = '#111';
+export const white = '#fff';
+export const eggshell = '#f0ebe1';
+export const black = '#111';
+
+export const gradientStart = white;
+export const gradientEnd = eggshell;
+
+export const lightFontColor = white;
+export const darkFontColor = black;
 
 
 export const pickColor = (t: number, scale = COLOR_SCALE) => {
@@ -16,7 +23,6 @@ export const pickColor = (t: number, scale = COLOR_SCALE) => {
   return scale[i];
 };
 
-// YIQ-Heuristik (reicht hier völlig)
 export const textOn = (hex: string) => {
   const [r,g,b] = hex.replace('#','').match(/.{2}/g)!.map(x => parseInt(x,16));
   const yiq = (r*299 + g*587 + b*114) / 1000; // ~Luminanz
@@ -30,6 +36,11 @@ export const writeCssVarsToHTML = () => {
   });
   cssVars += "--text-color: " + darkFontColor + ";\n";
   cssVars += "--text-color-inv: " + lightFontColor + ";\n";
+  cssVars += "--color-white: " + white + ";\n";
+  cssVars += "--color-eggshell: " + eggshell + ";\n";
+  cssVars += "--color-black: " + black + ";\n";
+  cssVars += "--gradient-color-1: " + gradientStart + ";\n";
+  cssVars += "--gradient-color-2: " + gradientEnd + ";\n";
 
   const head = document.head || document.getElementsByTagName('head')[0];
   let style = document.createElement('style');
