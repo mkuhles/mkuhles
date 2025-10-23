@@ -1,15 +1,3 @@
 :root {
-    --spacing: 3rem;
-
-    --background-primary: lightblue;
-    --shadow-color: gray;
-    --text-color: black;
-
-
-    
-  --circle-diameter: 85vmin;
-  --circle-element-diameter: 12vmin;
-  --circle-element-max-diameter: 400px;
-  --circle-element-font-size: 2vmin;
-  --circle-element-padding: .5vmin;
+  --spacing: max(2vmin,15px);
 }

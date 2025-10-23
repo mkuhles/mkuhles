@@ -28,7 +28,7 @@ const {entry: about, Content: About} = await getPostById(sections, `${lang}/abou
 const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", className: "circle"}
 
 
-// ToDO: make about work on all screens better
+// ToDO: make about work on mobile better
 // ToDo: think about mobile skils view
 
 ---
@@ -36,5 +36,4 @@ const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", class
 <BaseLayout title="Home" lang={lang}>
 	<Section type="about" entry={about} image={image}><About /></Section>
   <Section type="skills"><Skills lang={lang} /></Section>
-  
 </BaseLayout>

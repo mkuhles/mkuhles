@@ -5,9 +5,16 @@ import { COLOR_SCALE } from "../../scripts/collorCalculations";
 
 const {lang} = Astro.props;
 const colorScaleString = COLOR_SCALE.join();
+
+const circleDiameter =           "85vmin";
+const circleElementDiameter =    "13vmin";
+const circleElementMaxDiameter = "400px";
+const circleElementFontSize =    "2vmin";
+const circleElementPadding =     "1vmin";
+const scaleWidth =               "1.5vmin";
 ---
 <div class="flex-center">
-  <div class="scale">
+  <div id="skillLevelScale" class="scale">
     <div class="scale__top">{"Grundlagen"}</div>
     <div class="scale__bottom">{"Expertenwissen"}</div>
   </div>
@@ -17,31 +24,79 @@ const colorScaleString = COLOR_SCALE.join();
   </div>
 </div>
 
-<style define:vars={{colorScaleString}}>
+<style define:vars={{colorScaleString, circleDiameter, circleElementDiameter, circleElementMaxDiameter, circleElementFontSize, circleElementPadding, scaleWidth}}>
 /* Legende als Verlauf */
 .scale {
   position: relative;
-  width: 12px;
-  height: 80vmin;
+  width: var(--scaleWidth);
+  height: var(--circleDiameter);
   background: linear-gradient(to bottom,
     var(--colorScaleString));
 }
 .scale__top {
   position: absolute;
   top: 0;
-  left: 18px;
+  left: calc(2 * var(--scaleWidth));
 }
 .scale__bottom {
   position: absolute;
   bottom: 0;
-  left: 18px;
+  left: calc(2 * var(--scaleWidth));
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: calc(2 * var(--scaleWidth));
+}
+
+ #circle-container {
+  position: relative;
+  width: var(--circleDiameter);
+  height: var(--circleDiameter);
+  
+  .circle {
+    position: absolute;
+    width: var(--circleElementDiameter);
+    height: var(--circleElementDiameter);
+    max-width: var(--circleElementMaxDiameter);
+    max-height: var(--circleElementMaxDiameter);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    font-size: var(--circleElementFontSize);
+    padding: var(--circleElementPadding);
+    box-sizing: border-box;
+  }
+
+  .center-element {
+    position: absolute;
+    width: var(--circleElementDiameter);
+    height: var(--circleElementDiameter);
+    max-width: var(--circleElementMaxDiameter);
+    max-height: var(--circleElementMaxDiameter);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    z-index: 100;
+    text-align: center;
+  }
+
+  .circle-element {
+    font-weight: bold;
+    opacity: 0;
+  }
+}
 </style>
 
-<script>        
+<script>
   import useCircleAnimation from "../../scripts/useCircleAnimation";
-
+  
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
   document.documentElement.classList.toggle('reduced-motion', mq.matches);
   mq.addEventListener?.('change', e =>
@@ -56,7 +111,7 @@ let stopAnimation: (() => void) | undefined | null = null;
 
 function start() {
     if (!stopAnimation) {
-        stopAnimation = useCircleAnimation(mq.matches); // startet animation und gibt cleanup zurück
+      stopAnimation = useCircleAnimation( mq.matches); // startet animation und gibt cleanup zurück
     }
 }
   function stop() {

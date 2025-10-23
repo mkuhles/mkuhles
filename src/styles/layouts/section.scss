@@ -1,8 +1,37 @@
 @use "../variables";
 
 .section {
-    max-width: 1000px;
     margin: auto;
-    padding: var(--spacing);
-    border-bottom: 1px dashed;
+
+    &__content {
+        padding: calc(var(--spacing) * 2) var(--spacing);
+    }
+}
+
+.section--grad {
+  background:linear-gradient(180deg, white 0%, #f0ebe1 100%);
+}
+.section--dark {
+  background:var(--c9); color:var(--text-color-inv);
+}
+
+.section.section--header {
+    @extend .section--dark;
+
+    .section__content {
+        padding: var(--spacing);
+    }
+}
+
+.section--about {
+  @extend .section--grad;
+}
+
+.section.section--skills {
+  @extend .section--grad;
+  padding: 0;
+}
+
+.section.section--footer {
+    @extend .section--dark;
 }

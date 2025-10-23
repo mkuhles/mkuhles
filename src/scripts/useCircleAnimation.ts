@@ -10,24 +10,36 @@ export default function useCircleAnimation(skipInitialAnimation:boolean = false)
   let angle: number = 0, radius: number = 0, opacity: number = 0;
   let width: number, height: number, vmin: number, maxRadius: number, radiusStep: number;
 
-  function recomputeSizes() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    vmin = Math.min(width, height);
-    maxRadius = vmin * 0.3;
-    radiusStep = maxRadius / STEP_NUMBER;
+  function recomputeSizes():[number,number,number]|void {
+    const container = document.getElementById('circle-container') as HTMLElement;
+    const elem = document.querySelector('.center-element'); // nutzt width/height: var(--circleElementDiameter)
+    if(!container || !elem) { return; }
+    const diameterPx = elem.getBoundingClientRect().width;
+    const boundingRect = container.getBoundingClientRect();
+    const vmin = Math.min(boundingRect.width, boundingRect.height);
+    
+    const maxRadius = (vmin - diameterPx)/2;
+    const radiusStep = maxRadius / STEP_NUMBER;
 
-    // keep current radius within new bounds (don't restart animation)
-    if (radius > maxRadius) radius = maxRadius;
+    const scale = document.getElementById('skillLevelScale') as HTMLElement;
+    scale.style.height = vmin+"px";
 
-    return [width,height,vmin,maxRadius,radiusStep];
+    return [vmin,maxRadius,radiusStep];
   }
 
   function handleResize() {
-    [width,height,vmin,maxRadius,radiusStep] = recomputeSizes();
+    const returnValue = recomputeSizes();
+    if(!returnValue) {
+      return;
+    }
+    [vmin,maxRadius,radiusStep] = returnValue;
     arrangeCircleElements(angle, radius, opacity);
   }
-  [width,height,vmin,maxRadius,radiusStep] = recomputeSizes();
+  const returnValue = recomputeSizes();
+  if(!returnValue) {
+    return;
+  }
+  [vmin,maxRadius,radiusStep] = returnValue;
   window.addEventListener('resize', handleResize);
 
   if (skipInitialAnimation) {

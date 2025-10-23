@@ -22,3 +22,9 @@ const { title, lang } = Astro.props;
         <Footer lang={lang} />
 	</body>
 </html>
+
+<script>
+import { writeCssVarsToHTML } from "../scripts/collorCalculations";
+
+writeCssVarsToHTML();
+</script>
