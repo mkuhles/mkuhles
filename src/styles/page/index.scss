@@ -5,6 +5,17 @@ body {
   font-size: max(14px,2vmin);
 }
 
+.btn{
+  background:var(--c8);
+  color:var(--text-color);
+  border-radius:999px;
+  padding:.7rem 1.2rem;
+}
+.btn--ghost{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.6);
+}
+
 /*
   * about
   */
@@ -12,8 +23,6 @@ body {
   background:linear-gradient(180deg, white 0%, var(--c1) 100%);
 
   .section__content {
-    max-width: 100vmin;
-    margin: auto;
     display: flex;
     gap: calc(var(--spacing) * 2);
     align-items: center;

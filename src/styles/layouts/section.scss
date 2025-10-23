@@ -8,7 +8,7 @@
     }
 }
 
-.section--grad {
+.section--gradient {
   background:linear-gradient(180deg, var(--gradient-color-1) 0%, var(--gradient-color-2) 100%);
 }
 .section--dark {
@@ -24,12 +24,21 @@
 }
 
 .section--about {
-  @extend .section--grad;
+  @extend .section--gradient;
+  
+  .section__content {
+    max-width: 100vmin;
+    // margin: auto;
+  }
 }
 
 .section.section--skills {
-  @extend .section--grad;
-  padding: 0;
+  @extend .section--gradient;
+  
+  .section__content {
+    max-width: 100vmin;
+    margin: auto;
+  }
 }
 
 .section.section--footer {
