@@ -16,5 +16,7 @@ export default defineConfig({
   },
   vite: {
     plugins: [imagetools(), tailwindcss()]
-  }
+  },
+  site: 'https://mkuhles.github.io',
+  base: '/mkuhles'
 });

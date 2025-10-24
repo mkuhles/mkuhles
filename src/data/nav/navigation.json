@@ -1,5 +1,3 @@
 [
-    { "id": "home", "slug": "/" },
-    { "id": "about", "slug": "/about/" },
-    { "id": "blog", "slug": "/blog/" }
+    { "id": "home", "slug": "/mkuhles" }
 ]
