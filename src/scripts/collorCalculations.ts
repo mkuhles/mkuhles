@@ -9,12 +9,14 @@ export const COLOR_SCALE = [
 export const white = '#fff';
 export const eggshell = '#f0ebe1';
 export const black = '#111';
+export const coral = '#E6725E';
 
 export const gradientStart = white;
 export const gradientEnd = eggshell;
 
 export const lightFontColor = white;
 export const darkFontColor = black;
+export const highlightColor = coral;
 
 
 export const pickColor = (t: number, scale = COLOR_SCALE) => {
@@ -41,6 +43,7 @@ export const writeCssVarsToHTML = () => {
   cssVars += "--color-black: " + black + ";\n";
   cssVars += "--gradient-color-1: " + gradientStart + ";\n";
   cssVars += "--gradient-color-2: " + gradientEnd + ";\n";
+  cssVars += "--highlight-color: " + highlightColor + ";\n";
 
   const head = document.head || document.getElementsByTagName('head')[0];
   let style = document.createElement('style');

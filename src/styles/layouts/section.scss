@@ -1,11 +1,11 @@
 @use "../variables";
 
 .section {
-    margin: auto;
+  margin: auto;
 
-    &__content {
-        padding: calc(var(--spacing) * 2) var(--spacing);
-    }
+  &__content {
+    padding: calc(var(--spacing) * 2) var(--spacing);
+  }
 }
 
 .section--gradient {
@@ -16,11 +16,19 @@
 }
 
 .section.section--header {
-    @extend .section--dark;
+  @extend .section--dark;
 
-    .section__content {
-        padding: var(--spacing);
+  .section__content {
+    padding: calc(var(--spacing) / 2) var(--spacing);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+      width: 8vmin;
+      border-radius: 50%;
     }
+  }
 }
 
 .section--about {

@@ -12,7 +12,7 @@ interface Props {
     lang: Language["key"];
 }
 
-const {pageTitle, lang} = Astro.props;
+const {lang} = Astro.props;
 
 const locale = (locales as LocalesIndex)[lang] ?? (locales as LocalesIndex).de;
 const localeNav = (nav as NavEntry[]).map((item) => {
@@ -23,6 +23,11 @@ const localeNav = (nav as NavEntry[]).map((item) => {
 
 <header>
     <Section type="header">
+        <div class="logo__wrapper">
+            <a href="/">
+                <img src="/images/logo.svg" alt="Website Logo" />
+            </a>
+        </div>
         <Navigation className="header-nav" lang={lang} navItems={localeNav} /> 
     </Section>
 </header>
