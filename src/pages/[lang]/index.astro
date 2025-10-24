@@ -28,8 +28,6 @@ const sections = await getCollection('sections');
 const {entry: about, Content: About} = await getPostById(sections, `${lang}/about.md`);
 const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", className: "circle"}
 
-
-// ToDO: make about work on mobile better
 // ToDo: think about mobile skils view
 
 ---
