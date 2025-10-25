@@ -16,7 +16,7 @@ export default function useCircleAnimation(
   function recomputeSizes():[number,number,number]|void {
     const container = document.getElementById('circle-container') as HTMLElement;
     const elem = document.querySelector('.center-element'); // nutzt width/height: var(--circleElementDiameter)
-    if(!container || !elem) { return null; }
+    if(!container || !elem) { return; }
     const diameterPx = elem.getBoundingClientRect().width;
     const boundingRect = container.getBoundingClientRect();
     const vmin = Math.min(boundingRect.width, boundingRect.height);
@@ -40,7 +40,7 @@ export default function useCircleAnimation(
   }
   const returnValue = recomputeSizes();
   if(!returnValue) {
-    return;
+    return function stopNoop() { /* nothing to cleanup */ };;
   }
   [vmin,maxRadius,radiusStep] = returnValue;
   window.addEventListener('resize', handleResize);
