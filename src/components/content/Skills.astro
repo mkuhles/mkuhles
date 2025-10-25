@@ -2,8 +2,12 @@
 import SkillElement from "./SkillElement.astro";
 import {skills} from "../../data/mkuhles.json";
 import { COLOR_SCALE } from "../../scripts/collorCalculations";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
-const {lang} = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const colorScaleString = COLOR_SCALE.join();
 
 const circleDiameter =           "85vmin";
@@ -16,16 +20,16 @@ const scaleWidth =               "1.5vmin";
 <div class="skills">
   <div class="flex-center">
     <div id="skillLevelScale" class="scale">
-      <div class="scale__top">{"Grundlagen"}</div>
-      <div class="scale__bottom">{"Expertenwissen"}</div>
+      <div class="scale__top">{t('skills.basics')}</div>
+      <div class="scale__bottom">{t('skills.expert')}</div>
     </div>
     <div id="circle-container" class="circle-container">
-      <div class="center-element circle">{lang == 'de' ? "Ich kann" : "my skills"}</div>
+      <div class="center-element circle">{t('skills.myskills')}</div>
       {skills.map( (skill) => <SkillElement skill={skill} /> )}
     </div>
   </div>
   <div class="pt-1 flex justify-end">
-    <button id="reanimateSkills" class="btn btn--highlight">again</button>
+    <button id="reanimateSkills" class="btn btn--highlight">{t('skills.again')}</button>
   </div>
 </div>
 

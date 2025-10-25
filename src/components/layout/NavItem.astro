@@ -1,11 +1,24 @@
 ---
-import type { LocaleNavItem } from "../../types/NavItem";
+import { getLangFromUrl, getUrlFromRoute, useTranslations } from "../../i18n/utils";
+import type { NavEntry } from "../../types/NavItem";
 
 interface Props {
-    navItem: LocaleNavItem
+    navItem: NavEntry
 }
 
-const { navItem } = Astro.props; 
+const { navItem } = Astro.props;
+const curLang = getLangFromUrl(Astro.url);
+const t = useTranslations(curLang);
+const getUrl = getUrlFromRoute(curLang);
+
+let href: string;
+let target: string|undefined;
+if(navItem.href) {
+    href = navItem.href;
+    target = "_blank";
+} else {
+    href = getUrl(navItem.id); 
+}
 ---
 
-<li><a href={navItem.href}>{navItem.title}</a></li>
+<li><a href={href} target={target}>{t('nav.' + navItem.id)}</a></li>

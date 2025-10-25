@@ -1,7 +1,24 @@
 ---
-const { currentLang } = Astro.props;
+import { getLangFromUrl, useTranslations, getUrlFromPath } from "../../i18n/utils";
+import {ui} from "../../i18n/ui";
+
+const curLang = getLangFromUrl(Astro.url);
+const t = useTranslations(curLang);
+const urlFromPath = getUrlFromPath(curLang);
+
+const path = Astro.url.pathname.split('/').slice(3).join('/');
+
+
+const allLanguages = (
+  Array.from(new Set(Object.keys(ui))).sort()
+) as (keyof typeof ui)[];
 ---
 
-<a href={currentLang === "de" ? "/mkuhles/en/" : "/mkuhles/"}>
-    {currentLang === "de" ? "switch to Englisch" : "wechsele zur deutschen Seite"}
-</a>
+{allLanguages.map((lang) => {
+    if(curLang == lang) { return ''; }
+    return (
+        <a href={urlFromPath(path, lang)}>
+            {t('langSwitcher.switch', lang)}
+        </a>
+    )
+})}

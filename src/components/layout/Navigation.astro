@@ -1,16 +1,14 @@
 ---
 import NavItem from "./NavItem.astro";
-import type { LocaleNavItem } from "../../types/NavItem";
+import type { NavEntry } from "../../types/NavItem";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
-import type { Language } from "../../types/Language";
 
 interface Props {
     className: string,
-    navItems: LocaleNavItem[],
-    lang: Language["key"],
+    navItems: NavEntry[],
 };
 
-const { className, navItems, lang } = Astro.props;
+const { navItems } = Astro.props;
 ---
 
 <nav class="navbar">
@@ -18,7 +16,7 @@ const { className, navItems, lang } = Astro.props;
         {navItems.map(item => (
             <NavItem navItem={item} />
         ))}
-        <li><LanguageSwitcher currentLang={lang} /></li>
+        <li><LanguageSwitcher /></li>
     </ul>
 </nav>
 
