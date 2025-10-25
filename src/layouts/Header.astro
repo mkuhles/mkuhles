@@ -21,13 +21,25 @@ const localeNav = (nav as NavEntry[]).map((item) => {
 });
 ---
 
-<header>
-    <Section type="header">
-        <div class="logo__wrapper">
-            <a href="/mkuhles">
-                <img src="/mkuhles/images/logo.svg" alt="Website Logo" />
-            </a>
-        </div>
-        <Navigation className="header-nav" lang={lang} navItems={localeNav} /> 
-    </Section>
+<header class="py-1 px-2 flex justify-between items-center">
+    <div class="logo__wrapper">
+        <a href="/mkuhles">
+            <img src="/mkuhles/images/logo.svg" alt="Website Logo" />
+        </a>
+    </div>
+    <Navigation className="header-nav" lang={lang} navItems={localeNav} /> 
 </header>
+
+<style>
+    header {
+      background:var(--c9); color:var(--text-color-inv);
+    }
+    .logo__wrapper img {
+      width: 15vmin;
+      border-radius: 50%;
+    
+      @media screen and (min-width: 500px) {  
+        width: 8vmin;
+      } 
+    }
+</style>

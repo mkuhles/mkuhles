@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+.section {
+    @apply py-4;
+    @apply px-2;
+    @apply m-auto;
+}

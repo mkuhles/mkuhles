@@ -10,7 +10,7 @@ interface Props {
 }
 
 let { type, id = '' } = Astro.props;
-const className = 'section '
+const className = 'section'
     + (type ? ` section--${type}` : "") 
     + (Astro.props.className ? ` ${Astro.props.className}` : '');
 ---

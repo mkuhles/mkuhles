@@ -1,38 +1,10 @@
 @use "../variables";
 
-.section {
-  margin: auto;
-
-  &__content {
-    padding: calc(var(--spacing) * 2) var(--spacing);
-  }
-}
-
 .section--gradient {
   background:linear-gradient(180deg, var(--gradient-color-1) 0%, var(--gradient-color-2) 100%);
 }
 .section--dark {
   background:var(--c9); color:var(--text-color-inv);
-}
-
-.section.section--header {
-  @extend .section--dark;
-
-  .section__content {
-    padding: calc(var(--spacing) / 2) var(--spacing);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    img {
-      width: 15vmin;
-      border-radius: 50%;
-    
-      @media screen and (min-width: 500px) {  
-        width: 8vmin;
-      } 
-    }
-  }
 }
 
 .section--about {

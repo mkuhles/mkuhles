@@ -6,14 +6,17 @@ const ANGLE_STEP = (2 * Math.PI) / STEP_NUMBER;
 const MAX_OPACITY = 1;
 const OPACITY_STEP = 1 / STEP_NUMBER;
 
-export default function useCircleAnimation(skipInitialAnimation:boolean = false) {
+export default function useCircleAnimation(
+  skipInitialAnimation:boolean = false,
+  opts?: { onComplete?: () => void }
+) {
   let angle: number = 0, radius: number = 0, opacity: number = 0;
   let width: number, height: number, vmin: number, maxRadius: number, radiusStep: number;
 
   function recomputeSizes():[number,number,number]|void {
     const container = document.getElementById('circle-container') as HTMLElement;
     const elem = document.querySelector('.center-element'); // nutzt width/height: var(--circleElementDiameter)
-    if(!container || !elem) { return; }
+    if(!container || !elem) { return null; }
     const diameterPx = elem.getBoundingClientRect().width;
     const boundingRect = container.getBoundingClientRect();
     const vmin = Math.min(boundingRect.width, boundingRect.height);
@@ -51,8 +54,12 @@ export default function useCircleAnimation(skipInitialAnimation:boolean = false)
     angle = calculateNextState(angle, MAX_ANGLE, ANGLE_STEP);
     radius = calculateNextState(radius, maxRadius, radiusStep);
     opacity = calculateNextState(opacity, MAX_OPACITY, OPACITY_STEP);
-
     arrangeCircleElements(angle, radius, opacity);
+    
+    if(angle >= MAX_ANGLE && radius >= maxRadius && opacity >= MAX_OPACITY) {
+      clearInterval(interval);
+      if(opts?.onComplete) { opts.onComplete(); }
+    }
   }, 25);
 
   // return cleanup so caller can stop the animation

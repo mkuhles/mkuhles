@@ -22,9 +22,14 @@ const localeNav = (nav as NavEntry[]).map((item) => {
 const currentYear = new Date().getFullYear();
 ---
 
-<footer>    
-    <Section type="footer">
-        <div>  <p>© {currentYear} Melanie Kuhles</p></div>
-        <Navigation className="footer-nav" lang={lang} navItems={localeNav} />
-    </Section>
+<footer class="py-1 px-2 flex justify-between items-center">
+    <div>  <p>© {currentYear} Melanie Kuhles</p></div>
+    <Navigation className="footer-nav" lang={lang} navItems={localeNav} />
 </footer>
+
+
+<style>
+    footer {
+      background:var(--c9); color:var(--text-color-inv);
+    }
+</style>

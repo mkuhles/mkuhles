@@ -13,14 +13,19 @@ const circleElementFontSize =    "2vmin";
 const circleElementPadding =     "1vmin";
 const scaleWidth =               "1.5vmin";
 ---
-<div class="flex-center">
-  <div id="skillLevelScale" class="scale">
-    <div class="scale__top">{"Grundlagen"}</div>
-    <div class="scale__bottom">{"Expertenwissen"}</div>
+<div class="skills">
+  <div class="flex-center">
+    <div id="skillLevelScale" class="scale">
+      <div class="scale__top">{"Grundlagen"}</div>
+      <div class="scale__bottom">{"Expertenwissen"}</div>
+    </div>
+    <div id="circle-container" class="circle-container">
+      <div class="center-element circle">{lang == 'de' ? "Ich kann" : "my skills"}</div>
+      {skills.map( (skill) => <SkillElement skill={skill} /> )}
+    </div>
   </div>
-  <div id="circle-container" class="circle-container">
-    <div class="center-element circle">{lang == 'de' ? "Ich kann" : "my skills"}</div>
-    {skills.map( (skill) => <SkillElement skill={skill} /> )}
+  <div class="pt-1 flex justify-end">
+    <button id="reanimateSkills" class="btn btn--highlight">again</button>
   </div>
 </div>
 
@@ -99,21 +104,27 @@ const scaleWidth =               "1.5vmin";
   
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
   document.documentElement.classList.toggle('reduced-motion', mq.matches);
-  mq.addEventListener?.('change', e =>
+  mq.addEventListener?.('change', (e: MediaQueryListEvent) =>
     document.documentElement.classList.toggle('reduced-motion', e.matches)
   );
-  mq.addListener?.(e =>
+  mq.addListener?.((e: MediaQueryListEvent) =>
     document.documentElement.classList.toggle('reduced-motion', e.matches)
   ); // Fallback
 
-const container = document.getElementById('circle-container');
-let stopAnimation: (() => void) | undefined | null = null;
+  const reanimateSkillsButton = document.getElementById('reanimateSkills');
+  reanimateSkillsButton?.addEventListener('click', () => start());
 
-function start() {
+  let stopAnimation: (() => void) | null = null;
+  let autoPlayed = false;
+
+  function start() {
     if (!stopAnimation) {
-      stopAnimation = useCircleAnimation( mq.matches); // startet animation und gibt cleanup zurück
+      stopAnimation = useCircleAnimation( mq.matches, {
+        onComplete: () => stop()
+      }); // startet animation und gibt cleanup zurück
     }
-}
+  }
+
   function stop() {
     if (stopAnimation) {
       stopAnimation();
@@ -121,12 +132,22 @@ function start() {
     }
   }
 
-const onScroll = () => {
-    if(!container) return;
+  const VISIBLE_RATIO = 0.7;
+  const onScroll = () => {
+    const container = document.getElementById('circle-container');
+    if (!container || autoPlayed) return;
     const rect = container.getBoundingClientRect();
-    const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
-    if (inView) start(); else stop();
-};
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+    const ratio = Math.max(0, Math.min(visible / rect.height, 1));
+    
+    if (ratio >= VISIBLE_RATIO) {
+      autoPlayed = true;
+      start();
+      window.removeEventListener("scroll", onScroll);
+    }
+  };  
+
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
   window.addEventListener('beforeunload', () => { window.removeEventListener('scroll', onScroll); stop(); });
