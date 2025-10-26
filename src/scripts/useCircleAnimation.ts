@@ -11,7 +11,7 @@ export default function useCircleAnimation(
   opts?: { onComplete?: () => void }
 ) {
   let angle: number = 0, radius: number = 0, opacity: number = 0;
-  let width: number, height: number, vmin: number, maxRadius: number, radiusStep: number;
+  let vmin: number, maxRadius: number, radiusStep: number;
 
   function recomputeSizes():[number,number,number]|void {
     const container = document.getElementById('circle-container') as HTMLElement;
@@ -23,9 +23,6 @@ export default function useCircleAnimation(
     
     const maxRadius = (vmin - diameterPx)/2;
     const radiusStep = maxRadius / STEP_NUMBER;
-
-    const scale = document.getElementById('skillLevelScale') as HTMLElement;
-    scale.style.height = vmin+"px";
 
     return [vmin,maxRadius,radiusStep];
   }

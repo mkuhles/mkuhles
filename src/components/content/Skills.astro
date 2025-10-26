@@ -18,8 +18,8 @@ const circleElementPadding =     "1vmin";
 const scaleWidth =               "1.5vmin";
 ---
 <div class="skills">
-  <div class="flex-center">
-    <div id="skillLevelScale" class="scale">
+  <div class="flex-center flex flex-col sm:flex-row sm:justify-between items-center">
+    <div id="skillLevelScale" class="scale order-last sm:order-first">
       <div class="scale__top">{t('skills.basics')}</div>
       <div class="scale__bottom">{t('skills.expert')}</div>
     </div>
@@ -28,7 +28,7 @@ const scaleWidth =               "1.5vmin";
       {skills.map( (skill) => <SkillElement skill={skill} /> )}
     </div>
   </div>
-  <div class="pt-1 flex justify-end">
+  <div class="pt-1 flex justify-around sm:justify-end">
     <button id="reanimateSkills" class="btn btn--highlight">{t('skills.again')}</button>
   </div>
 </div>
@@ -37,26 +37,40 @@ const scaleWidth =               "1.5vmin";
 /* Legende als Verlauf */
 .scale {
   position: relative;
-  width: var(--scaleWidth);
-  height: var(--circleDiameter);
-  background: linear-gradient(to bottom,
+  background: linear-gradient(to right,
     var(--colorScaleString));
+  width: 100%;
+  height: var(--scaleWidth);
+  margin-bottom: calc(2 * var(--scaleWidth));
+
+  @media screen and (min-width:640px) {
+    background: linear-gradient(to bottom,
+      var(--colorScaleString));
+    width: var(--scaleWidth);
+    height: var(--circleDiameter);
+  }
 }
 .scale__top {
   position: absolute;
-  top: 0;
-  left: calc(2 * var(--scaleWidth));
+  top: calc(2 * var(--scaleWidth));
+
+  @media screen and (min-width:640px) {
+    top: 0;
+    left: calc(2 * var(--scaleWidth));
+  }
 }
 .scale__bottom {
   position: absolute;
-  bottom: 0;
-  left: calc(2 * var(--scaleWidth));
+  top: calc(2 * var(--scaleWidth));
+  right: 0;
+  @media screen and (min-width:640px) {
+    top: initial;
+    bottom: 0;
+    left: calc(2 * var(--scaleWidth));
+  }
 }
 
 .flex-center {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: calc(2 * var(--scaleWidth));
 }
 
@@ -80,24 +94,17 @@ const scaleWidth =               "1.5vmin";
     font-size: var(--circleElementFontSize);
     padding: var(--circleElementPadding);
     box-sizing: border-box;
+    font-weight: bold;
   }
 
   .center-element {
-    position: absolute;
-    width: var(--circleElementDiameter);
-    height: var(--circleElementDiameter);
-    max-width: var(--circleElementMaxDiameter);
-    max-height: var(--circleElementMaxDiameter);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-weight: bold;
     z-index: 100;
-    text-align: center;
   }
 
   .circle-element {
-    font-weight: bold;
     opacity: 0;
   }
 }
