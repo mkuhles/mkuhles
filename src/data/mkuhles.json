@@ -1,11 +1,50 @@
 {
   "skills": [
-    {"name":"mysql","knowledge":0.5},
-    {"name":"bash scripts","knowledge":0.2},
-    {"name":"git","knowledge":0.7},
-    {"name":"css","knowledge":0.9},
-    {"name":"json","knowledge":1},
-    {"name":"jira","knowledge":0.5},
+    {
+      "name":"mysql",
+      "knowledge":0.5,
+      "since": 2005,
+      "examples": {
+        "de": ["komplexe Datenbanken für webseiten vor Doctrine und Co", "verschachtelte SQL-Abfragen"],
+        "en": ["complex data basis for web sites before doctrine and Co", "nested mysql queries"]
+      }
+    },
+    {
+      "name":"bash scripts",
+      "knowledge":0.2,
+      "since": 2016,
+      "examples": {
+        "de": ["deployment", "cron-jobs", "automatisation"],
+        "en": ["deployment", "cron-jobs", "automatisation"]
+      }
+    },
+    {
+      "name":"git",
+      "knowledge":0.7,
+      "since": 2014,
+      "examples": {
+        "de": ["Versionsverwaltung für Projekte", "branching", "pull requests"],
+        "en": ["version control for projects", "branching", "pull requests"]
+      }
+    },
+    {
+      "name":"css",
+      "knowledge":0.9,
+      "since": 2004,
+      "examples": {
+        "de": ["jede Webseite hat mehr oder weniger komplexes CSS"],
+        "en": ["every web site hat more or less complex css"]
+      }
+    },
+    {
+      "name":"jira",
+      "knowledge":0.6,
+      "since": 2015,
+      "examples": {
+        "de": ["Tickets schreiben und bearbeiten", "Workflows erstellen", "Projekte und Boards konfigurieren", "grundlegende Administration"],
+        "en": ["write and edit Tickets", "create workflows", "configure projekts and boards", "basic administration"]
+      }
+    },
     {"name":"JavaScript","knowledge":0.8},
     {"name":"drupal","knowledge":0.7},
     {"name":"symfony","knowledge":0.6},
@@ -16,6 +55,15 @@
     {"name":"webpack","knowledge":0.3},
     {"name":"docker","knowledge":0.3},
     {"name":"wordpress","knowledge":0.5},
-    {"name":"TypeScript","knowledge":0.6}
+    {"name":"TypeScript","knowledge":0.6},
+    {
+      "name":"Tailwind",
+      "knowledge":0.2,
+      "since":2025,
+      "examples":{
+        "de": ["diese seite"],
+        "en": ["this web site"]
+      }
+    }
   ]
 }
