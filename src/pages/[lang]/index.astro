@@ -27,9 +27,6 @@ const { lang } = Astro.params;
 const sections = await getCollection('sections');
 const {entry: about, Content: About} = await getPostById(sections, `${lang}/about.md`);
 const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", className: "circle"}
-
-// ToDo: think about mobile skils view
-
 ---
 
 <BaseLayout title="Home" lang={lang}>
