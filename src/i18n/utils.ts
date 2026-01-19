@@ -23,12 +23,12 @@ export function useTranslations(langUrl: UiLang) {
 export function getUrlFromRoute(lang: RoutesLang) {
   return function url(key: RouteKey) {
     const page = routes[lang]?.[key] ?? routes[defaultLang][key];
-    return `/mkuhles/${lang}/${page}`;
+    return `/${lang}/${page}`;
   }
 }
 
 export function getUrlFromPath(langUrl: RoutesLang) {
   return function urlFromPath(path: string, lang: RoutesLang = langUrl) {
-    return `/mkuhles/${lang}/${path}`;
+    return `/${lang}/${path}`;
   }
 }
