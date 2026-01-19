@@ -1,12 +1,25 @@
 ---
 import { pickColor, textOn } from "../../scripts/collorCalculations";
+import FlipCard from "../FlipCard.astro";
 
 
-const { skill } = Astro.props;
+const { skill, lang } = Astro.props;
 const bgcolor = pickColor(skill.knowledge);
 const color = textOn(bgcolor);
+const examples = skill.examples?.[lang] || [];
+
 ---
 
-<div class="circle-element circle" style=`color:${color};background-color:${bgcolor};`>
-  {skill.name}
-</div>
+<FlipCard className="skill-element circle-element circle" styles=`background-color:${bgcolor};`>
+  <div slot="front">
+    <div style=`color:${color};background-color:${bgcolor};`>
+      {skill.name}
+    </div>
+  </div>
+  <div slot="back">
+    <div class="skill-back" style=`color:${color};background-color:${bgcolor};`>
+      <strong>{skill.name}</strong> {skill.since && "since "+skill.since}<br />
+      <div class="skill-examples">{examples.join(", ")}</div>
+    </div>
+  </div>
+</FlipCard>

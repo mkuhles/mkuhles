@@ -4,7 +4,7 @@ import {skills} from "../../data/mkuhles.json";
 import { COLOR_SCALE } from "../../scripts/collorCalculations";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
-
+const { lang: propLang } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -25,7 +25,7 @@ const scaleWidth =               "1.5vmin";
     </div>
     <div id="circle-container" class="circle-container">
       <div class="center-element circle">{t('skills.myskills')}</div>
-      {skills.map( (skill) => <SkillElement skill={skill} /> )}
+      {skills.map( (skill) => <SkillElement skill={skill} lang={propLang} /> )}
     </div>
   </div>
   <div class="pt-1 flex justify-around sm:justify-end">

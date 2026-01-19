@@ -33,7 +33,7 @@
       "since": 2004,
       "examples": {
         "de": ["jede Webseite hat mehr oder weniger komplexes CSS"],
-        "en": ["every web site hat more or less complex css"]
+        "en": ["every web site has more or less complex css"]
       }
     },
     {
@@ -45,17 +45,96 @@
         "en": ["write and edit Tickets", "create workflows", "configure projekts and boards", "basic administration"]
       }
     },
-    {"name":"JavaScript","knowledge":0.8},
-    {"name":"drupal","knowledge":0.7},
-    {"name":"symfony","knowledge":0.6},
-    {"name":"react","knowledge":0.7},
-    {"name":"vue.js","knowledge":0.5},
-    {"name":"astrojs","knowledge":0.4},
-    {"name":"php","knowledge":0.8},
-    {"name":"webpack","knowledge":0.3},
-    {"name":"docker","knowledge":0.3},
-    {"name":"wordpress","knowledge":0.5},
-    {"name":"TypeScript","knowledge":0.6},
+    {
+      "name":"JavaScript",
+      "knowledge":0.8,
+      "since": 2004,
+      "examples": {
+        "de": ["interaktive Webseiten", "DOM-Manipulation", "AJAX"],
+        "en": ["interactive web sites", "DOM manipulation", "AJAX"]
+      }
+    },
+    {
+      "name":"drupal",
+      "knowledge":0.7,
+      "since": 2010,
+      "examples": {
+        "de": ["Module programmieren", "Themes anpassen", "Views konfigurieren und auch programmatisch erweitern"],
+        "en": ["program custom modules", "customize themes", "configure views and extend them programmatically"]
+      }
+    },
+    {
+      "name":"symfony",
+      "knowledge":0.6,
+      "since": 2020,
+      "examples": {
+        "de": ["Backend für eine Bewerberplattform", "Komplexe Anwendung mit teils legacy Code warten und erweitern"],
+        "en": ["backend for a application platform", "maintain and extend complex application with partly legacy code"]
+      }
+    },
+    {
+      "name":"react",
+      "knowledge":0.7,
+      "since": 2020,
+      "examples": {
+        "de": ["interaktive webanwendungen z.B. Frontend für Bewerberplattform", "komplexe komponenten", "state management"],
+        "en": ["interactive web applications i.e. frontend for a application platform", "complex components", "state management"]
+      }
+    },
+    {
+      "name":"vue.js",
+      "knowledge":0.5,
+      "since": 2019,
+      "examples": {
+        "de": ["komplettes überarbeiten eines Widgets, damit die Funktion an die Anforderungen passten"],
+        "en": ["complete overhaul of a widget to match the requirements"]
+      }
+    },
+    {
+      "name":"astrojs",
+      "knowledge":0.4,
+      "since":2025,
+      "examples":{
+        "de": ["diese seite", "Vereinswebseite"],
+        "en": ["this web site", "club web site"]
+      }
+    },
+    {
+      "name":"php",
+      "knowledge":0.8,
+      "since": 2004,
+      "examples": {
+        "de": ["umfangreiche webanwendungen", "cms entwicklung", "frameworks wie drupal und symfony"],
+        "en": ["extensive web applications", "cms development", "frameworks like drupal and symfony"]
+      }
+    },
+    {
+      "name":"docker",
+      "knowledge":0.3,
+      "since":2025,
+      "examples":{
+        "de": ["Kontainerisierung von Anwendungen um leichter entwickln und deployen zu können"],
+        "en": ["containerization of applications to make development and deployment easier"]
+      }
+    },
+    {
+      "name":"wordpress",
+      "knowledge":0.5,
+      "since": 2014,
+      "examples": {
+        "de": ["Themes und Plugins anpassen und erstellen", "Eventwebseiten", "Firmenwebseiten"],
+        "en": ["customize and create themes and plugins", "event web sites", "company web sites"]
+      }
+    },
+    {
+      "name":"TypeScript",
+      "knowledge":0.6,
+      "since":2021,
+      "examples":{
+        "de": ["größere JavaScript-Projekte", "bessere Struktur und Wartbarkeit"],
+        "en": ["larger JavaScript projects", "better structure and maintainability"]
+      }
+    },
     {
       "name":"Tailwind",
       "knowledge":0.2,

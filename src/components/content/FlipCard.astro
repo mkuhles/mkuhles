@@ -1,0 +1,38 @@
+---
+interface Props {
+  className?: string;
+  id?: string;
+}
+
+let { className, id } = Astro.props
+if (!id) {
+  id = 'flip-card-' + Math.random().toString(36).substring(2, 9);
+}
+--- 
+
+<div class={ className + ' flip-card'}
+    id={id}
+    tabindex="0"
+    role="button"
+    aria-controls={id + '-inner'}
+    aria-expanded="false"
+>
+    <div class='flip-card-inner flip-trigger' aria-label="Vorderseite" id={id + '-inner'}>
+        <div class="flip-card-front">
+            <slot name="front" />
+        </div>
+        <div class="flip-card-back flip-trigger" aria-label="Rückseite">
+            <slot name="back" />
+        </div>
+    </div>
+</div>
+
+<style lang="scss" scoped>
+
+*:focus,
+*:focus-visible {
+  outline: 2px dashed var(--black);
+  outline-offset: 1vmin;
+  border-radius: 50%;
+}
+</style>

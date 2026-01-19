@@ -1,16 +1,17 @@
 ---
 interface Props {
   className?: string;
+  styles?: string;
   id?: string;
 }
 
-let { className, id } = Astro.props
+let { className, styles, id } = Astro.props
 if (!id) {
   id = 'flip-card-' + Math.random().toString(36).substring(2, 9);
 }
 --- 
 
-<div class={ className + ' flip-card'}
+<div class={ className + ' flip-card'} style={styles}
     id={id}
     tabindex="0"
     role="button"
