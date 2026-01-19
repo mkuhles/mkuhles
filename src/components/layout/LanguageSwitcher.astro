@@ -6,8 +6,7 @@ const curLang = getLangFromUrl(Astro.url);
 const t = useTranslations(curLang);
 const urlFromPath = getUrlFromPath(curLang);
 
-const path = Astro.url.pathname.split('/').slice(3).join('/');
-
+const path = Astro.url.pathname.split('/').slice(2).join('/');
 
 const allLanguages = (
   Array.from(new Set(Object.keys(ui))).sort()

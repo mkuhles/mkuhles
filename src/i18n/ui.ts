@@ -10,6 +10,8 @@ export const ui = {
         "skills.again": "noch mal",
         "nav.home": "Startseite",
         "nav.github": "Mein Github",
+        "nav.imprint": "Impressum",
+        "nav.privacy": "Datenschutzerklärung",
     },
     en: {
         "language": "English",
@@ -19,6 +21,8 @@ export const ui = {
         "skills.expert": "Expert knowledge",
         "skills.again": "again",
         "nav.home": "Home",
-        "nav.github": "My Github"
+        "nav.github": "My Github",
+        "nav.imprint": "Imprint",
+        "nav.privacy": "Privacy Policy",
     }
 } as const;

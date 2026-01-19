@@ -2,7 +2,25 @@
 
 
 body {
+  font-size: 14px;
   font-size: max(14px,2vmin);
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: var(--spacing);
+}
+h2 {
+  font-size: 2rem;
+  margin-bottom: calc(var(--spacing) / 2);
+}
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: calc(var(--spacing) / 3);
+}
+h4 {
+  font-size: 1.2rem;
+  margin-bottom: calc(var(--spacing) / 4);
 }
 
 *:focus,

@@ -1,8 +1,12 @@
 export const routes = {
     de: {
-        'home': ''
+        'home': '',
+        'imprint': 'impressum',
+        'privacy': 'datenschutz'
     },
     en: {
-        'home': ''
+        'home': '',
+        'imprint': 'imprint',
+        'privacy': 'privacy'
     }
 } as const;

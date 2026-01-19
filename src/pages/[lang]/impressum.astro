@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Section from "../../layouts/Section.astro";
+import { getPostById } from "../../utils/sections.ts";
+import { getLangStaticPaths } from "../../utils/i18n";
+
+export const getStaticPaths = getLangStaticPaths;
+const { lang } = Astro.params;
+const {Content} = await getPostById(`${lang}/imprint.md`);
+---
+
+<BaseLayout title="Home" lang={lang}>
+  <Section type="imprint"><Content /></Section>
+</BaseLayout>
