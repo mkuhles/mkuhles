@@ -9,7 +9,7 @@ type UiKey = keyof (typeof ui)[UiLang];
 type RouteKey = keyof (typeof routes)[RoutesLang];
 
 export function getLangFromUrl(url: URL) {
-  const [,, lang] = url.pathname.split('/');
+  const [, lang] = url.pathname.split('/');
   if (typeof lang === 'string' && lang in ui) return lang as UiLang;
   return defaultLang;
 }
