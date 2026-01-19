@@ -3,7 +3,7 @@
 body {
     min-height: 100vh;
     position: relative;
-    padding-bottom: calc(var(--spacing * 3));
+    padding-bottom: calc(var(--spacing) * 4); /* space for footer */
 
     footer {
         position: absolute;
