@@ -2,8 +2,8 @@
 import type { NavEntry } from "../types/NavItem.ts";
 import Navigation from "../components/layout/Navigation.astro";
 
-import navData from '../data/nav/navigation.json';
-const nav = navData satisfies NavEntry[];
+import navData from '../data/navigation.json';
+const nav = (navData as any).main as NavEntry[];
 ---
 
 <header class="py-1 px-2 flex justify-between items-center">
