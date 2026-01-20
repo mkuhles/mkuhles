@@ -1,12 +1,15 @@
 ---
-import { getLangFromUrl, useTranslations, getUrlFromPath } from "../../i18n/utils";
+import { getLangFromUrl, useTranslations, getRouteFromUrl, type RouteKey } from "../../i18n/utils";
 import {ui} from "../../i18n/ui";
+import { getUrlFromRoute } from "../../i18n/utils";
 
 const curLang = getLangFromUrl(Astro.url);
 const t = useTranslations(curLang);
-const urlFromPath = getUrlFromPath(curLang);
+const urlFromRoute = getUrlFromRoute(curLang);
+const getRoute = getRouteFromUrl(curLang)
 
 const path = Astro.url.pathname.split('/').slice(2).join('/');
+const routeKey = getRoute(path) as RouteKey;
 
 const allLanguages = (
   Array.from(new Set(Object.keys(ui))).sort()
@@ -16,8 +19,9 @@ const allLanguages = (
 {allLanguages.map((lang) => {
     if(curLang == lang) { return ''; }
     return (
-        <a class="btn language-switcher" href={urlFromPath(path, lang)} title={t('langSwitcher.switch', lang)}>
+        <a class="btn language-switcher" href={urlFromRoute(routeKey, lang)} title={t('langSwitcher.switch', lang)}>
             {lang}
         </a>
     )
-})}
+})
+}

@@ -20,15 +20,20 @@ export function useTranslations(langUrl: UiLang) {
   }
 }
 
-export function getUrlFromRoute(lang: RoutesLang) {
-  return function url(key: RouteKey) {
+export function getUrlFromRoute(langUrl: RoutesLang) {
+  return function url(key: RouteKey, lang: RoutesLang = langUrl) {
     const page = routes[lang]?.[key] ?? routes[defaultLang][key];
     return `/${lang}/${page}`;
   }
 }
 
-export function getUrlFromPath(langUrl: RoutesLang) {
-  return function urlFromPath(path: string, lang: RoutesLang = langUrl) {
-    return `/${lang}/${path}`;
+export function getRouteFromUrl(langUrl: RoutesLang) {
+  return function route(slug: string, lang: RoutesLang = langUrl) {
+    // reverse lookup
+    const entry = Object.entries(routes[lang]).find(([, value]) => value === slug);
+    if (entry) {
+      return entry[0] as RouteKey;
+    }
+    return 'home' as RouteKey;
   }
 }
