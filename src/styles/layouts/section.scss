@@ -98,8 +98,8 @@
 
 .flip-card .skill-back {
       padding: 3vmin;
-      width: calc(var(--circleElementDiameter) * 1.5);
-      height: calc(var(--circleElementDiameter) * 1.5);
+      width: calc(var(--circle-element-diameter) * 1.5);
+      height: calc(var(--circle-element-diameter) * 1.5);
       opacity: 0;
       transition: 1s ease;
 }

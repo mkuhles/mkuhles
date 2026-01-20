@@ -1,3 +1,42 @@
 :root {
-  --spacing: max(2vmin,15px);
+  /* Spacing */
+  --spacing: max(2vmin, 15px);
+
+  /* Color Scale (11 steps) */
+  --c1: #E7E0CF;
+  --c2: #D7D6C2;
+  --c3: #C6CCB6;
+  --c4: #ACBFAF;
+  --c5: #9DB8AC;
+  --c6: #8FB1AA;
+  --c7: #779EAB;
+  --c8: #628AA3;
+  --c9: #4F7392;
+  --c10: #476786;
+  --c11: #3E5C7A;
+
+  /* Named Colors */
+  --color-white: #fff;
+  --color-eggshell: #f0ebe1;
+  --color-black: #111;
+  --color-coral: #E6725E;
+
+  /* Text Colors */
+  --text-color: #111;
+  --text-color-inv: #fff;
+
+  /* Gradients */
+  --gradient-color-1: #fff;
+  --gradient-color-2: #f0ebe1;
+
+  /* Highlight */
+  --highlight-color: #E6725E;
+
+  /* Circle Layout (Skills) */
+  --circle-diameter: 85vmin;
+  --circle-element-diameter: 14vmin;
+  --circle-element-max-diameter: 400px;
+  --circle-element-font-size: 2vmin;
+  --circle-element-padding: 1vmin;
+  --scale-width: 1.5vmin;
 }

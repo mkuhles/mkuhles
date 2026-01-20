@@ -1,7 +1,7 @@
 ---
 import SkillElement from "./SkillElement.astro";
 import {skills} from "../../data/mkuhles.json";
-import { COLOR_SCALE } from "../../scripts/colorPalette";
+import { COLOR_SCALE } from "../../scripts/colorUtils";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const { lang: propLang } = Astro.props;
@@ -9,13 +9,6 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const colorScaleString = COLOR_SCALE.join();
-
-const circleDiameter =           "85vmin";
-const circleElementDiameter =    "14vmin";
-const circleElementMaxDiameter = "400px";
-const circleElementFontSize =    "2vmin";
-const circleElementPadding =     "1vmin";
-const scaleWidth =               "1.5vmin";
 ---
 <div class="skills">
   <div class="flex-center flex flex-col sm:flex-row sm:justify-between items-center">
@@ -33,66 +26,66 @@ const scaleWidth =               "1.5vmin";
   </div>
 </div>
 
-<style define:vars={{colorScaleString, circleDiameter, circleElementDiameter, circleElementMaxDiameter, circleElementFontSize, circleElementPadding, scaleWidth}}>
+<style define:vars={{colorScaleString}}>
 /* Legende als Verlauf */
 .scale {
   position: relative;
   background: linear-gradient(to right,
     var(--colorScaleString));
   width: 100%;
-  height: var(--scaleWidth);
-  margin-bottom: calc(2 * var(--scaleWidth));
+  height: var(--scale-width);
+  margin-bottom: calc(2 * var(--scale-width));
 
   @media screen and (min-width:640px) {
     background: linear-gradient(to bottom,
       var(--colorScaleString));
-    width: var(--scaleWidth);
-    height: var(--circleDiameter);
+    width: var(--scale-width);
+    height: var(--circle-diameter);
   }
 }
 .scale__top {
   position: absolute;
-  top: calc(2 * var(--scaleWidth));
+  top: calc(2 * var(--scale-width));
 
   @media screen and (min-width:640px) {
     top: 0;
-    left: calc(2 * var(--scaleWidth));
+    left: calc(2 * var(--scale-width));
   }
 }
 .scale__bottom {
   position: absolute;
-  top: calc(2 * var(--scaleWidth));
+  top: calc(2 * var(--scale-width));
   right: 0;
   @media screen and (min-width:640px) {
     top: initial;
     bottom: 0;
-    left: calc(2 * var(--scaleWidth));
+    left: calc(2 * var(--scale-width));
   }
 }
 
 .flex-center {
-  gap: calc(2 * var(--scaleWidth));
+  gap: calc(2 * var(--scale-width));
 }
 
  #circle-container {
   position: relative;
-  width: var(--circleDiameter);
-  height: var(--circleDiameter);
+  width: var(--circle-diameter);
+  height: var(--circle-diameter);
   
   .circle {
     position: absolute;
-    width: var(--circleElementDiameter);
-    height: var(--circleElementDiameter);
-    max-width: var(--circleElementMaxDiameter);
-    max-height: var(--circleElementMaxDiameter);
+    width: var(--circle-element-diameter);
+    height: var(--circle-element-diameter);
+    max-width: var(--circle-element-max-diameter);
+    max-height: var(--circle-element-max-diameter);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     text-align: center;
-    font-size: var(--circleElementFontSize);
-    padding: var(--circleElementPadding);
+    font-size: var(--circle-element-font-size);
+    padding: var(--circle-element-padding);
     box-sizing: border-box;
     font-weight: bold;
   }
