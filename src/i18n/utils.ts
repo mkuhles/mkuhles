@@ -5,8 +5,8 @@ type UiLang = keyof typeof ui;
 type RoutesLang = keyof typeof routes;
 
 // keys across any language entry in ui/routes
-type UiKey = keyof (typeof ui)[UiLang];
-type RouteKey = keyof (typeof routes)[RoutesLang];
+export type UiKey = keyof (typeof ui)[UiLang];
+export type RouteKey = keyof (typeof routes)[RoutesLang];
 
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split('/');
