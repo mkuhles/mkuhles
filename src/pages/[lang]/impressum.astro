@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import MarkdownSection from "../../layouts/MarkdownSection.astro";
-import { getPostById } from "../../utils/sections.ts";
+import { getPostById } from "../../scripts/content";
 
 export function getStaticPaths() {
   return [{ params: { lang: "de" } }];

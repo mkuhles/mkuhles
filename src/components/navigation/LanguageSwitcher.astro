@@ -1,7 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations, getRouteFromUrl, type RouteKey } from "../../i18n/utils";
-import {ui} from "../../i18n/ui";
-import { getUrlFromRoute } from "../../i18n/utils";
+import { getLangFromUrl, useTranslations, getRouteFromUrl, getUrlFromRoute, type RouteKey, LANGS } from "../../i18n/utils";
 
 const curLang = getLangFromUrl(Astro.url);
 const t = useTranslations(curLang);
@@ -11,9 +9,7 @@ const getRoute = getRouteFromUrl(curLang)
 const path = Astro.url.pathname.split('/').slice(2).join('/');
 const routeKey = getRoute(path) as RouteKey;
 
-const allLanguages = (
-  Array.from(new Set(Object.keys(ui))).sort()
-) as (keyof typeof ui)[];
+const allLanguages = Array.from(LANGS) as (typeof LANGS)[number][];
 ---
 
 {allLanguages.map((lang) => {

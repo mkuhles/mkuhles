@@ -5,14 +5,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Section from "../../layouts/Section.astro";
 import Skills from "../../components/content/Skills.astro";
 import ImageSection from "../../layouts/ImageSection.astro";
-import { getPostById } from "../../utils/sections.ts";
+import { getPostById } from "../../scripts/content";
 
 import heroSrcset from '../../assets/images/foto-mkuhles.jpg?w=480;768;1200&format=webp;jpeg&as=srcset';
 import heroSrc from '../../assets/images/foto-mkuhles.jpg?w=1200&format=jpeg&as=src';
 
 
 
-import { getLangStaticPaths } from "../../utils/i18n";
+import { getLangStaticPaths } from "../../i18n/utils";
 
 export const getStaticPaths = getLangStaticPaths;
 const { lang } = Astro.params;
