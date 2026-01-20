@@ -1,4 +1,4 @@
-import arrangeCircleElements from './arrangeCircleElements';
+import arrangeCircleElements from './skillsCircleLayout';
 
 const STEP_NUMBER = 50;
 const MAX_ANGLE = 2 * Math.PI;

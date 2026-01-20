@@ -53,3 +53,4 @@ export const writeCssVarsToHTML = () => {
   head.appendChild(style);
   style.appendChild(document.createTextNode(css));
 };
+

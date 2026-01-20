@@ -1,7 +1,7 @@
 ---
 import SkillElement from "./SkillElement.astro";
 import {skills} from "../../data/mkuhles.json";
-import { COLOR_SCALE } from "../../scripts/colorCalculations";
+import { COLOR_SCALE } from "../../scripts/colorPalette";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const { lang: propLang } = Astro.props;
@@ -111,7 +111,7 @@ const scaleWidth =               "1.5vmin";
 </style>
 
 <script>
-  import useCircleAnimation from "../../scripts/useCircleAnimation";
+  import skillsCircleAnimation from "../../scripts/skillsCircleAnimation";
   
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
   document.documentElement.classList.toggle('reduced-motion', mq.matches);
@@ -130,7 +130,7 @@ const scaleWidth =               "1.5vmin";
 
   function start() {
     if (!stopAnimation) {
-      stopAnimation = useCircleAnimation( mq.matches, {
+      stopAnimation = skillsCircleAnimation( mq.matches, {
         onComplete: () => stop()
       }); // startet animation und gibt cleanup zurück
     }
