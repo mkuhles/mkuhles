@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Section from "../../layouts/Section.astro";
+import MarkdownSection from "../../layouts/MarkdownSection.astro";
 import { getPostById } from "../../utils/sections.ts";
 
 export function getStaticPaths() {
@@ -12,5 +12,5 @@ const {Content} = await getPostById(`${lang}/privacy.md`);
 ---
 
 <BaseLayout title="Home" lang={lang}>
-  <Section type="privacy" className="section--gradient"><Content /></Section>
+  <MarkdownSection type="privacy" className="section--gradient"><Content /></Section>
 </BaseLayout>

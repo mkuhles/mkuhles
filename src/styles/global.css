@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@config "../../tailwind.config.js";
 
 body {
     min-height: 100vh;
@@ -17,26 +18,4 @@ body {
     @apply py-4;
     @apply px-2;
     @apply m-auto;
-}
-
-
-
-h1 {
-  font-size: 3rem;
-  margin-bottom: var(--spacing);
-}
-h2 {
-  font-size: 2rem;
-  margin-bottom: calc(var(--spacing) / 2);
-  margin-top: calc(var(--spacing));
-}
-h3 {
-  font-size: 1.5rem;
-  margin-bottom: calc(var(--spacing) / 3);
-  margin-top: calc(var(--spacing));
-}
-h4 {
-  font-size: 1.2rem;
-  margin-bottom: calc(var(--spacing) / 4);
-  margin-top: calc(var(--spacing));
 }

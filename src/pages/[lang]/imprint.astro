@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Section from "../../layouts/Section.astro";
+import MarkdownSection from "../../layouts/MarkdownSection.astro";
 
 import { getPostById } from "../../utils/sections.ts";
 
@@ -13,5 +13,5 @@ const {Content} = await getPostById(`${lang}/imprint.md`);
 ---
 
 <BaseLayout title="Home" lang={lang}>
-  <Section type="imprint" className="section--gradient"><Content /></Section>
+  <MarkdownSection type="imprint" className="section--gradient"><Content /></Section>
 </BaseLayout>
