@@ -23,3 +23,29 @@ const examples = skill.examples?.[lang] || [];
     </div>
   </div>
 </FlipCard>
+
+<style lang="scss" scoped>
+  .skill-back {
+    border-radius: 100%;
+    line-height: 1.2;
+    font-size: .9em;
+    padding: 3vmin;
+    width: calc(var(--circle-element-diameter) * 1.5);
+    height: calc(var(--circle-element-diameter) * 1.5);
+
+    .skill-examples {
+      margin-top: .5em;
+      font-size: .8em;
+    }
+  }
+
+  .flip-card .skill-back {
+    opacity: 0;
+    transition: 1s ease opacity;
+  }
+  .flip-card:hover .skill-back,
+  .flip-card:focus .skill-back,
+  .flip-card:focus-within .skill-back {
+    opacity: 1;
+  }
+</style>

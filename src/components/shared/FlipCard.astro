@@ -52,20 +52,17 @@ if (!id) {
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-/* Keyboard-Fokus soll flippen wie Hover: */
+.flip-card:focus .flip-card-inner,
+.flip-card:hover .flip-card-inner,
 .flip-card:focus-within .flip-card-inner,
 .flip-card:focus-visible .flip-card-inner{
   transform: rotateY(180deg);
 }
 
 /* Reduced motion: nicht drehen, siehe dein R-Media-Query */
-@media (prefers-reduced-motion: reduce){
-  .flip-card-inner{ transition:none; transform:none; }
-}
+// @media (prefers-reduced-motion: reduce){
+//   .flip-card-inner{ transition:none; transform:none; }
+// }
 
 /* Position the front and back side */
 .flip-card-front, .flip-card-back {
@@ -91,11 +88,11 @@ if (!id) {
     max-height: 100%;
   }
 
-  *:focus,
-  *:focus-visible {
-    outline: 2px dashed var(--light-green);
-    outline-offset: 2px;
-  }
+  // *:focus,
+  // *:focus-visible {
+  //   outline: 2px dashed var(--light-green);
+  //   outline-offset: 2px;
+  // }
 }
 
 /* Style the back side */
@@ -108,15 +105,9 @@ if (!id) {
   }
 }
 
-.flip-card-back-inner {
-  padding: 3.5vmin 3vmin 2.5vmin 3vmin;
-}
 
-
-*:focus,
-*:focus-visible {
-  outline: 2px dashed var(--black);
+.flip-card:focus-visible {
+  outline: 3px dashed var(--highlight-color);
   outline-offset: 1vmin;
-  border-radius: 50%;
 }
 </style>
