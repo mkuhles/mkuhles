@@ -11,7 +11,7 @@ const t = useTranslations(lang);
 const colorScaleString = COLOR_SCALE.join();
 ---
 <div class="skills">
-  <div class="flex-center flex flex-col sm:flex-row sm:justify-between items-center">
+  <div class="flex flex-col sm:flex-row sm:justify-between items-center gap-2">
     <div id="skillLevelScale" class="scale order-last sm:order-first">
       <div class="scale__top">{t('skills.basics')}</div>
       <div class="scale__bottom">{t('skills.expert')}</div>
@@ -61,10 +61,6 @@ const colorScaleString = COLOR_SCALE.join();
     bottom: 0;
     left: calc(2 * var(--scale-width));
   }
-}
-
-.flex-center {
-  gap: calc(2 * var(--scale-width));
 }
 
  #circle-container {
