@@ -100,55 +100,105 @@ const colorScaleString = COLOR_SCALE.join();
 </style>
 
 <script>
-  import skillsCircleAnimation from "../../scripts/skills/animation";
+  import createCircleAnimation from "../../scripts/skills/animation";
   
-  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  document.documentElement.classList.toggle('reduced-motion', mq.matches);
-  mq.addEventListener?.('change', (e: MediaQueryListEvent) =>
-    document.documentElement.classList.toggle('reduced-motion', e.matches)
-  );
-  mq.addListener?.((e: MediaQueryListEvent) =>
-    document.documentElement.classList.toggle('reduced-motion', e.matches)
-  ); // Fallback
+  function rafDebounce(fn: () => void) {
+  let rafId = 0;
+  return () => {
+    if (rafId) return;
+    rafId = requestAnimationFrame(() => {
+      rafId = 0;
+      fn();
+    });
+  };
+}
 
-  const reanimateSkillsButton = document.getElementById('reanimateSkills');
-  reanimateSkillsButton?.addEventListener('click', () => start());
+// --- Reduced motion flag wie bisher ---
+const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+document.documentElement.classList.toggle("reduced-motion", mq.matches);
 
-  let stopAnimation: (() => void) | null = null;
-  let autoPlayed = false;
+mq.addEventListener?.("change", (e: MediaQueryListEvent) =>
+  document.documentElement.classList.toggle("reduced-motion", e.matches)
+);
+mq.addListener?.((e: MediaQueryListEvent) =>
+  document.documentElement.classList.toggle("reduced-motion", e.matches)
+); // Fallback
 
-  function start() {
-    if (!stopAnimation) {
-      stopAnimation = skillsCircleAnimation( mq.matches, {
-        onComplete: () => stop()
-      }); // startet animation und gibt cleanup zurück
-    }
+// --- Animation Controller ---
+const anim = createCircleAnimation({
+  onComplete: () => {
+    // wie vorher: wenn fertig, stoppen
+    anim.stop();
+  },
+});
+
+// Wenn reduced motion: direkt final layouten (ohne Animation)
+function start() {
+  if (mq.matches) {
+    anim.start(true); // skipInitialAnimation
+  } else {
+    anim.start(false);
   }
+}
 
-  function stop() {
-    if (stopAnimation) {
-      stopAnimation();
-      stopAnimation = null;
-    }
+function stop() {
+  anim.stop();
+}
+
+// Button “reanimate”
+const reanimateSkillsButton = document.getElementById("reanimateSkills");
+reanimateSkillsButton?.addEventListener("click", () => {
+  autoPlayed = true; // optional: verhindert, dass Scroll nochmal startet
+  start();
+});
+
+// --- AutoPlay on scroll (VISIBLE_RATIO) ---
+const VISIBLE_RATIO = 0.7;
+let autoPlayed = false;
+
+const onScroll = () => {
+  const container = document.getElementById("circle-container");
+  if (!container || autoPlayed) return;
+
+  const rect = container.getBoundingClientRect();
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+
+  const visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+  const ratio = Math.max(0, Math.min(visible / rect.height, 1));
+
+  if (ratio >= VISIBLE_RATIO) {
+    autoPlayed = true;
+    start();
+    window.removeEventListener("scroll", onScroll);
   }
+};
 
-  const VISIBLE_RATIO = 0.7;
-  const onScroll = () => {
-    const container = document.getElementById('circle-container');
-    if (!container || autoPlayed) return;
-    const rect = container.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    const visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
-    const ratio = Math.max(0, Math.min(visible / rect.height, 1));
-    
-    if (ratio >= VISIBLE_RATIO) {
-      autoPlayed = true;
-      start();
-      window.removeEventListener("scroll", onScroll);
-    }
-  };  
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll(); // initial check
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-  window.addEventListener('beforeunload', () => { window.removeEventListener('scroll', onScroll); stop(); });
+// --- Performantes Resize: ResizeObserver + rAF debounce ---
+const requestReflow = rafDebounce(() => {
+  anim.reflow();
+});
+
+const container = document.getElementById("circle-container");
+let ro: ResizeObserver | null = null;
+
+if (container && "ResizeObserver" in window) {
+  ro = new ResizeObserver(() => requestReflow());
+  ro.observe(container);
+}
+
+// Fallback (optional, schadet nicht)
+window.addEventListener("resize", requestReflow, { passive: true });
+window.addEventListener("orientationchange", requestReflow, { passive: true });
+
+// --- Cleanup ---
+window.addEventListener("beforeunload", () => {
+  window.removeEventListener("scroll", onScroll);
+  window.removeEventListener("resize", requestReflow);
+  window.removeEventListener("orientationchange", requestReflow);
+  ro?.disconnect();
+  stop();
+});
 </script>

@@ -1,74 +1,115 @@
-import arrangeCircleElements from './layout';
+import arrangeCircleElements from "./layout";
 
 const STEP_NUMBER = 50;
 const MAX_ANGLE = 2 * Math.PI;
-const ANGLE_STEP = (2 * Math.PI) / STEP_NUMBER;
+const ANGLE_STEP = MAX_ANGLE / STEP_NUMBER;
 const MAX_OPACITY = 1;
 const OPACITY_STEP = 1 / STEP_NUMBER;
 
-export default function useCircleAnimation(
-  skipInitialAnimation:boolean = false,
+export type CircleAnimationController = {
+  start: (skipInitialAnimation?: boolean) => void;
+  stop: () => void;
+  reflow: () => void;
+  isRunning: () => boolean;
+};
+
+export default function createCircleAnimation(
   opts?: { onComplete?: () => void }
-) {
-  let angle: number = 0, radius: number = 0, opacity: number = 0;
-  let vmin: number, maxRadius: number, radiusStep: number;
+): CircleAnimationController {
+  let angle = 0;
+  let radius = 0;
+  let opacity = 0;
 
-  function recomputeSizes():[number,number,number]|void {
-    const container = document.getElementById('circle-container') as HTMLElement;
-    const elem = document.querySelector('.center-element'); // nutzt width/height: var(--circleElementDiameter)
-    if(!container || !elem) { return; }
+  let maxRadius = 0;
+  let radiusStep = 0;
+
+  let intervalId: number | null = null;
+
+  function recomputeSizes(): [number, number] | null {
+    const container = document.getElementById("circle-container") as HTMLElement | null;
+    const elem = document.querySelector(".center-element") as HTMLElement | null;
+    if (!container || !elem) return null;
+
     const diameterPx = elem.getBoundingClientRect().width;
-    const boundingRect = container.getBoundingClientRect();
-    const vmin = Math.min(boundingRect.width, boundingRect.height);
-    
-    const maxRadius = (vmin - diameterPx)/2;
-    const radiusStep = maxRadius / STEP_NUMBER;
+    const rect = container.getBoundingClientRect();
+    const vmin = Math.min(rect.width, rect.height);
 
-    return [vmin,maxRadius,radiusStep];
+    const newMaxRadius = (vmin - diameterPx) / 2;
+    const newRadiusStep = newMaxRadius / STEP_NUMBER;
+
+    return [newMaxRadius, newRadiusStep];
   }
 
-  function handleResize() {
-    const returnValue = recomputeSizes();
-    if(!returnValue) {
+  function applySizesOrBail(): boolean {
+    const r = recomputeSizes();
+    if (!r) return false;
+    [maxRadius, radiusStep] = r;
+    return true;
+  }
+
+  function draw() {
+    arrangeCircleElements(angle, radius, opacity);
+  }
+
+  function reflow() {
+    if (!applySizesOrBail()) return;
+
+    // set radius to max if it was already there
+    radius = radius == 0 ? radius : maxRadius;
+    draw();
+  }
+
+  function stop() {
+    if (intervalId !== null) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+  }
+
+  function isRunning() {
+    return intervalId !== null;
+  }
+
+  function resetState() {
+    angle = 0;
+    radius = 0;
+    opacity = 0;
+  }
+
+  function start(skipInitialAnimation = false) {
+    // Stelle sicher, dass Größen aktuell sind
+    if (!applySizesOrBail()) return;
+
+    // falls schon läuft: neu starten
+    stop();
+    resetState();
+
+    if (skipInitialAnimation) {
+      angle = MAX_ANGLE;
+      radius = maxRadius;
+      opacity = MAX_OPACITY;
+      draw();
       return;
     }
-    [vmin,maxRadius,radiusStep] = returnValue;
-    arrangeCircleElements(angle, radius, opacity);
-  }
-  const returnValue = recomputeSizes();
-  if(!returnValue) {
-    return function stopNoop() { /* nothing to cleanup */ };;
-  }
-  [vmin,maxRadius,radiusStep] = returnValue;
-  window.addEventListener('resize', handleResize);
 
-  if (skipInitialAnimation) {
-    arrangeCircleElements(MAX_ANGLE, maxRadius, MAX_OPACITY);
-    return function stopNoop() { /* nothing to cleanup */ };
+    intervalId = window.setInterval(() => {
+      angle = calculateNextState(angle, MAX_ANGLE, ANGLE_STEP);
+      radius = calculateNextState(radius, maxRadius, radiusStep);
+      opacity = calculateNextState(opacity, MAX_OPACITY, OPACITY_STEP);
+
+      draw();
+
+      if (angle >= MAX_ANGLE && radius >= maxRadius && opacity >= MAX_OPACITY) {
+        stop();
+        opts?.onComplete?.();
+      }
+    }, 25);
   }
 
-  const interval = setInterval(() => {
-    angle = calculateNextState(angle, MAX_ANGLE, ANGLE_STEP);
-    radius = calculateNextState(radius, maxRadius, radiusStep);
-    opacity = calculateNextState(opacity, MAX_OPACITY, OPACITY_STEP);
-    arrangeCircleElements(angle, radius, opacity);
-    
-    if(angle >= MAX_ANGLE && radius >= maxRadius && opacity >= MAX_OPACITY) {
-      clearInterval(interval);
-      if(opts?.onComplete) { opts.onComplete(); }
-    }
-  }, 25);
-
-  // return cleanup so caller can stop the animation
-  return function stop() {
-    clearInterval(interval);
-    window.removeEventListener('resize', handleResize);
-  };
+  return { start, stop, reflow, isRunning };
 }
 
 function calculateNextState(previous: number, max: number, step: number): number {
-  if (previous >= max - step) {
-    return max;
-  }
+  if (previous >= max - step) return max;
   return previous + step;
 }
