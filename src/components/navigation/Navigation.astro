@@ -8,27 +8,16 @@ interface Props {
     navItems: NavEntry[],
 };
 
-const { navItems } = Astro.props;
+const { navItems, className} = Astro.props;
 ---
 
-<nav class="navbar">
-    <ul>
+<nav class={"navbar"+(className ? ` ${className}` : "")}>
+    <ul class={"flex justify-center md:justify-end gap-2 flex-wrap list-none"}>
         {navItems.map(item => (
             <NavItem navItem={item} />
         ))}
-        <li><LanguageSwitcher /></li>
+        <NavItem>
+            <LanguageSwitcher />
+        </NavItem>
     </ul>
 </nav>
-
-
-<style lang="scss" scoped>
-    .navbar {
-        ul {
-            list-style: none;
-            display: flex;
-            gap: .5em;
-            justify-content: flex-end;
-        }
-    }
-</style>
-

@@ -15,7 +15,7 @@ const allLanguages = Array.from(LANGS) as (typeof LANGS)[number][];
 {allLanguages.map((lang) => {
     if(curLang == lang) { return ''; }
     return (
-        <a class="btn language-switcher" href={urlFromRoute(routeKey, lang)} title={t('langSwitcher.switch', lang)}>
+        <a class="language-switcher" href={urlFromRoute(routeKey, lang)} title={t('langSwitcher.switch', lang)}>
             {lang}
         </a>
     )

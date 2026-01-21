@@ -4,24 +4,23 @@ import type { NavEntry } from "../../types/NavItem";
 import type { UiKey } from "../../i18n/utils";
 
 interface Props {
-    navItem: NavEntry
+    navItem?: NavEntry
 }
 
 const { navItem } = Astro.props;
 const curLang = getLangFromUrl(Astro.url);
 const t = useTranslations(curLang);
 const getUrl = getUrlFromRoute(curLang);
-const navId = navItem.id;
-const NavUiKey = `nav.${navId}` as UiKey;
 
-let href: string;
-let target: string|undefined;
-if(navItem.href) {
-    href = navItem.href;
-    target = "_blank";
-} else {
-    href = getUrl(navId); 
-}
+const href = navItem ? (navItem.href ?? getUrl(navItem.id)) : undefined;
+const target = navItem?.href ? "_blank" : undefined;
+const label = navItem ? t(`nav.${navItem.id}` as UiKey) : "";
 ---
 
-<li><a href={href} target={target}>{t(NavUiKey)}</a></li>
+<li class="hover:outline">
+{navItem ? (
+    <a href={href} target={target}>{label}</a>
+  ) : (
+    <slot />
+  )}
+</li>

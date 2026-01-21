@@ -1,21 +1,43 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
-body {
-    min-height: 100vh;
-    position: relative;
-    padding-bottom: calc(var(--spacing) * 4); /* space for footer */
-    background:var(--c9);
+    /* @tailwind base;
+    @tailwind components;
+    @tailwind utilities; */
 
-    footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    }
-}
+@layer base {
+  *:focus,
+  *:focus-visible {
+    @apply outline outline-dashed outline-offset-8 rounded;
+    outline-color: theme('colors.highlight');
+    outline-width: 0.3vmin;
+  }
 
-.section {
+  body {
+    @apply relative min-h-screen bg-c9;
+  }
+
+  .section {
     @apply py-4;
     @apply px-2;
     @apply m-auto;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply rounded-lg border border-c8 bg-c8 px-1 py-0.5 text-white transition-colors duration-300;
+    @apply hover:bg-white hover:text-c8;
+  }
+
+  .btn--highlight {
+    @apply border-highlight bg-white text-highlight;
+    @apply hover:bg-highlight hover:text-white;
+  }
+
+  .skill-circle {
+    @apply absolute rounded-full will-change-transform;
+    @apply transition-all duration-200 ease-out;
+    @apply hover:scale-110 hover:z-50 hover:shadow-lg;
+  }
 }
