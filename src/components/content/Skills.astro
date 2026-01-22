@@ -2,11 +2,11 @@
 import SkillElement from "./SkillElement.astro";
 import {skills} from "../../data/mkuhles.json";
 import { COLOR_SCALE } from "../../scripts/colorUtils";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
 
 const { lang: propLang } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const t = getTranslationFunction(lang);
 
 const colorScaleString = COLOR_SCALE.join();
 ---

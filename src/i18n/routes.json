@@ -1,12 +1,5 @@
 {
-  "de": {
-    "home": "",
-    "imprint": "impressum",
-    "privacy": "datenschutz"
-  },
-  "en": {
-    "home": "",
-    "imprint": "imprint",
-    "privacy": "privacy"
-  }
+  "home": {"de": "", "en": ""},
+  "imprint": {"de": "impressum", "en": "imprint"},
+  "privacy": {"de": "datenschutz", "en": "privacy"}
 }

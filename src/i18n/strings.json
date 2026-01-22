@@ -1,26 +1,16 @@
 {
-  "de": {
-    "language": "Deutsch",
-    "langSwitcher.switch": "wechsele zur deutschen Seite",
-    "skills.myskills": "Ich kann",
-    "skills.basics": "Grundlagen",
-    "skills.expert": "Expertenwissen",
-    "skills.again": "noch mal",
-    "nav.home": "Startseite",
-    "nav.github": "Mein Github",
-    "nav.imprint": "Impressum",
-    "nav.privacy": "Datenschutzerklärung"
+  "language": { "de": "Deutsch", "en": "English" },
+  "langSwitcher.switch": {
+    "de": "wechsele zur deutschen Seite",
+    "en": "switch to English"
   },
-  "en": {
-    "language": "English",
-    "langSwitcher.switch": "switch to English",
-    "skills.myskills": "my skills",
-    "skills.basics": "Basics",
-    "skills.expert": "Expert knowledge",
-    "skills.again": "again",
-    "nav.home": "Home",
-    "nav.github": "My Github",
-    "nav.imprint": "Imprint",
-    "nav.privacy": "Privacy Policy"
-  }
+  "skills.myskills": { "de": "Ich kann", "en": "my skills" },
+  "skills.basics": { "de": "Grundlagen", "en": "Basics" },
+  "skills.expert": { "de": "Expertenwissen", "en": "Expert knowledge" },
+  "skills.again": { "de": "noch mal", "en": "again" },
+  "nav.home": { "de": "Startseite", "en": "Home" },
+  "nav.github": { "de": "Mein Github", "en": "My Github" },
+  "nav.imprint": { "de": "Impressum", "en": "Imprint" },
+  "nav.privacy": { "de": "Datenschutzerklärung", "en": "Privacy Policy" },
+  "today": { "de": "heute", "en": "today" }
 }

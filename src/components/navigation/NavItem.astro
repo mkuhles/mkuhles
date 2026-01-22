@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, getUrlFromRoute, useTranslations } from "../../i18n/utils";
+import { getLangFromUrl, getUrlFromRoute, getTranslationFunction } from "../../i18n/utils";
 import type { NavEntry } from "../../types/NavItem";
 import type { UiKey } from "../../i18n/utils";
 
@@ -9,7 +9,7 @@ interface Props {
 
 const { navItem } = Astro.props;
 const curLang = getLangFromUrl(Astro.url);
-const t = useTranslations(curLang);
+const t = getTranslationFunction(curLang);
 const getUrl = getUrlFromRoute(curLang);
 
 const href = navItem ? (navItem.href ?? getUrl(navItem.id)) : undefined;
