@@ -17,9 +17,9 @@ const target = navItem?.href ? "_blank" : undefined;
 const label = navItem ? t(`nav.${navItem.id}` as UiKey) : "";
 ---
 
-<li class="border-2 border-transparent hover:bg-c10 px-1 py-0.5 hover:border-b-highlight">
+<li class="border-2 border-transparent border-b-highlight border-dashed hover:bg-c10 hover:border-highlight">
 {navItem ? (
-    <a href={href} target={target}>{label}</a>
+    <a class="block px-0.5 py-0.5" href={href} target={target}>{label}</a>
   ) : (
     <slot />
   )}
