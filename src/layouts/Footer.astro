@@ -3,13 +3,16 @@ import type { NavEntry } from "../types/NavItem.ts";
 import Navigation from "../components/navigation/Navigation.astro";
 
 import navData from '../data/navigation.json';
+import Section from "./Section.astro";
 const nav = (navData as any).footer as NavEntry[];
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="px-2 md:flex justify-between items-center">
-    <Navigation className="footer-nav my-2" navItems={nav} />
-    <div class="my-2 text-center md:text-left order-first"><p>© {currentYear} Melanie Kuhles</p></div>
+<footer>
+    <Section type="footer" className="py-0" contentClassName="md:flex justify-between items-center">
+        <Navigation className="footer-nav my-2" navItems={nav} />
+        <div class="my-2 text-center md:text-left order-first"><p>© {currentYear} Melanie Kuhles</p></div>
+    </Section>
 </footer>
 
 

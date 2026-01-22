@@ -3,16 +3,19 @@ import type { NavEntry } from "../types/NavItem.ts";
 import Navigation from "../components/navigation/Navigation.astro";
 
 import navData from '../data/navigation.json';
+import Section from "./Section.astro";
 const nav = (navData as any).main as NavEntry[];
 ---
 
-<header class="py-1 px-2 flex justify-between items-center">
-    <div class="logo__wrapper">
-        <a href="/">
-            <img src="/images/logo.svg" alt="Website Logo" />
-        </a>
-    </div>
-    <Navigation className="header-nav" navItems={nav} /> 
+<header>
+    <Section type="header" className="py-1" contentClassName="flex justify-between items-center">
+      <div class="logo__wrapper">
+          <a href="/">
+              <img src="/images/logo.svg" alt="Website Logo" />
+          </a>
+      </div>
+      <Navigation className="header-nav" navItems={nav} /> 
+    </Section>
 </header>
 
 <style>

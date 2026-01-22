@@ -1,29 +1,18 @@
 @use "../variables";
 
-.section--gradient {
+.section {
   background:linear-gradient(180deg, var(--gradient-color-1) 0%, var(--gradient-color-2) 100%);
-}
-.section--dark {
-  background:var(--c9); color:var(--text-color-inv);
-}
-
-.section--about {
-  @extend .section--gradient;
-  
-  .section__content {
-    max-width: 100vmin;
-  }
-}
-
-.section.section--skills {
-  @extend .section--gradient;
   
   .section__content {
     max-width: 100vmin;
     margin: auto;
   }
 }
+.section--dark {
+  background:var(--c9); color:var(--text-color-inv);
+}
 
+.section.section--header,
 .section.section--footer {
     @extend .section--dark;
 }
