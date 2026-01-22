@@ -14,6 +14,7 @@ import heroSrc from '../../assets/images/foto-mkuhles.jpg?w=1200&format=jpeg&as=
 
 
 import { getLangStaticPaths } from "../../i18n/utils";
+import Experience from "../../components/content/experience/ExperienceList.astro";
 
 export const getStaticPaths = getLangStaticPaths;
 const { lang } = Astro.params;
@@ -26,5 +27,6 @@ const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", class
 <BaseLayout title="Home" lang={lang}>
 	<ImageSection type="about" image={image}><About /></ImageSection>
   <Section type="skills"><Skills lang={lang} /></Section>
+  <Experience />
 </BaseLayout>
  

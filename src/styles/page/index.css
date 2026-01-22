@@ -1,11 +1,6 @@
 @tailwind utilities;
 @config "../../../tailwind.config.js";
 
-body {
-  font-size: 14px;
-  font-size: max(14px,2vmin);
-}
-
 /*
   * about
   */

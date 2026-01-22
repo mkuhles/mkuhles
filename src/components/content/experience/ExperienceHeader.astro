@@ -1,0 +1,32 @@
+---
+import { getLangFromUrl, getTranslationFunction } from "../../../i18n/utils";
+
+interface Props {
+  title: string,
+  subtitle?: string,
+  startDate: string,
+  endDate?: string,
+  level?: number,
+  className?: string
+}
+
+const {title, subtitle, startDate, endDate, level = 3, className = ''} = Astro.props;
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+
+const start = new Date(startDate).toLocaleDateString(curLang, { year: 'numeric', month: 'long' });
+const end = endDate ? new Date(endDate).toLocaleDateString(curLang, { year: 'numeric', month: 'long' }) : t("today");
+---
+
+
+<div class={"section-header "+className}>
+  <div class="sm:flex justify-between items-baseline">
+    {level == 3 
+      ? <h3 class="text-c11">{title}</h3> 
+      : level == 4 
+        ? <h4 class="">{title}</h4> 
+        : <h5 class="">{title}</h5>}
+    <div class="justify-end">{start} - {end}</div>
+  </div>
+  <div class="">{subtitle}</div>
+</div>

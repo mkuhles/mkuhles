@@ -132,7 +132,7 @@
       "since":2021,
       "examples":{
         "de": ["größere JavaScript-Projekte", "bessere Struktur und Wartbarkeit"],
-        "en": ["larger JavaScript projects", "better structure and maintainability"]
+        "en": ["larger JavaScript projects", "improved structure and maintainability"]
       }
     },
     {
@@ -141,8 +141,284 @@
       "since":2025,
       "examples":{
         "de": ["diese seite"],
-        "en": ["this web site"]
+        "en": ["this website"]
       }
+    }
+  ],
+  "experience": [
+    {
+      "role": {
+        "de": "Sabbatical / Familienzeit & private Projekte",
+        "en": "Sabbatical / Family Time & Private Projects"
+      },
+      "start_date": "2025-03",
+      "end_date": null,
+      "description": [
+        {
+          "de": "Geplantes Sabbatical mit Fokus auf Familie.",
+          "en": "Planned sabbatical with a focus on family."
+        },
+        {
+          "de": "Aufbau und Organisation eines privaten Selbstversorger- und Tierprojekts (Schafe, Hühner).",
+          "en": "Building and organizing a private self-sufficiency and animal project (sheep, chickens)."
+        },
+        {
+          "de": "Begleitende Weiterbildung in Symfony, Drupal 11, Architektur, CI/CD und sicherer Webentwicklung.",
+          "en": "Ongoing professional development in Symfony, Drupal 11, architecture, CI/CD and secure web development."
+        },
+        {
+          "de": "Umsetzung kleiner Eigenprojekte.",
+          "en": "Implementation of small personal projects."
+        }
+      ],
+          "technologies": [
+            "PHP",
+            "Symfony",
+            "Drupal 11",
+            "JavaScript",
+            "SCSS",
+            "Astro"
+          ]
+    },
+    {
+      "role": {
+        "de": "Freiberufliche Webentwicklerin",
+        "en": "Freelance Web Developer"
+      },
+      "company": "OSC Oder-Spree-Consulting GmbH",
+      "start_date": "2023-04",
+      "end_date": null,
+      "projects": [
+        {
+          "name": {
+            "de": "Symfony-Entwicklung (Agenturumfeld)",
+            "en": "Symfony Development (Agency Environment)"
+          },
+          "start_date": "2023-08",
+          "end_date": "2025-02",
+          "description": [
+            {
+              "de": "Wartung und Weiterentwicklung kundenspezifischer Symfony-Webanwendungen (Features, Bugfixes, technische Optimierungen).",
+              "en": "Maintenance and further development of custom Symfony web applications (features, bug fixes, technical optimizations)."
+            },
+            {
+              "de": "Umsetzung von API-Anbindungen und Integrationen externer Dienste.",
+              "en": "Implementation of API connections and integrations of external services."
+            },
+            {
+              "de": "Zusammenarbeit im Team-Workflow (Git, Reviews) sowie Umsetzung von Templates und Frontend-Anteilen.",
+              "en": "Collaboration in team workflows (Git, reviews) as well as implementing templates and frontend parts."
+            }
+          ],
+          "technologies": [
+            "PHP",
+            "Symfony",
+            "SCSS",
+            "JavaScript",
+            "Git",
+            "Twig"
+          ]
+        }
+      ]
+    },
+    {
+      "role": {
+        "de": "Webentwicklerin",
+        "en": "Web Developer"
+      },
+      "employment_type": {
+        "de": "angestellt",
+        "en": "employed"
+      },
+      "company": "Quadriga Media Berlin GmbH",
+      "start_date": "2013-12",
+      "end_date": "2023-03",
+      "projects": [
+        {
+          "name": {
+            "de": "WordPress-Plugin-Entwicklung und Betrieb",
+            "en": "WordPress Plugin Development & Operations"
+          },
+          "start_date": "2014-06",
+          "end_date": "2023-03",
+          "description": [
+            {
+              "de": "Entwicklung individueller Plugins zur Unterstützung redaktioneller Workflows inklusive konfigurierbarer Einstellungen und API-Integrationen.",
+              "en": "Development of custom plugins to support editorial workflows, including configurable settings and API integrations."
+            },
+            {
+              "de": "Langfristige Betreuung produktiver Websites mit Fokus auf Stabilität, Wartbarkeit und Weiterentwicklung.",
+              "en": "Long-term maintenance of production websites with a focus on stability, maintainability and continuous improvement."
+            },
+            {
+              "de": "Abstimmung mit Redaktion und Stakeholdern sowie verständliche technische Beratung.",
+              "en": "Coordination with editorial teams and stakeholders, providing clear technical guidance."
+            },
+            {
+              "de": "Analyse und Behebung sicherheitsrelevanter Vorfälle inklusive System-Hardening.",
+              "en": "Analysis and remediation of security incidents including system hardening."
+            }
+          ],
+          "technologies": [
+            "WordPress",
+            "PHP",
+            "ACF",
+            "JavaScript",
+            "REST-API",
+            "SCSS"
+          ]
+        },
+        {
+          "name": {
+            "de": "Bewerberportal",
+            "en": "Applicant Portal"
+          },
+          "start_date": "2020-03",
+          "end_date": "2020-06",
+          "description": [
+            {
+              "de": "Entwicklung eines Bewerberportals von Erstkontakt bis Annahmeprozess.",
+              "en": "Development of an applicant portal covering the full process from initial contact to acceptance."
+            },
+            {
+              "de": "Umsetzung einer intuitiven Benutzeroberfläche mit strukturierter API-Kommunikation.",
+              "en": "Implementation of an intuitive user interface with structured API communication."
+            }
+          ],
+          "technologies": [
+            "React",
+            "Symfony",
+            "REST-API"
+          ]
+        },
+        {
+          "name": {
+            "de": "Vue.js-Widget & API-Anbindung",
+            "en": "Vue.js Widget & API Integration"
+          },
+          "start_date": "2019-12",
+          "end_date": "2020-02",
+          "description": [
+            {
+              "de": "Refakturierung und teilweise Neuimplementation eines Vue.js-Widgets zur Eventintegration.",
+              "en": "Refactoring and partial reimplementation of a Vue.js widget for event integration."
+            },
+            {
+              "de": "Stabilisierung der Anwendung durch automatisierte Tests.",
+              "en": "Improving stability through automated tests."
+            }
+          ],
+          "technologies": [
+            "Vue.js",
+            "JavaScript",
+            "Jest"
+          ]
+        },
+        {
+          "name": {
+            "de": "Multisite mit DSGVO-Fokus",
+            "en": "Multisite with GDPR Focus"
+          },
+          "start_date": "2016-12",
+          "end_date": "2020-09",
+          "description": [
+            {
+              "de": "Umsetzung komplexer Event-Webseiten mit responsiver Darstellung.",
+              "en": "Implementation of complex event websites with responsive layouts."
+            },
+            {
+              "de": "Einsatz DSGVO-gerechter Plugins und benutzerfreundlicher Inhaltsstruktur.",
+              "en": "Use of GDPR-compliant plugins and user-friendly content structure."
+            }
+          ],
+          "technologies": [
+            "WordPress",
+            "JavaScript",
+            "SVG",
+            "PHP"
+          ]
+        },
+        {
+          "name": {
+            "de": "Drupal-Module & Themes",
+            "en": "Drupal Modules & Themes"
+          },
+          "start_date": "2014-01",
+          "end_date": "2022-10",
+          "description": [
+            {
+              "de": "Entwicklung und Pflege von Modulen und Themes für mehrere Drupal-Systeme.",
+              "en": "Development and maintenance of modules and themes across multiple Drupal systems."
+            },
+            {
+              "de": "Technische Migrationen, systematische Fehleranalyse und Refactoring.",
+              "en": "Technical migrations, systematic debugging and refactoring."
+            }
+          ],
+          "technologies": [
+            "Drupal 7",
+            "Drupal 8",
+            "Drupal 9",
+            "PHP",
+            "SCSS",
+            "Twig",
+            "JavaScript"
+          ]
+        }
+      ]
+    },
+    {
+      "role": {
+        "de": "Java-Entwicklung & Tests",
+        "en": "Java Development & Testing"
+      },
+      "company": "Talgo (Deutschland) GmbH",
+      "start_date": "2013-01",
+      "end_date": "2013-11",
+      "description": [
+        {
+          "de": "Kundenspezifische Anpassung von IBM Maximo Asset Management.",
+          "en": "Customer-specific customization of IBM Maximo Asset Management."
+        },
+        {
+          "de": "Umsetzung automatisierter Tests.",
+          "en": "Implementation of automated tests."
+        }
+      ],
+      "technologies": [
+        "Java",
+        "Selenium"
+      ]
+    },
+    {
+      "role": {
+        "de": "Modul- und Themeentwicklung",
+        "en": "Module & Theme Development"
+      },
+      "company": "Backend Media UG",
+      "start_date": "2010-04",
+      "end_date": "2011-05",
+      "description": [
+        {
+          "de": "Modul- und Themeentwicklung für Drupal 6.",
+          "en": "Module and theme development for Drupal 6."
+        }
+      ],
+      "technologies": [
+        "PHP",
+        "CSS",
+        "Drupal 6"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Humboldt-Universität zu Berlin",
+      "period": {
+        "start_year": "10-2004",
+        "end_year": "2013-09"
+      },
+      "degree": "Studium der Informatik"
     }
   ]
 }

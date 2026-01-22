@@ -1,0 +1,33 @@
+---
+import { getLangFromUrl, getTranslationFunction } from "../../../i18n/utils";
+import Section from "../../../layouts/Section.astro";
+import ExperienceDescription from "./ExperienceDescription.astro";
+import ExperienceHeader from "./ExperienceHeader.astro";
+import ExperienceProject from "./ExperienceProject.astro";
+import ExperienceTechnologies from "./ExperienceTechnologies.astro";
+
+const {entry} = Astro.props;
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+---
+
+<Section type="experience-entry" className="py-2">
+  <ExperienceHeader 
+    title={t(entry.role)} 
+    subtitle={entry.company} 
+    startDate={entry.start_date} 
+    endDate={entry.end_date}
+    className="mb-1"
+  />
+  {entry.description &&
+    <ExperienceDescription description={entry.description} />}
+  {entry.projects && (
+    <ul>
+      {entry.projects?.map((project:any) => (
+        <li><ExperienceProject project={project} /></li>
+      ))}
+    </ul>
+  )}
+  {entry.technologies &&
+    <ExperienceTechnologies techs={entry.technologies} />}
+</Section>

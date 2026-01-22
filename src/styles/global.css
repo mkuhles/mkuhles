@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-size: 16px;
+    font-size: max(16px,2vmin);
+  }
+
   *:focus,
   *:focus-visible {
     @apply outline outline-dashed outline-offset-8 rounded;
@@ -12,12 +17,26 @@
 
   body {
     @apply relative min-h-screen bg-c9;
+    color: var(--text-color);
   }
 
   .section {
     @apply py-4;
     @apply px-2;
     @apply m-auto;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  h4 {
+    @apply text-xl;
+  }
+  h5 {
+    @apply text-lg;
   }
 }
 
@@ -37,4 +56,9 @@
     @apply transition-all duration-200 ease-out;
     @apply hover:scale-110 hover:z-50 hover:shadow-lg;
   }
+}
+
+.prose {
+  max-width: 50rem;
+  margin: auto;
 }

@@ -1,0 +1,22 @@
+---
+const { project } = Astro.props;
+import { getLangFromUrl, getTranslationFunction } from "../../../i18n/utils";
+import ExperienceDescription from "./ExperienceDescription.astro";
+import ExperienceHeader from "./ExperienceHeader.astro";
+import ExperienceTechnologies from "./ExperienceTechnologies.astro";
+
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+---
+<div class="py-1 border-t border-highlight border-dashed">
+    <ExperienceHeader 
+        title={t(project.name)}
+        startDate={project.start_date} 
+        endDate={project.end_date}
+        level={4}
+        className="mb-0.5" />
+    {project.description &&
+      <ExperienceDescription description={project.description} />}
+    {project.technologies &&
+      <ExperienceTechnologies techs={project.technologies} />}
+</div>

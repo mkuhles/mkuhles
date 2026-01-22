@@ -1,0 +1,20 @@
+---
+import {experience} from "../../../data/mkuhles.json";
+import ExperienceEntry from "./ExperienceEntry.astro";
+import MarkdownSection from "../../../layouts/MarkdownSection.astro";
+import { getLangFromUrl, getTranslationFunction } from "../../../i18n/utils";
+import Section from "../../../layouts/Section.astro";
+
+
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+---
+
+<Section type="experience">
+    <Section type="no-gradient" className="pb-0">
+        <h2>{t("experience")}</h2>
+    </Section>
+    {experience.map( (exp) => (
+        <ExperienceEntry entry={exp} />
+    ))}
+</Section>

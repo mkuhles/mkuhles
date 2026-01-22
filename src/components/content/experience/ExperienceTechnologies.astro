@@ -1,0 +1,15 @@
+---
+import { getLangFromUrl, getTranslationFunction } from "../../../i18n/utils";
+
+const {techs} = Astro.props;
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+---
+<>
+    <h5 class="font-semibold mt-1">{t("technologies")}:</h5>
+    <ul class="technologies">
+    {techs.map((tech:any, i:number) => (
+        <li>{t(tech)}</li>
+    ))}
+    </ul>
+</>

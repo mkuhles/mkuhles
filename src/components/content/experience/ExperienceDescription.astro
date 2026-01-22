@@ -1,0 +1,13 @@
+---
+import { getLangFromUrl, getTranslationFunction } from "../../../i18n/utils";
+
+const {description} = Astro.props;
+
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+---
+<ul class="description">
+    {description.map((desc:any, i:number) => (
+        <li>{t(desc)}</li>
+    ))}
+</ul>

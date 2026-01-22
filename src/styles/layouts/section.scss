@@ -12,7 +12,42 @@
   background:var(--c9); color:var(--text-color-inv);
 }
 
+.section--no-gradient {
+    background: var(--gradient-color-1);
+}
+
 .section.section--header,
 .section.section--footer {
     @extend .section--dark;
+}
+
+.section--experience {
+    @extend .section--no-gradient;
+    padding: 0;
+
+    & > .section__content {
+        max-width: none;
+    }
+
+    ul.description {
+      padding-left: 1em;
+      list-style: '> ';
+
+      li::marker {
+        color: var(--highlight);
+      }
+    }
+
+    ul.technologies {
+      li {
+        display: inline;
+      }
+      li + li:before {
+        content: ', ';
+      }
+    }
+}
+
+.section.section--experience-entry .section__content {
+  max-width: 50rem;
 }

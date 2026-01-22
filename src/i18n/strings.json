@@ -8,9 +8,13 @@
   "skills.basics": { "de": "Grundlagen", "en": "Basics" },
   "skills.expert": { "de": "Expertenwissen", "en": "Expert knowledge" },
   "skills.again": { "de": "noch mal", "en": "again" },
+
   "nav.home": { "de": "Startseite", "en": "Home" },
   "nav.github": { "de": "Mein Github", "en": "My Github" },
   "nav.imprint": { "de": "Impressum", "en": "Imprint" },
   "nav.privacy": { "de": "Datenschutzerklärung", "en": "Privacy Policy" },
-  "today": { "de": "heute", "en": "today" }
+
+  "today": { "de": "heute", "en": "today" },
+  "experience": { "de": "Berufserfahrung", "en": "Experience" },
+  "technologies": { "de": "Technologien", "en": "Technologies" }
 }

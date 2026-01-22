@@ -10,8 +10,6 @@ const path = Astro.url.pathname.split('/').slice(2).join('/');
 const routeKey = getRoute(path) as RouteKey;
 
 const allLanguages = Array.from(LANGS) as (typeof LANGS)[number][];
-
-console.log({curLang, path, routeKey});
 ---
 
 {allLanguages.map((lang) => {
