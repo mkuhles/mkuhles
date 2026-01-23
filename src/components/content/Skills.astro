@@ -3,6 +3,7 @@ import SkillElement from "./SkillElement.astro";
 import {skills} from "../../data/mkuhles.json";
 import { COLOR_SCALE } from "../../scripts/colorUtils";
 import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
+import AgainButton from "../shared/buttons/AgainButton.astro";
 
 const { lang: propLang } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
@@ -22,7 +23,7 @@ const colorScaleString = COLOR_SCALE.join();
     </div>
   </div>
   <div class="pt-1 flex justify-around sm:justify-end">
-    <button id="reanimateSkills" class="btn btn--highlight">{t('skills.again')}</button>
+    <AgainButton id="reanimateSkills" />
   </div>
 </div>
 
@@ -34,13 +35,14 @@ const colorScaleString = COLOR_SCALE.join();
     var(--colorScaleString));
   width: 100%;
   height: var(--scale-width);
-  margin-bottom: calc(2 * var(--scale-width));
+  margin-bottom: calc(2 * var(--scale-width) + 1rem);
 
   @media screen and (min-width:640px) {
     background: linear-gradient(to bottom,
       var(--colorScaleString));
     width: var(--scale-width);
     height: var(--circle-diameter);
+    margin-bottom: 0;
   }
 }
 .scale__top {

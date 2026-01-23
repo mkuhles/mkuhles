@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string,
+  id?: string,
+  className?: string,
+  type?: string,
+}
+
+let {title,id,className, type} = Astro.props;
+const hasIcon = Astro.slots.has("default");
+if(!className) {
+  className = "btn";
+} else {
+  className = "btn " + className;
+}
+if(type) {
+  className = className + " btn--"+type;
+}
+if(hasIcon) {
+  className = className + " btn--icon";
+}
+---
+
+<button id={id} class={"btn " + className}>
+  {hasIcon? (
+    <span class="icon" aria-hidden="true"><slot /></span>
+    <span class="sr-only">{title}</span>
+  ) : (
+    title
+  )}
+</button>

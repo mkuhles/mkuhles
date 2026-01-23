@@ -6,13 +6,11 @@
   html {
     font-size: 16px;
     font-size: max(16px,2vmin);
-  }
 
-  *:focus,
-  *:focus-visible {
-    @apply outline outline-dashed outline-offset-8 rounded;
-    outline-color: theme('colors.highlight');
-    outline-width: 0.3vmin;
+    hyphens: auto;
+    &.de {
+      lang: de;
+    }
   }
 
   body {
@@ -42,12 +40,12 @@
 
 @layer components {
   .btn {
-    @apply rounded-lg border border-c8 bg-c8 px-1 py-0.5 text-white transition-colors duration-300;
+    @apply border border-dashed border-c8 bg-c8 px-1 py-0.5 text-white transition-colors duration-300;
     @apply hover:bg-white hover:text-c8;
   }
 
   .btn--highlight {
-    @apply border-highlight bg-white text-highlight;
+    @apply border-highlight bg-transparent text-highlight;
     @apply hover:bg-highlight hover:text-white;
   }
 
@@ -61,4 +59,23 @@
 .prose {
   max-width: 50rem;
   margin: auto;
+}
+
+/*
+ * focus
+ */
+:root {
+  --focus-ring-strong: rgba(0, 0, 0, 0.45);
+  --focus-ring-soft: rgba(0, 0, 0, 0.15);
+}
+footer,
+header {
+  --focus-ring-strong: rgba(255, 255, 255, 0.55);
+  --focus-ring-soft: rgba(255, 255, 255, 0.12);
+}
+*:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--focus-ring-strong),
+    0 0 0 6px var(--focus-ring-soft);
 }

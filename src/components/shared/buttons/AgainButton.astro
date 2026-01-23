@@ -1,0 +1,13 @@
+---
+import { getLangFromUrl, getTranslationFunction } from "../../../i18n/utils";
+import Button from "./Button.astro";
+import AgainIcon from "../icons/again.svg"
+
+const {id} = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(lang);
+---
+
+<Button id={id} title={t('skills.again')} type="highlight">
+    <AgainIcon />
+</Button>

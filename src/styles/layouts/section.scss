@@ -22,30 +22,30 @@
 }
 
 .section--experience {
-    @extend .section--no-gradient;
-    padding: 0;
+  @extend .section--no-gradient;
+  padding: 0;
 
-    & > .section__content {
-        max-width: none;
+  & > .section__content {
+      max-width: none;
+  }
+
+  ul.description {
+    padding-left: 1em;
+    list-style: '> ';
+
+    li::marker {
+      color: var(--highlight);
     }
+  }
 
-    ul.description {
-      padding-left: 1em;
-      list-style: '> ';
-
-      li::marker {
-        color: var(--highlight);
-      }
+  ul.technologies {
+    li {
+      display: inline;
     }
-
-    ul.technologies {
-      li {
-        display: inline;
-      }
-      li + li:before {
-        content: ', ';
-      }
+    li + li:before {
+      content: ', ';
     }
+  }
 }
 
 .section.section--experience-entry .section__content {

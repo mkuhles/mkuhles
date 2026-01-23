@@ -19,14 +19,22 @@ const end = endDate ? new Date(endDate).toLocaleDateString(curLang, { year: 'num
 ---
 
 
-<div class={"section-header "+className}>
+<div class={"experience__header "+className}>
   <div class="sm:flex justify-between items-baseline">
     {level == 3 
-      ? <h3 class="text-c11">{title}</h3> 
+      ? <h3 class="">{title}</h3> 
       : level == 4 
-        ? <h4 class="">{title}</h4> 
+        ? <h4 class="text-c11">{title}</h4> 
         : <h5 class="">{title}</h5>}
     <div class="justify-end">{start} - {end}</div>
   </div>
   <div class="">{subtitle}</div>
 </div>
+
+<style lang="scss" scoped>
+  .prose .experience__header {
+    h3 {
+      margin-bottom: 0;
+    }
+  }
+</style>
