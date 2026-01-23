@@ -5,7 +5,6 @@ import { COLOR_SCALE } from "../../scripts/colorUtils";
 import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
 import AgainButton from "../shared/buttons/AgainButton.astro";
 
-const { lang: propLang } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(lang);
 
@@ -18,12 +17,12 @@ const colorScaleString = COLOR_SCALE.join();
       <div class="scale__bottom">{t('skills.expert')}</div>
     </div>
     <div id="circle-container" class="circle-container">
-      <div class="center-element circle">{t('skills.myskills')}</div>
-      {skills.map( (skill) => <SkillElement skill={skill} lang={propLang} /> )}
+      <div class="center-element">{t('skills.myskills')}</div>
+      {skills.map( (skill) => <SkillElement skill={skill} /> )}
     </div>
   </div>
   <div class="pt-1 flex justify-around sm:justify-end">
-    <AgainButton id="reanimateSkills" />
+    <AgainButton id="reanimateSkills" className="xs:hidden" />
   </div>
 </div>
 
@@ -65,17 +64,15 @@ const colorScaleString = COLOR_SCALE.join();
   }
 }
 
- #circle-container {
+#circle-container {
   position: relative;
   width: var(--circle-diameter);
   height: var(--circle-diameter);
-  
-  .circle {
-    position: absolute;
+  isolation: isolate;
+}
+#circle-container .circle {
     width: var(--circle-element-diameter);
     height: var(--circle-element-diameter);
-    max-width: var(--circle-element-max-diameter);
-    max-height: var(--circle-element-max-diameter);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -85,18 +82,54 @@ const colorScaleString = COLOR_SCALE.join();
     font-size: var(--circle-element-font-size);
     padding: var(--circle-element-padding);
     box-sizing: border-box;
-    font-weight: bold;
+}
+
+#circle-container .center-element {
+    font-size: calc(1.5 * var(--circle-element-font-size));
   }
 
-  .center-element {
+
+@media (min-width: 500px) {
+  #circle-container .circle {
+    position: absolute;
+  }
+
+  #circle-container .center-element {
+    font-size: calc(1.5 * var(--circle-element-font-size));
+    z-index: 100;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 100;
+  }
+  
+  #circle-container .circle-element {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  #circle-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: space-around;
   }
 
-  .circle-element {
-    opacity: 0;
+  #circle-container .circle {
+    position: static;
+    transform: none;
+  }
+
+  #circle-container .center-element {
+    width: 100%;
+    order: -1;
+  }
+
+  #circle-container .circle-element {
+    opacity: 1;
   }
 }
 </style>
@@ -117,6 +150,7 @@ const colorScaleString = COLOR_SCALE.join();
 
 // --- Reduced motion flag wie bisher ---
 const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+const small = window.matchMedia("(max-width: 500px)");
 document.documentElement.classList.toggle("reduced-motion", mq.matches);
 
 mq.addEventListener?.("change", (e: MediaQueryListEvent) =>
@@ -126,81 +160,83 @@ mq.addListener?.((e: MediaQueryListEvent) =>
   document.documentElement.classList.toggle("reduced-motion", e.matches)
 ); // Fallback
 
-// --- Animation Controller ---
-const anim = createCircleAnimation({
-  onComplete: () => {
-    // wie vorher: wenn fertig, stoppen
+if (!small.matches) {
+  // --- Animation Controller ---
+  const anim = createCircleAnimation({
+    onComplete: () => {
+      // wie vorher: wenn fertig, stoppen
+      anim.stop();
+    },
+  });
+
+  // Wenn reduced motion: direkt final layouten (ohne Animation)
+  function start() {
+    if (mq.matches) {
+      anim.start(true); // skipInitialAnimation
+    } else {
+      anim.start(false);
+    }
+  }
+
+  function stop() {
     anim.stop();
-  },
-});
-
-// Wenn reduced motion: direkt final layouten (ohne Animation)
-function start() {
-  if (mq.matches) {
-    anim.start(true); // skipInitialAnimation
-  } else {
-    anim.start(false);
   }
-}
 
-function stop() {
-  anim.stop();
-}
-
-// Button “reanimate”
-const reanimateSkillsButton = document.getElementById("reanimateSkills");
-reanimateSkillsButton?.addEventListener("click", () => {
-  autoPlayed = true; // optional: verhindert, dass Scroll nochmal startet
-  start();
-});
-
-// --- AutoPlay on scroll (VISIBLE_RATIO) ---
-const VISIBLE_RATIO = 0.7;
-let autoPlayed = false;
-
-const onScroll = () => {
-  const container = document.getElementById("circle-container");
-  if (!container || autoPlayed) return;
-
-  const rect = container.getBoundingClientRect();
-  const vh = window.innerHeight || document.documentElement.clientHeight;
-
-  const visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
-  const ratio = Math.max(0, Math.min(visible / rect.height, 1));
-
-  if (ratio >= VISIBLE_RATIO) {
-    autoPlayed = true;
+  // Button “reanimate”
+  const reanimateSkillsButton = document.getElementById("reanimateSkills");
+  reanimateSkillsButton?.addEventListener("click", () => {
+    autoPlayed = true; // optional: verhindert, dass Scroll nochmal startet
     start();
-    window.removeEventListener("scroll", onScroll);
+  });
+
+  // --- AutoPlay on scroll (VISIBLE_RATIO) ---
+  const VISIBLE_RATIO = 0.7;
+  let autoPlayed = false;
+
+  const onScroll = () => {
+    const container = document.getElementById("circle-container");
+    if (!container || autoPlayed) return;
+
+    const rect = container.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+
+    const visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+    const ratio = Math.max(0, Math.min(visible / rect.height, 1));
+
+    if (ratio >= VISIBLE_RATIO) {
+      autoPlayed = true;
+      start();
+      window.removeEventListener("scroll", onScroll);
+    }
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll(); // initial check
+
+  // --- Performantes Resize: ResizeObserver + rAF debounce ---
+  const requestReflow = rafDebounce(() => {
+    anim.reflow();
+  });
+
+  const container = document.getElementById("circle-container");
+  let ro: ResizeObserver | null = null;
+
+  if (container && "ResizeObserver" in window) {
+    ro = new ResizeObserver(() => requestReflow());
+    ro.observe(container);
   }
-};
 
-window.addEventListener("scroll", onScroll, { passive: true });
-onScroll(); // initial check
+  // Fallback (optional, schadet nicht)
+  window.addEventListener("resize", requestReflow, { passive: true });
+  window.addEventListener("orientationchange", requestReflow, { passive: true });
 
-// --- Performantes Resize: ResizeObserver + rAF debounce ---
-const requestReflow = rafDebounce(() => {
-  anim.reflow();
-});
-
-const container = document.getElementById("circle-container");
-let ro: ResizeObserver | null = null;
-
-if (container && "ResizeObserver" in window) {
-  ro = new ResizeObserver(() => requestReflow());
-  ro.observe(container);
+  // --- Cleanup ---
+  window.addEventListener("beforeunload", () => {
+    window.removeEventListener("scroll", onScroll);
+    window.removeEventListener("resize", requestReflow);
+    window.removeEventListener("orientationchange", requestReflow);
+    ro?.disconnect();
+    stop();
+  });
 }
-
-// Fallback (optional, schadet nicht)
-window.addEventListener("resize", requestReflow, { passive: true });
-window.addEventListener("orientationchange", requestReflow, { passive: true });
-
-// --- Cleanup ---
-window.addEventListener("beforeunload", () => {
-  window.removeEventListener("scroll", onScroll);
-  window.removeEventListener("resize", requestReflow);
-  window.removeEventListener("orientationchange", requestReflow);
-  ro?.disconnect();
-  stop();
-});
 </script>

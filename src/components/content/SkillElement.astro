@@ -1,9 +1,13 @@
 ---
+import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
 import { pickColor, textOn } from "../../scripts/colorUtils";
 import FlipCard from "../shared/FlipCard.astro";
 
 
-const { skill, lang } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(lang);
+
+const { skill } = Astro.props;
 const bgcolor = pickColor(skill.knowledge);
 const color = textOn(bgcolor);
 const examples = skill.examples?.[lang] || [];
@@ -18,8 +22,11 @@ const examples = skill.examples?.[lang] || [];
   </div>
   <div slot="back">
     <div class="skill-back" style=`color:${color};background-color:${bgcolor};`>
-      <strong>{skill.name}</strong> {skill.since && "since "+skill.since}<br />
-      <div class="skill-examples">{examples.join(", ")}</div>
+      <div>
+        <strong>{skill.name}</strong><br />
+        {skill.since && t("since") + " " + skill.since}
+        <div class="skill-examples">{examples.join(", ")}</div>
+      </div>
     </div>
   </div>
 </FlipCard>
@@ -29,13 +36,17 @@ const examples = skill.examples?.[lang] || [];
     border-radius: 100%;
     line-height: 1.2;
     font-size: .9em;
-    padding: 3vmin;
-    width: calc(var(--circle-element-diameter) * 1.5);
-    height: calc(var(--circle-element-diameter) * 1.5);
+    padding:  calc(var(--circle-element-padding) *2);
+    width: calc(var(--circle-element-diameter) * 2);
+    height: calc(var(--circle-element-diameter) * 2);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .skill-examples {
       margin-top: .5em;
-      font-size: .8em;
+      font-size: .9em;
     }
   }
 

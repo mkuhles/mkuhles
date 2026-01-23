@@ -6,11 +6,6 @@
   html {
     font-size: 16px;
     font-size: max(16px,2vmin);
-
-    hyphens: auto;
-    &.de {
-      lang: de;
-    }
   }
 
   body {
@@ -56,9 +51,15 @@
   }
 }
 
+.experience,
 .prose {
   max-width: 50rem;
   margin: auto;
+
+  hyphens: auto;
+  &.de {
+    lang: de;
+  }
 }
 
 /*

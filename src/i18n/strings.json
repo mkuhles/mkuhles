@@ -7,7 +7,8 @@
   "skills.myskills": { "de": "Ich kann", "en": "my skills" },
   "skills.basics": { "de": "Grundlagen", "en": "Basics" },
   "skills.expert": { "de": "Expertenwissen", "en": "Expert knowledge" },
-  "skills.again": { "de": "noch mal", "en": "again" },
+  "again": { "de": "noch mal", "en": "again" },
+  "since": { "de": "seit", "en": "since"},
 
   "nav.home": { "de": "Startseite", "en": "Home" },
   "nav.github": { "de": "Mein Github", "en": "My Github" },
