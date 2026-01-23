@@ -27,7 +27,7 @@ export default function createCircleAnimation(
 
   function recomputeSizes(): [number, number] | null {
     const container = document.getElementById("circle-container") as HTMLElement | null;
-    const elem = document.querySelector(".center-element") as HTMLElement | null;
+    const elem = document.querySelector(".circle-element") as HTMLElement | null;
     if (!container || !elem) return null;
 
     const diameterPx = elem.getBoundingClientRect().width;

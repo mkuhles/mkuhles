@@ -69,31 +69,30 @@ const colorScaleString = COLOR_SCALE.join();
   width: var(--circle-diameter);
   height: var(--circle-diameter);
   isolation: isolate;
-}
-#circle-container .circle {
-    width: var(--circle-element-diameter);
-    height: var(--circle-element-diameter);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+
+  .circle {
+    @media screen and (min-width:550px) {
+      position: absolute;
+      width: var(--circle-element-diameter);
+      height: var(--circle-element-diameter);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
     text-align: center;
     font-size: var(--circle-element-font-size);
     padding: var(--circle-element-padding);
     box-sizing: border-box;
-}
+  }
 
-#circle-container .center-element {
+  .center-element {
     font-size: calc(1.5 * var(--circle-element-font-size));
   }
+}
 
-
-@media (min-width: 500px) {
-  #circle-container .circle {
-    position: absolute;
-  }
-
+@media screen and (min-width:550px) {
   #circle-container .center-element {
     font-size: calc(1.5 * var(--circle-element-font-size));
     z-index: 100;
@@ -108,7 +107,7 @@ const colorScaleString = COLOR_SCALE.join();
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
   #circle-container {
     width: 100%;
     height: auto;
@@ -116,20 +115,22 @@ const colorScaleString = COLOR_SCALE.join();
     flex-wrap: wrap;
     gap: 0.6rem;
     justify-content: space-around;
-  }
 
-  #circle-container .circle {
-    position: static;
-    transform: none;
-  }
 
-  #circle-container .center-element {
-    width: 100%;
-    order: -1;
-  }
+  .circle {
+      position: static;
+      transform: none;
+      width: calc(var(--circle-element-diameter) * 1.5);
+    }
 
-  #circle-container .circle-element {
-    opacity: 1;
+  .center-element {
+      width: 100%;
+      order: -1;
+    }
+
+  .circle-element {
+      opacity: 1;
+    }
   }
 }
 </style>
@@ -150,7 +151,7 @@ const colorScaleString = COLOR_SCALE.join();
 
 // --- Reduced motion flag wie bisher ---
 const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-const small = window.matchMedia("(max-width: 500px)");
+const small = window.matchMedia("(max-width: 550px)");
 document.documentElement.classList.toggle("reduced-motion", mq.matches);
 
 mq.addEventListener?.("change", (e: MediaQueryListEvent) =>
@@ -160,7 +161,7 @@ mq.addListener?.((e: MediaQueryListEvent) =>
   document.documentElement.classList.toggle("reduced-motion", e.matches)
 ); // Fallback
 
-if (!small.matches) {
+if(!small.matches) {
   // --- Animation Controller ---
   const anim = createCircleAnimation({
     onComplete: () => {
@@ -190,7 +191,7 @@ if (!small.matches) {
   });
 
   // --- AutoPlay on scroll (VISIBLE_RATIO) ---
-  const VISIBLE_RATIO = 0.7;
+  const VISIBLE_RATIO = 0.9;
   let autoPlayed = false;
 
   const onScroll = () => {
