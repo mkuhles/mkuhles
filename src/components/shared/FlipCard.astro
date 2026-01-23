@@ -11,21 +11,28 @@ if (!id) {
 }
 --- 
 
-<div class={ className + ' flip-card'} style={styles}
+<div 
+    class={ (className ?? '') + ' flip-card'}
+    style={styles}
     id={id}
     tabindex="0"
     role="button"
-    aria-controls={id + '-inner'}
-    aria-expanded="false"
+    aria-pressed="false"
+    aria-describedby={id + '-desc'}
+    data-card-id={id}
 >
-    <div class='flip-card-inner flip-trigger' aria-label="Vorderseite" id={id + '-inner'}>
-        <div class="flip-card-front">
-            <slot name="front" />
-        </div>
-        <div class="flip-card-back flip-trigger" aria-label="Rückseite">
-            <slot name="back" />
-        </div>
+  <!-- Screen-reader-only description of how to interact with the card -->
+  <span class="sr-only" id={id + '-desc'}>
+    This is a flip card. Press Enter or Space to flip.
+  </span>
+  <div class='flip-card-inner flip-trigger' aria-label="Vorderseite" id={id + '-inner'}>
+    <div class="flip-card-front">
+      <slot name="front" />
     </div>
+    <div class="flip-card-back flip-trigger" aria-label="Rückseite">
+      <slot name="back" />
+    </div>
+  </div>
 </div>
 
 <style lang="scss" scoped>

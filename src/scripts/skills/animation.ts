@@ -5,12 +5,12 @@ const MAX_ANGLE = 2 * Math.PI;
 const ANGLE_STEP = MAX_ANGLE / STEP_NUMBER;
 const MAX_OPACITY = 1;
 const OPACITY_STEP = 1 / STEP_NUMBER;
+const DURATION_MS = 1400;
 
 export type CircleAnimationController = {
   start: (skipInitialAnimation?: boolean) => void;
   stop: () => void;
   reflow: () => void;
-  isRunning: () => boolean;
 };
 
 export default function createCircleAnimation(
@@ -23,7 +23,10 @@ export default function createCircleAnimation(
   let maxRadius = 0;
   let radiusStep = 0;
 
-  let intervalId: number | null = null;
+  // Store the current animation frame request id. Using requestAnimationFrame
+  // instead of setInterval aligns updates with the browser's refresh cycle and
+  // improves performance.
+  let rafId: number | null = null;
 
   function recomputeSizes(): [number, number] | null {
     const container = document.getElementById("circle-container") as HTMLElement | null;
@@ -54,20 +57,19 @@ export default function createCircleAnimation(
   function reflow() {
     if (!applySizesOrBail()) return;
 
-    // set radius to max if it was already there
-    radius = radius == 0 ? radius : maxRadius;
+    // Snap the radius to the new maximum if it was previously non‑zero. This
+    // ensures that resizing the container while the circles are expanded keeps
+    // them fully expanded.
+    radius = radius === 0 ? 0 : maxRadius;
     draw();
   }
 
   function stop() {
-    if (intervalId !== null) {
-      clearInterval(intervalId);
-      intervalId = null;
+    // Cancel any scheduled animation frame
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
     }
-  }
-
-  function isRunning() {
-    return intervalId !== null;
   }
 
   function resetState() {
@@ -77,13 +79,14 @@ export default function createCircleAnimation(
   }
 
   function start(skipInitialAnimation = false) {
-    // Stelle sicher, dass Größen aktuell sind
+    // Ensure sizes are up to date
     if (!applySizesOrBail()) return;
 
-    // falls schon läuft: neu starten
+    // If already running, reset and cancel existing frame
     stop();
     resetState();
 
+    // If we should skip the initial animation, jump directly to the final state
     if (skipInitialAnimation) {
       angle = MAX_ANGLE;
       radius = maxRadius;
@@ -92,23 +95,37 @@ export default function createCircleAnimation(
       return;
     }
 
-    intervalId = window.setInterval(() => {
-      angle = calculateNextState(angle, MAX_ANGLE, ANGLE_STEP);
-      radius = calculateNextState(radius, maxRadius, radiusStep);
-      opacity = calculateNextState(opacity, MAX_OPACITY, OPACITY_STEP);
+    // Internal function to perform a single animation step. Each call schedules
+    // itself via requestAnimationFrame until the animation completes.
+    const startTime = performance.now();
+
+    const animateFrame = (now: number) => {
+      const elapsed = now - startTime;
+      const t = Math.min(elapsed / DURATION_MS, 1);
+
+      // optional easing (wirkt natürlicher)
+      const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+      angle = MAX_ANGLE * eased;
+      radius = maxRadius * eased;
+      opacity = MAX_OPACITY * eased;
 
       draw();
 
-      if (angle >= MAX_ANGLE && radius >= maxRadius && opacity >= MAX_OPACITY) {
+      if (t >= 1) {
         stop();
         opts?.onComplete?.();
+        return;
       }
-    }, 25);
+
+      rafId = requestAnimationFrame(animateFrame);    
+    };
+
+    rafId = requestAnimationFrame(animateFrame);
   }
 
-  return { start, stop, reflow, isRunning };
+  return { start, stop, reflow };
 }
-
 function calculateNextState(previous: number, max: number, step: number): number {
   if (previous >= max - step) return max;
   return previous + step;

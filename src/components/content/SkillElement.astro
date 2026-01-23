@@ -57,11 +57,9 @@ const examples = skill.examples?.[lang] || [];
 
   .flip-card .skill-back {
     opacity: 0;
-    transition: 1s ease opacity;
+    transition: opacity 1s ease;
   }
-  .flip-card:hover .skill-back,
-  .flip-card:focus .skill-back,
-  .flip-card:focus-within .skill-back {
+  .flip-card[aria-pressed="true"] .skill-back {
     opacity: 1;
   }
 </style>
