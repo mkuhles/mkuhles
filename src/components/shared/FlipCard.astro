@@ -37,15 +37,12 @@ if (!id) {
 
 <style lang="scss" scoped>
 
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+/* The flip card container */
 .flip-card {
   background-color: transparent;
-    
-  /* border: 1px solid #f1f1f1; */
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  perspective: 1000px;
 }
 
-/* This container is needed to position the front and back side */
 .flip-card-inner {
   position: relative;
   width: 100%;
@@ -55,23 +52,24 @@ if (!id) {
   transform-style: preserve-3d;
 }
 
-// @media (min-width:550px) {
-  /* Do an horizontal flip when you move the mouse over the flip box container */
-  .flip-card:focus,
-  .flip-card:hover,
-  .flip-card:focus-within,
-  .flip-card:focus-visible {
-    z-index: 100;
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:focus,
+.flip-card:hover,
+.flip-card:focus-within,
+.flip-card:focus-visible {
+  z-index: 100;
 
+  @media (min-width:550px) { 
     .flip-card-inner{
       transform: rotateY(180deg);
     }
   }
+}
 
-  /* Reduced motion: nicht drehen, siehe dein R-Media-Query */
-  @media (prefers-reduced-motion: reduce){
-    .flip-card-inner{ transition:none; transform:none; }
-  }
+/* Reduced motion: nicht drehen, siehe dein R-Media-Query */
+@media (prefers-reduced-motion: reduce){
+  .flip-card-inner{ transition:none; transform:none; }
+}
 
 /* Position the front and back side */
 .flip-card-front, .flip-card-back {
@@ -88,15 +86,11 @@ if (!id) {
 
 /* Style the back side */
 .flip-card-back {
-  top:50%;
-  left:50%;
-  transform: rotateY(180deg) translate(50%, -50%);
   border-radius: 100%;
-  line-height: 1.2;
 
-  padding:  calc(var(--circle-element-padding) *2);
-  width: calc(var(--circle-element-diameter) * 2);
-  height: calc(var(--circle-element-diameter) * 2);
+  padding: 6vmin;
+  width: 65vmin;
+  height: 65vmin;
 
   display: flex;
   justify-content: center;
@@ -106,8 +100,16 @@ if (!id) {
   transition: transform 1s ease opacity 1s ease; 
 
   @media (min-width:550px) {
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%) rotateY(180deg);
     font-size: .9em;
     transition: opacity 1s ease;
+    width: calc(var(--circle-element-diameter) * 2);
+    height: calc(var(--circle-element-diameter) * 2);
+    padding:  calc(var(--circle-element-padding) *2);
+    
+    line-height: 1.2;
   }
 }
 .flip-card:hover,
@@ -118,4 +120,119 @@ if (!id) {
     opacity: 1;
   }
 }
+
+@media (max-width: 549px) {
+  .flip-card-back {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .flip-card.is-open {
+    z-index: 9999;
+  }
+
+  .flip-card.is-open .flip-card-back {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+
+    font-size: max(16px,2vmin);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(var(--dx), var(--dy));
+
+    .skill-title {
+      font-size: 1.2em;
+    }
+  }
+}
 </style>
+
+<script>
+
+  const isMobile = () => window.matchMedia("(max-width: 549px)").matches;
+
+  function getTranslateXY(el: Element) {
+    const t = getComputedStyle(el).transform; // "none" | "matrix(...)" | "matrix3d(...)"
+    if (!t || t === "none") return { x: 0, y: 0 };
+
+    const m = new DOMMatrixReadOnly(t);
+    return { x: m.m41, y: m.m42 }; // translateX / translateY
+  }
+
+  function setBacksitePosition(container: HTMLElement, card: Element, back: HTMLElement) {
+    // offsetLeft is used for both axes because the container is symmetrically
+    // positioned via vmin-based sizing (same horizontal and vertical offset).
+    const targetCx = container.offsetWidth / 2 - container.offsetLeft;
+    const targetCy = container.offsetHeight / 2 - container.offsetLeft;
+    const {x:cardX, y:cardY} = getTranslateXY(card);
+
+    const backWidth = back.offsetWidth;
+    const backHeight = back.offsetHeight;
+    
+    const dx = targetCx - cardX - backWidth / 2;
+    const dy = targetCy - cardY - backHeight / 2;
+
+    back.style.setProperty("--dx", `${dx}px`);
+    back.style.setProperty("--dy", `${dy}px`);
+  }
+
+  function toggleCard(card: Element) {
+    const container = document.getElementById("circle-container");
+    const back = card.querySelector<HTMLElement>(".flip-card-back");
+    if (!container || !back) return;
+
+    const pressed = card.getAttribute("aria-pressed") === "true";
+    const willOpen = !pressed;
+    card.setAttribute("aria-pressed", willOpen ? "true" : "false");
+
+    if (!isMobile()) return;
+
+    if (willOpen) {
+      const position = setBacksitePosition(container,card,back);
+      
+      card.classList.add("is-open");
+    } else {
+      card.classList.remove("is-open");
+      back.style.removeProperty("--dx");
+      back.style.removeProperty("--dy");
+    }
+  }
+
+  function requestReflow() {
+    const container = document.getElementById("circle-container");
+    const card = document.querySelector<HTMLElement>('.flip-card.is-open');
+    const back = card?.querySelector<HTMLElement>(".flip-card-back");
+    if (!container || !card || !back) return;
+
+    setBacksitePosition(container, card, back);
+  }
+
+  document.addEventListener("click", (e) => {
+    const target = /** @type {HTMLElement|null} */ (e.target instanceof HTMLElement ? e.target : null);
+    const card = target ? target.closest(".flip-card") : null;
+    
+    const openCards = document.getElementsByClassName("flip-card is-open");
+    Array.from(openCards).forEach(card => {
+      card.classList.remove('is-open');
+    });
+    
+    if (!card) return;
+    if (!isMobile()) return;
+    toggleCard(card);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const card = document.activeElement?.closest?.(".flip-card");
+    if (!card) return;
+    if (!isMobile()) return;
+    e.preventDefault();
+    toggleCard(card);
+  });
+
+  window.addEventListener("resize", requestReflow, { passive: true });
+</script>

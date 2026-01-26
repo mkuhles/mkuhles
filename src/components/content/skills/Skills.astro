@@ -27,6 +27,10 @@ const t = getTranslationFunction(lang);
   width: var(--circle-diameter);
   height: var(--circle-diameter);
   isolation: isolate;
+  overflow: hidden;
+  @media (min-width:550px) {
+    overflow: visible;
+  }
 
   .circle-element {
     position: absolute;

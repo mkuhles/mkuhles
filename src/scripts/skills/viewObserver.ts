@@ -15,7 +15,6 @@ export default function initCircleAnimationOnView(
 ): { startAnimation: () => void} {
   const controller = createCircleAnimation(opts);
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const isSmallScreen = window.matchMedia("(max-width: 550px)");
 
   const startAnimation = () => {
     // if (isSmallScreen.matches) return; // no-op on small screens
@@ -26,7 +25,7 @@ export default function initCircleAnimationOnView(
   let hasAutoPlayed = false;
   const intersectionObserver = new IntersectionObserver(
     (entries) => {
-      if (/*isSmallScreen.matches ||*/ hasAutoPlayed) return;
+      if (hasAutoPlayed) return;
       for (const entry of entries) {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
           hasAutoPlayed = true;
@@ -40,15 +39,13 @@ export default function initCircleAnimationOnView(
   );
 
   const container = document.getElementById("circle-container");
-  if (container /*&& !isSmallScreen.matches*/) {
+  if (container) {
     intersectionObserver.observe(container);
   }
 
   // --- Resize handling (large screens only) ---
   let reflowRafId: number | null = null;
   const requestReflow = () => {
-    // on small screens do not arrange / do nothing.
-    // if (isSmallScreen.matches) return;
     if (reflowRafId !== null) return;
     reflowRafId = requestAnimationFrame(() => {
       reflowRafId = null;
@@ -58,7 +55,7 @@ export default function initCircleAnimationOnView(
 
   let resizeObserver: ResizeObserver | null = null;
   const attachResizeObservers = () => {
-    if (!container /*|| isSmallScreen.matches*/) return;
+    if (!container) return;
     if ("ResizeObserver" in window) {
       resizeObserver = new ResizeObserver(() => requestReflow());
       resizeObserver.observe(container);
@@ -78,29 +75,8 @@ export default function initCircleAnimationOnView(
     window.removeEventListener("orientationchange", requestReflow);
   };
 
-  // Attach once at init (only if large screen).
+  // Attach once at init.
   attachResizeObservers();
-
-  // --- Media-query switching (large <-> small) ---
-  const handleSmallScreenChange = () => {
-    // if (isSmallScreen.matches) {
-    //   // Switching to small: stop everything and remove circle layout.
-    //   controller.stop();
-    //   intersectionObserver.disconnect();
-    //   detachResizeObservers();
-    //   clearCircleInlineStyles();
-    //   return;
-    // }
-
-    // Switching back to large: re-enable resize handling and lay out.
-    attachResizeObservers();
-    controller.reflow();
-
-    // Re-arm auto-play only if it hasn't played yet.
-    if (!hasAutoPlayed && container) {
-      intersectionObserver.observe(container);
-    }
-  };
 
   const clearCircleInlineStyles = () => {
     // When switching to the small-screen layout we don't want stale inline
@@ -113,9 +89,6 @@ export default function initCircleAnimationOnView(
       el.style.removeProperty("opacity");
     });
   };
-
-  // Modern + legacy listeners
-  isSmallScreen.addEventListener?.("change", handleSmallScreenChange);
   
   return {startAnimation};
 }

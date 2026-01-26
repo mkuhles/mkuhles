@@ -20,7 +20,7 @@ const examples = skill.examples?.[lang] || [];
   </div>
   <div slot="back">
     <div>
-      <strong>{skill.name}</strong><br />
+      <div class="skill-title">{skill.name}</div>
       {skill.since && t("since") + " " + skill.since}
       <div class="skill-examples">{examples.join(", ")}</div>
     </div>
@@ -28,12 +28,12 @@ const examples = skill.examples?.[lang] || [];
 </FlipCard>
 
 <style lang="scss" scoped>
-  .skill-back {
-    .skill-examples {
-      margin-top: .5em;
-      font-size: .9em;
-    }
-
-    opacity: 1;
+  .skill-title {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  .skill-examples {
+    margin-top: .5em;
+    font-size: .9em;
   }
 </style>
