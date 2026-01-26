@@ -1,0 +1,51 @@
+---
+import { getLangFromUrl, getTranslationFunction } from "../../../i18n/utils";
+import { COLOR_SCALE } from "../../../scripts/colorUtils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(lang);
+const colorScaleString = COLOR_SCALE.join();
+---
+<div id="skillLevelScale" class="scale order-last sm:order-first">
+    <div class="scale__top">{t('skills.basics')}</div>
+    <div class="scale__bottom">{t('skills.expert')}</div>
+</div>
+
+<style define:vars={{colorScaleString}}>
+/* Legende als Verlauf */
+.scale {
+  position: relative;
+  background: linear-gradient(to right,
+    var(--colorScaleString));
+  width: 100%;
+  height: var(--scale-width);
+  margin-bottom: calc(2 * var(--scale-width) + 1rem);
+
+  @media screen and (min-width:640px) {
+    background: linear-gradient(to bottom,
+      var(--colorScaleString));
+    width: var(--scale-width);
+    height: var(--circle-diameter);
+    margin-bottom: 0;
+  }
+}
+.scale__top {
+  position: absolute;
+  top: calc(2 * var(--scale-width));
+
+  @media screen and (min-width:640px) {
+    top: 0;
+    left: calc(2 * var(--scale-width));
+  }
+}
+.scale__bottom {
+  position: absolute;
+  top: calc(2 * var(--scale-width));
+  right: 0;
+  @media screen and (min-width:640px) {
+    top: initial;
+    bottom: 0;
+    left: calc(2 * var(--scale-width));
+  }
+}
+</style>

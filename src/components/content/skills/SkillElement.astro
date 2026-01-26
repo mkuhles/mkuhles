@@ -1,0 +1,39 @@
+---
+import { getLangFromUrl, getTranslationFunction } from "../../../i18n/utils";
+import { pickColor, textOn } from "../../../scripts/colorUtils";
+import FlipCard from "../../shared/FlipCard.astro";
+
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(lang);
+
+const { skill, className } = Astro.props;
+const bgcolor = pickColor(skill.knowledge);
+const color = textOn(bgcolor);
+const examples = skill.examples?.[lang] || [];
+
+---
+
+<FlipCard className={"skill-element "+className} styles=`color:${color};background-color:${bgcolor};`>
+  <div slot="front">
+      {skill.name}
+  </div>
+  <div slot="back">
+    <div>
+      <strong>{skill.name}</strong><br />
+      {skill.since && t("since") + " " + skill.since}
+      <div class="skill-examples">{examples.join(", ")}</div>
+    </div>
+  </div>
+</FlipCard>
+
+<style lang="scss" scoped>
+  .skill-back {
+    .skill-examples {
+      margin-top: .5em;
+      font-size: .9em;
+    }
+
+    opacity: 1;
+  }
+</style>

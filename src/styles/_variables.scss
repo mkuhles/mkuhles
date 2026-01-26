@@ -37,10 +37,15 @@
   --highlight: #E6725E;
 
   /* Circle Layout (Skills) */
-  --circle-diameter: 85vmin;
-  --circle-element-diameter: 7em;
+  --circle-diameter: 95vmin;
+  --circle-element-diameter: 18vmin;
   --circle-element-max-diameter: 400px;
-  --circle-element-font-size: max(14px,2vmin);
+  --circle-element-font-size: 3.2vmin;
+  @media (min-width:550px) {
+    --circle-element-font-size: 2.3vmin;
+    --circle-element-diameter: 7em;
+  --circle-diameter: 85vmin;
+  }
   --circle-element-padding: calc(var(--circle-element-diameter) * 0.15);
   --scale-width: 1.5vmin;
 }
