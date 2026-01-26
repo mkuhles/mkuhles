@@ -41,7 +41,7 @@
   --circle-element-diameter: 18vmin;
   --circle-element-max-diameter: 400px;
   --circle-element-font-size: 3.2vmin;
-  @media (min-width:550px) {
+  @media (--small-up) {
     --circle-element-font-size: 2vmin;
     --circle-element-diameter: 7em;
     --circle-diameter: 85vmin;

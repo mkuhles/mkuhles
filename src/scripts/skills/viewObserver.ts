@@ -1,3 +1,4 @@
+import { closeAllOpenCards } from "../flip-card";
 import createCircleAnimation from "./animation";
 
 /**
@@ -6,8 +7,6 @@ import createCircleAnimation from "./animation";
  * Key behaviors:
  * - Uses IntersectionObserver instead of scroll events.
  * - Respects prefers-reduced-motion by skipping animation.
- * - If the screen is small (≤ 550px), this module does **nothing**:
- *   no animation, no arrangement, no reflow.
  * - On resize, reflows on large screens, but becomes a no-op on small screens.
  */
 export default function initCircleAnimationOnView(
@@ -17,7 +16,7 @@ export default function initCircleAnimationOnView(
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   const startAnimation = () => {
-    // if (isSmallScreen.matches) return; // no-op on small screens
+    closeAllOpenCards();
     controller.start(prefersReducedMotion.matches);
   };
 
@@ -64,31 +63,8 @@ export default function initCircleAnimationOnView(
     window.addEventListener("orientationchange", requestReflow, { passive: true });
   };
 
-  const detachResizeObservers = () => {
-    if (reflowRafId !== null) {
-      cancelAnimationFrame(reflowRafId);
-      reflowRafId = null;
-    }
-    resizeObserver?.disconnect();
-    resizeObserver = null;
-    window.removeEventListener("resize", requestReflow);
-    window.removeEventListener("orientationchange", requestReflow);
-  };
-
   // Attach once at init.
   attachResizeObservers();
-
-  const clearCircleInlineStyles = () => {
-    // When switching to the small-screen layout we don't want stale inline
-    // positioning from the large-screen circle layout.
-    const elements = document.querySelectorAll<HTMLElement>(".circle-element");
-    elements.forEach((el) => {
-      el.style.removeProperty("transform");
-      el.style.removeProperty("left");
-      el.style.removeProperty("top");
-      el.style.removeProperty("opacity");
-    });
-  };
   
   return {startAnimation};
 }

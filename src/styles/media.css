@@ -1,0 +1,7 @@
+@custom-media --small-up (min-width: 551px) and (min-height: 551px);
+@custom-media --tiny-down (max-width: 550px) or (max-height: 550px);
+
+:root { --is-tiny: 0; }
+@media (--tiny-down) {
+  :root { --is-tiny: 1; }
+}

@@ -15,7 +15,10 @@ export default defineConfig({
     }
   },
   vite: {
-    plugins: [imagetools(), tailwindcss()]
+    plugins: [imagetools(), tailwindcss()],
+    css: {
+      transformer: "postcss",
+    },
   },
   site: 'https://melanie-kuhles.statichost.page',
   base: '/'
