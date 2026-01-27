@@ -5,7 +5,7 @@
       "knowledge":0.5,
       "since": 2005,
       "examples": {
-        "de": ["komplexe Datenbanken für webseiten vor Doctrine und Co", "verschachtelte SQL-Abfragen"],
+        "de": ["komplexe Datenbanken für Webseiten vor Doctrine und Co", "verschachtelte SQL-Abfragen"],
         "en": ["complex data basis for web sites before doctrine and Co", "nested mysql queries"]
       }
     },
@@ -14,7 +14,7 @@
       "knowledge":0.2,
       "since": 2016,
       "examples": {
-        "de": ["deployment", "cron-jobs", "automatisation"],
+        "de": ["Deployment", "cron-jobs", "Automatisation"],
         "en": ["deployment", "cron-jobs", "automatisation"]
       }
     },
@@ -77,7 +77,7 @@
       "knowledge":0.7,
       "since": 2020,
       "examples": {
-        "de": ["interaktive webanwendungen z.B. Frontend für Bewerberplattform", "komplexe komponenten", "state management"],
+        "de": ["interaktive Webanwendungen z.B. Frontend für Bewerberplattform", "komplexe komponenten", "state management"],
         "en": ["interactive web applications i.e. frontend for a application platform", "complex components", "state management"]
       }
     },
@@ -86,13 +86,13 @@
       "knowledge":0.5,
       "since": 2019,
       "examples": {
-        "de": ["komplettes überarbeiten eines Widgets, damit die Funktion an die Anforderungen passten"],
+        "de": ["Vendor-Widget vollständig refaktoriert und funktional an projektspezifische Anforderungen angepasst"],
         "en": ["complete overhaul of a widget to match the requirements"]
       }
     },
     {
       "name":"astrojs",
-      "knowledge":0.4,
+      "knowledge":0.5,
       "since":2025,
       "examples":{
         "de": ["diese seite", "Vereinswebseite"],
@@ -104,7 +104,7 @@
       "knowledge":0.8,
       "since": 2004,
       "examples": {
-        "de": ["umfangreiche webanwendungen", "cms entwicklung", "frameworks wie drupal und symfony"],
+        "de": ["umfangreiche Webanwendungen", "CMS-Entwicklung", "frameworks wie drupal und symfony"],
         "en": ["extensive web applications", "cms development", "frameworks like drupal and symfony"]
       }
     },
@@ -113,7 +113,7 @@
       "knowledge":0.3,
       "since":2025,
       "examples":{
-        "de": ["Kontainerisierung von Anwendungen um leichter entwickln und deployen zu können"],
+        "de": ["Containerisierung von Anwendungen für reproduzierbare Entwicklungs- und Deployment-Prozesse"],
         "en": ["containerization of applications to make development and deployment easier"]
       }
     },
@@ -137,7 +137,7 @@
     },
     {
       "name":"Tailwind",
-      "knowledge":0.2,
+      "knowledge":0.4,
       "since":2025,
       "examples":{
         "de": ["diese seite"],
@@ -414,11 +414,9 @@
   "education": [
     {
       "institution": "Humboldt-Universität zu Berlin",
-      "period": {
-        "start_year": "10-2004",
-        "end_year": "2013-09"
-      },
-      "degree": "Studium der Informatik"
+      "start_date": "2004-10",
+      "end_date": "2013-09",
+      "degree": {"de": "Studium der Informatik", "en": "Studies in Computer Science"}
     }
   ]
 }

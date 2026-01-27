@@ -17,5 +17,7 @@
 
   "today": { "de": "heute", "en": "today" },
   "experience": { "de": "Berufserfahrung", "en": "Experience" },
-  "technologies": { "de": "Technologien", "en": "Technologies" }
+  "technologies": { "de": "Technologien", "en": "Technologies" },
+
+  "education": { "de": "Ausbildung", "en": "Edukation"}
 }

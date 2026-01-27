@@ -11,10 +11,10 @@ import heroSrcset from '../../assets/images/foto-mkuhles.jpg?w=480;768;1200&form
 // @ts-expect-error Vite image query import
 import heroSrc from '../../assets/images/foto-mkuhles.jpg?w=1200&format=jpeg&as=src';
 
-
-
 import { getLangStaticPaths } from "../../i18n/utils";
 import Experience from "../../components/content/experience/ExperienceList.astro";
+import Education from "../../components/education.astro";
+
 
 export const getStaticPaths = getLangStaticPaths;
 const { lang } = Astro.params;
@@ -28,5 +28,6 @@ const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", class
 	<ImageSection type="about" image={image}><About /></ImageSection>
   <Section type="skills"><Skills /></Section>
   <Experience />
+  <Education />
 </BaseLayout>
  
