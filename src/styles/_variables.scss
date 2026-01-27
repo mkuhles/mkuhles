@@ -1,6 +1,8 @@
 :root {
   /* Spacing */
   --spacing: max(2vmin, 15px);
+  --font-size-fix: 16px;
+  --font-size: max(var(--font-size-fix),2vmin);
 
   /* Color Scale (11 steps) */
   --c1: #E7E0CF;
@@ -41,8 +43,8 @@
   --circle-element-diameter: 18vmin;
   --circle-element-max-diameter: 400px;
   --circle-element-font-size: 3.2vmin;
-  @media (--small-up) {
-    --circle-element-font-size: 2vmin;
+  @media (--medium-up) {
+    --circle-element-font-size: var(--font-size);
     --circle-element-diameter: 7em;
     --circle-diameter: 85vmin;
   }

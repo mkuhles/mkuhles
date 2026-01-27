@@ -9,26 +9,36 @@ const lang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(lang);
 ---
 <div class="skills">
-  <div class="flex flex-col sm:flex-row sm:justify-between items-center gap-2">
+  <div class="skill-inner flex flex-col gap-2 items-center">
     <Scale />
     <div id="circle-container" class="circle-container">
       <div class="center-element">{t('skills.myskills')}</div>
       {skills.map( (skill) => <SkillElement skill={skill} className="circle-element"/> )}
     </div>
   </div>
-  <div class="pt-1 flex justify-around sm:justify-end">
+  <div class="skill-footer pt-1 flex justify-around">
     <AgainButton id="reanimateSkills" />
   </div>
 </div>
 
 <style>
+.skill-inner {
+  @media (--medium-up) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+.skill-footer {
+  @media (--medium-up) {
+    justify-content: end;
+  }
+}
 #circle-container {
   position: relative;
   width: var(--circle-diameter);
   height: var(--circle-diameter);
-  isolation: isolate;
   overflow: hidden;
-  @media (--small-up) {
+  @media (--medium-up) {
     overflow: visible;
   }
 
@@ -37,16 +47,19 @@ const t = getTranslationFunction(lang);
     width: var(--circle-element-diameter);
     height: var(--circle-element-diameter);
     border-radius: 50%;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     text-align: center;
     font-size: var(--circle-element-font-size);
-    padding: var(--circle-element-padding);
     box-sizing: border-box;
     
     opacity: 0;
+  }
+
+  .circle-element-front {
+    padding: var(--circle-element-padding);
   }
 
   .center-element {

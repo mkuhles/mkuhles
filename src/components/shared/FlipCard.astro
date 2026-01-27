@@ -36,7 +36,6 @@ if (!id) {
 </div>
 
 <style lang="scss" scoped>
-
 /* The flip card container */
 .flip-card {
   background-color: transparent;
@@ -58,7 +57,7 @@ if (!id) {
 .flip-card:focus-visible {
   z-index: 100;
 
-  @media (--small-up) { 
+  @media (--medium-up) { 
     .flip-card-inner{
       transform: rotateY(180deg);
     }
@@ -87,9 +86,10 @@ if (!id) {
 .flip-card-back {
   border-radius: 100%;
 
-  padding: 6vmin;
-  width: 65vmin;
-  height: 65vmin;
+  padding: min(6vmin,var(--circle-element-padding));
+  width: min(65vmin,20em);
+  height: min(65vmin,20em);
+  font-size: var(--font-size);
 
   display: flex;
   justify-content: center;
@@ -103,26 +103,24 @@ if (!id) {
   transform: translate(-50%, -50%);
     
 
-  @media (--small-up) {
+  @media (--medium-up) {
     transform: translate(-50%, -50%) rotateY(180deg);
     transition: opacity 1s ease;
-    width: calc(var(--circle-element-diameter) * 2);
-    height: calc(var(--circle-element-diameter) * 2);
+    width: calc(var(--circle-element-diameter) * 2.2);
+    height: calc(var(--circle-element-diameter) * 2.2);
     padding:  calc(var(--circle-element-padding) *2);
-    
-    font-size: .9em;
-    line-height: 1.2;
   }
 }
 .flip-card:hover,
 .flip-card:focus-visible,
+.flip-card:focus,
 .flip-card[aria-pressed="true"] {
   .flip-card-back {
     opacity: 1;
   }
 }
 
-@media (--tiny-down) {
+@media (--small-down) {
   .flip-card-back {
     visibility: hidden;
     opacity: 0;
@@ -138,26 +136,18 @@ if (!id) {
     opacity: 1;
     pointer-events: auto;
 
-    font-size: max(16px,2vmin);
-
     position: absolute;
-    top: 0;
-    left: 0;
     transform: translate(var(--dx), var(--dy));
-
-    .skill-title {
-      font-size: 1.2em;
-    }
   }
 }
 </style>
 
 <script>
   import { toggleCardMobile, requestReflow } from "../../scripts/flip-card";
-  import { isTiny } from "../../scripts/media";
+  import { isSmallScreen } from "../../scripts/media";
   
   document.addEventListener("click", (e) => {
-    if (!isTiny()) return;
+    if (!isSmallScreen()) return;
 
     const target = e.target instanceof HTMLElement ? e.target : null;
     const card = target?.closest(".flip-card");
@@ -167,7 +157,7 @@ if (!id) {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (!isTiny()) return;
+    if (!isSmallScreen()) return;
     if (e.key !== "Enter" && e.key !== " ") return;
 
     const card = document.activeElement?.closest?.(".flip-card");

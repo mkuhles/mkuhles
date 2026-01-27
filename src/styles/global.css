@@ -4,8 +4,8 @@
 
 @layer base {
   html {
-    font-size: 16px;
-    font-size: max(16px,2vmin);
+    font-size: var(--font-size-fix);
+    font-size: var(--font-size);
   }
 
   body {

@@ -1,5 +1,5 @@
-export function isTiny() {
+export function isSmallScreen() {
   return getComputedStyle(document.documentElement)
-    .getPropertyValue("--is-tiny")
+    .getPropertyValue("--is-small")
     .trim() === "1";
 }

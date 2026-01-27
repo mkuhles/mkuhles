@@ -1,4 +1,4 @@
-import { isTiny } from "./media";
+import { isSmallScreen } from "./media";
 
 function getCircleContainer(): HTMLElement | null {
   return document.getElementById("circle-container");
@@ -39,23 +39,18 @@ export function closeAllOpenCards() {
 }
 
 function computeBackCenteringOffset(container: HTMLElement, card: HTMLElement, back: HTMLElement) {
-  debugCross('50%','50%','red');
-  // offsetLeft is used for both axes because the container is symmetrically
-  // positioned via vmin-based sizing (same horizontal and vertical offset).
-  const targetCx = container.offsetWidth / 2;
-  const targetCy = container.offsetHeight / 2;
-console.log({targetCx, targetCy});
-  debugCross(targetCx+'px',targetCy+'px','blue');
-  // The card is already offset via translate(); read its current translation
-  // so we can neutralize it when centering the back side.
-  const { x: cardX, y: cardY } = getTranslateXY(card);
-console.log({cardX, cardY});
+  const c = container.getBoundingClientRect();
 
-  const backWidth = back.offsetWidth;
-  const backHeight = back.offsetHeight;
-console.log({backWidth, backHeight})
-  const dx = targetCx - cardX - backWidth / 2;
-  const dy = targetCy - cardY - backHeight / 2;
+  const targetX =  c.width / 2;
+  const targetY =  c.height / 2;
+
+  const { x: cardX, y: cardY } = getTranslateXY(card); // DOMMatrix m41/m42
+  const cardW = card.offsetWidth;
+  const cardH = card.offsetHeight;
+  
+  //         target  | reset card position | substract half backside width
+  const dx = targetX - cardX - cardW / 2 - back.offsetWidth / 2;
+  const dy = targetY - cardY - cardH / 2 - back.offsetHeight / 2;
 
   return { dx, dy };
 }
@@ -90,7 +85,7 @@ export function toggleCardMobile(card: HTMLElement) {
 }
 
 export function requestReflow() {
-  if (!isTiny()) return;
+  if (!isSmallScreen()) return;
 
   const container = getCircleContainer();
   const card = document.querySelector<HTMLElement>(".flip-card.is-open");

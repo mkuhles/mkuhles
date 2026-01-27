@@ -15,10 +15,10 @@ const examples = skill.examples?.[lang] || [];
 ---
 
 <FlipCard className={"skill-element "+className} styles=`color:${color};background-color:${bgcolor};`>
-  <div slot="front">
+  <div slot="front" class={"skill-element-front "+className+"-front"}>
       {skill.name}
   </div>
-  <div slot="back">
+  <div slot="back" class={"skill-element-back "+className+"-back"}>
     <div>
       <div class="skill-title">{skill.name}</div>
       {skill.since && t("since") + " " + skill.since}
@@ -27,7 +27,11 @@ const examples = skill.examples?.[lang] || [];
   </div>
 </FlipCard>
 
-<style lang="scss" scoped>
+<style scoped>
+  .skill-element-back {
+    line-height: 1.2;
+    
+  }
   .skill-title {
     font-weight: bold;
     font-size: 1.2em;
