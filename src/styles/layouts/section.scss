@@ -2,6 +2,7 @@
 
 .section {
   background:linear-gradient(180deg, var(--gradient-color-1) 0%, var(--gradient-color-2) 100%);
+  border-bottom: 1px solid var(--color-coral);
   
   .section__content {
     max-width: 100vmin;
@@ -16,9 +17,37 @@
     background: var(--gradient-color-1);
 }
 
+.ul-orange {
+    padding-left: 1em;
+    list-style: '> ';
+
+    li::marker {
+      color: var(--highlight);
+    }
+}
+
+.section--no-border {
+  border: none;
+}
+
 .section.section--header,
 .section.section--footer {
-    @extend .section--dark;
+  @extend .section--dark;
+}
+
+.section--experience-header {
+  @extend .section--no-gradient;
+}
+
+.section--experience-header,
+.section--education,
+.section--experience,
+.section.section--footer {
+  @extend .section--no-border;
+}
+
+.section--profile {
+  @extend .section--dark;
 }
 
 .section--experience {
@@ -30,12 +59,7 @@
   }
 
   ul.description {
-    padding-left: 1em;
-    list-style: '> ';
-
-    li::marker {
-      color: var(--highlight);
-    }
+    @extend .ul-orange;
   }
 
   ul.technologies {
@@ -46,8 +70,4 @@
       content: ', ';
     }
   }
-}
-
-.section.section--experience-entry .section__content {
-  max-width: 50rem;
 }

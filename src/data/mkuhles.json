@@ -1,4 +1,29 @@
 {
+  "profile": {
+    "title": { "de": "Schwerpunkt und Profil", "en": "Focus and Profile"},
+    "statement": {
+      "de": "Ich entwickle und betreue Drupal-basierte Webanwendungen mit besonderem Fokus auf sichere, wartbare und langfristig stabile Lösungen.",
+      "en": "I develop and maintain Drupal-based web applications with a strong focus on security, maintainability, and long-term stability."
+    },
+    "bullets": [
+      {
+        "de": "Entwicklung, Erweiterung und Wartung von Drupal-Websites und -Plattformen",
+        "en": "Development, extension, and maintenance of Drupal websites and platforms"
+      },
+      {
+        "de": "Schwerpunkt auf sicherer Webentwicklung, sauberen Rollen- & Rechtemodellen und Update-Strategien",
+        "en": "Strong focus on secure web development, clean role and permission models, and reliable update strategies"
+      },
+      {
+        "de": "Erfahrung mit individuellen Modulen, Template-Anpassungen und der Integration externer Dienste",
+        "en": "Experience with custom modules, template customization, and integration of external services"
+      },
+      {
+        "de": "Ergänzend: kleinere Frontend-, React- und Astro-Projekte zur eigenen Weiterentwicklung",
+        "en": "Additionally, smaller frontend, React, and Astro projects for personal learning and continuous improvement"
+      }
+    ]
+  },
   "skills": [
     {
       "name":"mysql",

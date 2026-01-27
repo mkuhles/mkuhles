@@ -4,11 +4,12 @@ import {skills} from "../../../data/mkuhles.json";
 import { getLangFromUrl, getTranslationFunction } from "../../../i18n/utils";
 import AgainButton from "../../shared/buttons/AgainButton.astro";
 import Scale from "./Scale.astro";
+import Section from "../../../layouts/Section.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(lang);
 ---
-<div class="skills">
+<Section type="skills" className="skills">
   <div class="skill-inner flex flex-col gap-2 items-center">
     <Scale />
     <div id="circle-container" class="circle-container">
@@ -19,7 +20,7 @@ const t = getTranslationFunction(lang);
   <div class="skill-footer pt-1 flex justify-around">
     <AgainButton id="reanimateSkills" />
   </div>
-</div>
+</Section>
 
 <style>
 .skill-inner {

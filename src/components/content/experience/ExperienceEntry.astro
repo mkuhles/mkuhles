@@ -11,7 +11,7 @@ const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
 ---
 
-<Section type="experience-entry" className="experience py-2">
+<Section type="experience-entry" className="py-2">
   <ExperienceHeader 
     title={t(entry.role)} 
     subtitle={entry.company} 

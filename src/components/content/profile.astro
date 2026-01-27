@@ -1,0 +1,18 @@
+---
+import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
+import Section from "../../layouts/Section.astro";
+import {profile} from "../../data/mkuhles.json";
+
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+---
+
+<Section type="profile md:flex">
+    <h2 class="profile-title mb-2">{t(profile.title)}</h2>
+    <div class="profile-statement text-xl mb-1">{t(profile.statement)}</div>
+    <ul class="ul-orange">
+        {profile.bullets.map((bullet) => (
+            <li>{t(bullet)}</li>
+        ))}
+    </ul>
+</Section>

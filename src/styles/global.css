@@ -51,11 +51,15 @@
   }
 }
 
-.experience,
+.section.section--profile .section__content,
+.section.section--experience-header .section__content,
+.section.section--experience-entry .section__content,
+.section.section--education .section__content,
 .prose {
-  max-width: 50rem;
+  max-width: 45rem;
   margin: auto;
-
+}
+.prose {
   hyphens: auto;
   &.de {
     lang: de;
