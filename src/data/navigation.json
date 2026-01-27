@@ -2,6 +2,12 @@
   "main": [
     { "id": "home" }
   ],
+  "onepager": [
+    { "id": "me" },
+    { "id": "skills" },
+    { "id": "experience" },
+    { "id": "contact" }
+  ],
   "footer": [
     { "id": "imprint" },
     { "id": "privacy" },

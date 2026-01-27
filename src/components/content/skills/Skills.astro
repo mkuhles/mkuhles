@@ -9,7 +9,7 @@ import Section from "../../../layouts/Section.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(lang);
 ---
-<Section type="skills" className="skills">
+<Section id="skills" type="skills" className="skills">
   <div class="skill-inner flex flex-col gap-2 items-center">
     <Scale />
     <div id="circle-container" class="circle-container">

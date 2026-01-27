@@ -18,6 +18,11 @@ const currentYear = new Date().getFullYear();
 
 <style>
     footer {
-      background:var(--c9); color:var(--text-color-inv);
+      background:var(--c9);
+      color:var(--text-color-inv);
+
+      @media (--small-down) {
+        padding-bottom: calc(1rem + 48px);
+      }
     }
 </style>

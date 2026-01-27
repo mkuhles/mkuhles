@@ -10,7 +10,7 @@ const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
 ---
 
-<Section type="experience">
+<Section id="experience" type="experience">
     <Section type="experience-header" className="pb-0">
       <h2>{t("experience")}</h2>
     </Section>

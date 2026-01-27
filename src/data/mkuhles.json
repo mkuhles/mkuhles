@@ -39,7 +39,7 @@
       "knowledge":0.2,
       "since": 2016,
       "examples": {
-        "de": ["Deployment", "cron-jobs", "Automatisation"],
+        "de": ["Deployment", "cron-jobs", "Automatisierung"],
         "en": ["deployment", "cron-jobs", "automatisation"]
       }
     },

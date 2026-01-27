@@ -1,0 +1,283 @@
+---
+import navData from '../../data/navigation.json';
+import { getLangFromUrl, getTranslationFunction, type UiKey } from '../../i18n/utils';
+import type { NavEntry } from '../../types/NavItem';
+
+
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+const nav = (navData as any).onepager as NavEntry[];
+---
+
+<>
+  <nav class="onpage-nav" aria-label="Inhalt">
+    <ul>
+      {nav.map((navItem: NavEntry) => (
+        <li>
+          <a href={"#"+navItem.id} data-id={navItem.id}>
+            <span class="sr">{t(`nav.${navItem.id}` as UiKey)}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- <button class="onpage-nav-btn" aria-controls="onpage-sheet" aria-expanded="false">
+    <span class="sr-only">Inhalt</span>
+    <span class="line"></span>
+    <span class="line"></span>
+    <span class="line"></span>
+  </button>
+
+  <div id="onpage-sheet" class="onpage-sheet" hidden>
+    <div class="sheet-inner" role="dialog" aria-modal="true" aria-label="Inhalt">
+      <button class="sheet-close">Schließen</button>
+      <ul class="sheet-list">
+
+      </ul>
+    </div>
+  </div> -->
+
+  <div class="onpage-dock" data-open="false">
+    <div id="onpage-sheet" class="onpage-sheet" role="dialog" aria-modal="true" aria-label="Inhalt">
+      <button class="onpage-nav-btn" aria-controls="onpage-sheet" aria-expanded="false" type="button">
+        <span class="sr-only">Inhalt</span>
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </button>
+
+      <ul class="sheet-list">
+        {nav.map((navItem: NavEntry) => (
+          <li>
+            <a href={"#"+navItem.id} data-id={navItem.id}>{t(`nav.${navItem.id}` as UiKey)}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+</>
+
+<style scoped>
+@media (--medium-up) {
+  .onpage-nav { 
+    position: fixed;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .onpage-nav-btn,
+  .onpage-sheet {
+    display: none;
+  }
+
+  /* Dots */
+  .onpage-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: .5rem;
+  }
+  .onpage-nav a {
+    width: 8rem;
+    padding: .5rem 1rem;
+    transform: translateX(6rem);
+    display: block;
+    white-space: nowrap;
+    transition: transform .5s ease;
+
+    &:before {
+      content: ' ';
+      position: relative;
+      display: inline-block;
+      border: 2px solid var(--highlight);
+      border-radius: 100%;
+      margin-right: .25rem;
+      width: .7rem;
+      height: .7rem;
+    }
+
+    &:hover {
+      transform: translateX(1rem);
+      background-color: var(--highlight);
+      color: var(--text-color-inv);
+      
+      &:before {
+        border-color: var(--text-color-inv);
+      }
+    }
+
+    &[aria-current="true"] {
+      &:before {
+        background-color: var(--highlight);
+      }  
+      &:hover {
+        &:before {
+          background-color: var(--text-color-inv);
+        }
+      }
+    }
+  }
+  .onpage-nav a[aria-current="true"] {
+    opacity: 1;
+  }
+}
+
+/* Mobile only */
+@media (--small-down) {
+  .onpage-nav {
+    display: none;
+  }
+  .onpage-dock {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+
+    /* Damit der Button genau mittig sitzt */
+    display: grid;
+    justify-items: center;
+
+    /* optional: safe area */
+    padding-bottom: env(safe-area-inset-bottom);
+    pointer-events: none; /* wir geben Buttons/Sheet wieder pointer-events */
+  }
+
+  .onpage-nav-btn {
+    pointer-events: auto;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-5rem);
+    z-index: 2;
+
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--highlight);
+    border-radius: .5rem;
+    background-color: var(--color-white);
+
+    .line {
+      height: 2px;
+      width: calc(100% - 1rem);
+      margin: .5rem;
+      display: block;
+      background-color: var(--highlight);
+    }
+  }
+
+  .onpage-sheet {
+    pointer-events: auto;
+    width: 100%;
+    padding: 16px;
+
+    /* Animation */
+    transform: translateY(100%);
+    transition: transform 220ms ease;
+    will-change: transform;
+
+    background-color: var(--color-white);
+    border-top: 1px solid var(--highlight);
+
+    ul > li {
+      & > a {
+        padding: 1rem 0;
+        display: block;
+        border-bottom: 1px dashed var(--c11);
+        text-align: center;
+
+        &[aria-current="true"] {
+          background-color: var(--c9);
+          color: var(--text-color-inv)
+        }
+      }
+      &:last-child a {
+        border: none;
+      }
+    }
+  }
+
+  .onpage-dock[data-open="true"] .onpage-sheet {
+    transform: translateY(0);
+  }
+
+  .onpage-dock[data-open="true"] .onpage-nav-btn {
+    transform: translate(-50%,-38px);
+    transition: transform 220ms ease;
+  }
+}
+</style>
+
+<script define:vars={{nav}}>
+(function initOnpageNav() {
+  const run = () => {
+    const sections = nav.map(item =>  document.getElementById(item.id));
+
+    // --- ScrollSpy
+    const links = Array.from(document.querySelectorAll('[data-id]'));
+
+    const setActive = (id) => {
+      links.forEach((a) => {
+        a.setAttribute("aria-current", a.dataset.id === id ? "true" : "false");
+      });
+    };
+
+    if (!sections.length) {
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target?.id) setActive(visible.target.id);
+      },
+      { root: null, threshold: [0.25, 0.5, 0.75] }
+    );
+
+    sections.forEach((s) => io.observe(s));
+    setActive(sections[0].id);
+
+    // --- Mobile sheet
+    const dock = document.querySelector(".onpage-dock");
+    const btn = dock?.querySelector(".onpage-nav-btn");
+
+    const isOpen = () => dock?.getAttribute("data-open") === "true";
+    const openSheet = () => {
+      if (!dock || !btn) return;
+      dock.setAttribute("data-open", "true");
+      btn.setAttribute("aria-expanded", "true");
+    };
+    const closeSheet = () => {
+      if (!dock || !btn) return;
+      dock.setAttribute("data-open", "false");
+      btn.setAttribute("aria-expanded", "false");
+    };
+
+    btn?.addEventListener("click", () => (isOpen() ? closeSheet() : openSheet()));
+
+    // Close after selecting a link (Delegation)
+    dock?.addEventListener("click", (e) => {
+      const a = e.target.closest("a[data-id]");
+      if (a) closeSheet();
+    });
+
+    // ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen()) closeSheet();
+    });
+
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run, { once: true });
+  } else {
+    run();
+  }
+})();
+
+</script>

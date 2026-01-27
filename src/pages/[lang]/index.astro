@@ -15,6 +15,8 @@ import { getLangStaticPaths } from "../../i18n/utils";
 import Experience from "../../components/content/experience/ExperienceList.astro";
 import Education from "../../components/content/education.astro";
 import Profile from "../../components/content/profile.astro";
+import Contact from "../../components/content/contact.astro";
+import OnePagerNavigation from "../../components/navigation/OnePagerNavigation.astro";
 
 
 export const getStaticPaths = getLangStaticPaths;
@@ -26,10 +28,12 @@ const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", class
 ---
 
 <BaseLayout title="Home" lang={lang}>
-	<ImageSection type="about" image={image}><About /></ImageSection>
+  <OnePagerNavigation />
+	<ImageSection id="me" type="about" image={image}><About /></ImageSection>
   <Profile />
   <Skills />
   <Experience />
   <Education />
+  <ImageSection id="contact" type="about" image={image}><Contact /></ImageSection>
 </BaseLayout>
  

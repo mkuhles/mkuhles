@@ -14,6 +14,11 @@
   "nav.github": { "de": "Mein Github", "en": "My Github" },
   "nav.imprint": { "de": "Impressum", "en": "Imprint" },
   "nav.privacy": { "de": "Datenschutzerklärung", "en": "Privacy Policy" },
+  "nav.me": { "de": "über mich", "en": "About me" },
+  "nav.skills": { "de": "Fähigkeiten", "en": "Skills" },
+  "nav.experience": { "de": "Erfahrungen", "en": "Experiences" },
+  "nav.contact": { "de": "Kontakt", "en": "Contact" },
+
 
   "today": { "de": "heute", "en": "today" },
   "experience": { "de": "Berufserfahrung", "en": "Experience" },
