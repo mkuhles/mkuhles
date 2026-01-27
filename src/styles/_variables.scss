@@ -1,8 +1,10 @@
 :root {
   /* Spacing */
   --spacing: max(2vmin, 15px);
+
   --font-size-fix: 16px;
   --font-size: max(var(--font-size-fix),2vmin);
+  --btn-min-size: 48px;
 
   /* Color Scale (11 steps) */
   --c1: #E7E0CF;

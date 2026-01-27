@@ -28,12 +28,12 @@ const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", class
 ---
 
 <BaseLayout title="Home" lang={lang}>
-  <OnePagerNavigation />
 	<ImageSection id="me" type="about" image={image}><About /></ImageSection>
   <Profile />
   <Skills />
   <Experience />
   <Education />
   <ImageSection id="contact" type="about" image={image}><Contact /></ImageSection>
+  <OnePagerNavigation />
 </BaseLayout>
  

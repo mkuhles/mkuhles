@@ -1,4 +1,21 @@
 {
+  "contact": {
+    "name": {
+      "value": "Melanie Kuhles"
+    },
+    "email": {
+      "value": "melanie.kuhles@oder-spree-consulting.de",
+      "url": "mailto:melanie.kuhles@oder-spree-consulting.de" 
+    },
+    "social": {
+      "github": {
+        "url": "https://github.com/mkuhles"
+      },
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/melanie-kuhles/"
+      }
+    }
+  },
   "profile": {
     "title": { "de": "Schwerpunkt und Profil", "en": "Focus and Profile"},
     "statement": {

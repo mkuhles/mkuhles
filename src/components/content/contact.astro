@@ -1,7 +1,53 @@
 ---
-import Section from "../../layouts/Section.astro";
+type ContactValue = {
+    title?: string,
+    url?: string,
+    external?: boolean
+}
+
+import {contact} from "../../data/mkuhles.json";
+
+// const contactTyped: Record<string, ContactValue> = contact;
 ---
 
 <>
-    Kontakt todo wichtig :)
+    <div class="name">{contact.name.value}</div>
+    <div class="email">
+        <a href={"mailto:"+contact.email.value}>{contact.email.value}</a>
+    </div>
+    <div class="flex gap-1 my-1">
+        {Object.entries(contact.social).map(([key, value]) => (
+            <div class={key}>
+                {value.url && (
+                    <a
+                        href={value.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span class="sr-only">{value.url}</span>
+                    </a>
+                )}
+            </div>
+        ))}
+    </div>
 </>
+
+<style scoped>
+    .linkedin, .github {
+        a:before {
+            content: "";
+            display: inline-block;
+            width: var(--btn-min-size);height: var(--btn-min-size);
+            background-size: contain;
+            margin-right: .5em;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+    .github a:before {
+        background-image: url("/images/github.png");
+    }
+    .linkedin a:before {
+        background-image: url("/images/linkedin.png");
+    }
+</style>
