@@ -6,7 +6,11 @@ tags: ["software-development", "ai-in-development", "ownership", "kanban", "refa
 heroImage: ./hero.png
 featured: true
 draft: false
+links:
+  repo: "https://github.com/mkuhles/board"
+  live: ""
 ---
+import ProjectLinks from "../../../components/blog/ProjectLinks.astro"
 import PostImage from "../../../components/blog/PostImage.astro";
 import board from "./board-idea.png";
 import firstCode from "./first-code.png";
@@ -131,6 +135,7 @@ Neue Gedanken, neue Aufgaben, neue Ideen – alles landete direkt im Board.
 
 Das Board war damit nicht mehr nur Ergebnis der Entwicklung, sondern Teil davon.
 
+<ProjectLinks repo={frontmatter.links.repo} live={frontmatter.links.live} />
 
 ## Ownership & Vibe Coding
 

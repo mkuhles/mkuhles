@@ -28,5 +28,9 @@
   "education": { "de": "Ausbildung", "en": "Education"},
 
 
-  "blog": { "de": "Blog", "en": "Blog"}
+  "blog": { "de": "Blog", "en": "Blog"},
+  "project": { "de": "Projekt", "en": "Project" },
+  "github-repo": { "de": "GitHub Repository", "en": "GitHub Repository" },
+  "live-url": { "de": "Live URL", "en": "Live URL" }
+
 }

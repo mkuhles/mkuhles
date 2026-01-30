@@ -6,7 +6,14 @@ tags: ["software-development", "ai-in-development", "ownership", "kanban", "refa
 heroImage: ./hero.png
 featured: true
 draft: false
+links:
+  repo: "https://github.com/mkuhles/board"
+  live: ""
 ---
+import ProjectLinks from "../../../components/blog/ProjectLinks.astro"
+import PostImage from "../../../components/blog/PostImage.astro";
+import board from "./board-idea.png";
+import firstCode from "./first-code.png";
 
 ## Starting Point: Ideas, User Stories, JSON
 
@@ -33,7 +40,7 @@ At first, this JSON was nothing more than a working format. A list of items with
 At that point, the core idea emerged:
 If the work already exists in a structured form, why shouldn’t that structure become the foundation of the tool itself?
 
----
+<PostImage src={board} alt="Board Mock up" />
 
 ## The Idea: A Board That Lives Directly From JSON
 
@@ -59,7 +66,7 @@ Not as a vision, but as something that could actually be built.
 
 A board that is not placed on top of data, but grows directly out of it.
 
----
+<PostImage src={firstCode} alt="Board after the first generated code, light columns with white cards and white text" />
 
 ## The First Code — and the Blob Moment
 
@@ -108,7 +115,6 @@ In some cases, I was faster than the AI at identifying the root cause of an issu
 This is where the role of AI shifted for me:
 it is not just a code supplier, but a writing aid and a sparring partner.
 
----
 
 ## The MVP — Faster Than Expected
 
@@ -133,7 +139,8 @@ New thoughts, new tasks, new ideas — everything went straight into the board.
 
 The board was no longer just the result of development, but part of the process itself.
 
----
+<ProjectLinks repo={frontmatter.links.repo} live={frontmatter.links.live} />
+
 
 ## Ownership & Vibe Coding
 

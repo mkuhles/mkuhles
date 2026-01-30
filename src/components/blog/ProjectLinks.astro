@@ -1,0 +1,45 @@
+---
+import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
+
+const {repo, live} = Astro.props;
+
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+---
+
+<div class="project-links">
+  <div class="project-links__title">{t('project')}</div>
+  <ul>
+    <li><a href={repo} target="_blank" rel="noopener noreferrer">{t('github-repo')}</a></li>
+    {live && (
+      <li><a href={live} target="_blank" rel="noopener noreferrer">{t('live-url')}</a></li>
+    )}
+  </ul>
+</div>
+
+<style scoped>
+.project-links{
+  margin: 1.5rem auto;
+}
+
+.project-links__title{
+  font-weight: 600;
+  margin-bottom: .5rem;
+}
+.project-links ul{
+  margin: 0;
+  padding-left: 1em;
+  list-style: '> ';
+
+  li::marker {
+    color: var(--highlight);
+  }
+}
+.project-links a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--highlight);
+  text-underline-offset: 3px;
+}
+
+</style>
