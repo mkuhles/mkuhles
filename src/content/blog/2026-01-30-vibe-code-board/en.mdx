@@ -1,0 +1,178 @@
+---
+title: "I didn’t want to build a tool. I wanted to work."
+description: "A hands-on account of a real development process — from idea to production use"
+date: 2026-01-30
+tags: ["software-development", "ai-in-development", "ownership", "kanban", "refactoring"]
+heroImage: ./hero.png
+featured: true
+draft: false
+---
+
+## Starting Point: Ideas, User Stories, JSON
+
+I am currently developing a small, deliberately lightweight Kanban board for work items — with the goal of not just managing tasks, but supporting structured thinking.
+
+The actual work on this tool did not start with code, but with a conversation.
+
+I brainstormed a project idea with the help of AI, refined it, and derived user stories and technical tasks from it. Nothing unusual — more a structured thinking process where AI helps to organize thoughts and reveal gaps.
+
+Fairly quickly, I ended up with a usable list of tasks. Clearly formulated, sensibly scoped, ready for implementation.
+
+And then a very practical problem appeared:
+I did not want to manually transfer these stories into a project management tool.
+
+Not because it would have been particularly difficult, but because it felt unnecessary.
+The user stories were already structured. They already existed in exactly the form I wanted to work with.
+
+Copying and pasting them into another tool would likely have taken longer than creating them in the first place. And in the end, I would have been maintaining two representations of the same information.
+
+So I asked for the user stories and technical tasks to be output directly as JSON.
+
+At first, this JSON was nothing more than a working format. A list of items with titles, descriptions, and metadata. But that was precisely what made it appealing: the information was precise, machine-readable — and still complete enough to actually work with.
+
+At that point, the core idea emerged:
+If the work already exists in a structured form, why shouldn’t that structure become the foundation of the tool itself?
+
+---
+
+## The Idea: A Board That Lives Directly From JSON
+
+It quickly became clear that simply displaying items from JSON would not be enough.
+
+The user stories already had structure, but they needed a state. Without a status, it would just be a list — not a board. Each item needed a status, with a sensible default like `backlog`. The board’s columns would simply represent these status values.
+
+At the same time, it was important to me that the tool worked quickly and stayed simple.
+I did not want to build a backend just to edit a JSON file. And I did not want to integrate an external service just to persist state.
+
+The JSON needed to stay local. Directly readable. Directly editable.
+No additional infrastructure, no sync layer, no hidden state.
+
+This made one thing clear: the board is not an abstraction layered on top of the data.
+It is a direct visualization of the data itself.
+
+When I move a card, no internal UI state changes — the status in the JSON changes. The JSON is the single source of truth. Everything else follows from that.
+
+This decision was deliberate. It reduces complexity, prevents duplicate states, and enforces clear responsibilities. There is no “board state” and no “data state” — there is only one.
+
+At that point, the idea suddenly felt very concrete.
+Not as a vision, but as something that could actually be built.
+
+A board that is not placed on top of data, but grows directly out of it.
+
+---
+
+## The First Code — and the Blob Moment
+
+With the idea clear and the data model in mind, I had the first version of the code generated.
+
+The app started. There was a board. There were cards.
+At least in theory.
+
+In practice, I saw nothing. White text on a white background.
+
+That was not a big deal. No bug, no deep error — just a styling issue.
+My first thought was predictably simple: *I’ll just fix that quickly.*
+
+So I opened the code.
+
+And at that moment, styling was no longer the real problem.
+
+Everything lived in a single file.
+UI, state, logic, rendering — a monolithic blob.
+
+My immediate reaction was very direct:
+
+> omg everything in one file??
+> no one can maintain this
+
+This was not a careful analysis or a well-crafted prompt.
+I was simply surprised.
+
+The AI had done exactly what I asked for: generate a working board quickly.
+I had never said that I also wanted to be able to read and maintain the code.
+
+From that point on, I refactored together with the AI. Step by step.
+Splitting files, clarifying responsibilities, creating structure.
+
+And something became very clear to me: it is a good thing when I understand what is happening.
+
+I do not need to write everything myself.
+But I do take responsibility for what happens in the code.
+
+For me, this is a form of continuous code review during development.
+
+Only then can I ask the right questions and intervene in the right places.
+
+In some cases, I was faster than the AI at identifying the root cause of an issue — simply because I knew the code, while the AI was still focused on surface-level imperfections.
+
+This is where the role of AI shifted for me:
+it is not just a code supplier, but a writing aid and a sparring partner.
+
+---
+
+## The MVP — Faster Than Expected
+
+After refactoring, I had something I could actually use.
+
+Not a prototype in the sense of “it clicks nicely,” but a real board.
+Cards could be displayed and moved. The status changed directly in the JSON.
+
+Only then did I realize how little time had actually passed.
+From the initial idea to this point, it had taken roughly two hours.
+
+That surprised me. Not because I had built something particularly complex, but because the result already felt stable.
+
+That speed did not come from rushing, but from earlier decisions:
+a clear data model, a single source of truth, no additional infrastructure.
+
+I did not have to build a backend, define an API, or connect an external service.
+The board worked locally, directly on the JSON.
+
+From this point on, I started using the tool for real.
+New thoughts, new tasks, new ideas — everything went straight into the board.
+
+The board was no longer just the result of development, but part of the process itself.
+
+---
+
+## Ownership & Vibe Coding
+
+From that point on, my way of working changed noticeably.
+
+I did not stop letting AI write code for me.
+But I did stop letting it make decisions for me.
+
+Vibe coding, for me, does not mean crafting perfect prompts.
+It means staying in dialogue — expressing thoughts, observing reactions, refining ideas.
+
+Often, I did not describe a finished solution, but simply a problem.
+Or said what bothered me. Or what felt wrong.
+
+The AI responds with suggestions.
+Sometimes they are good. Sometimes they are not.
+But they provide a starting point.
+
+What matters is this: I understand the code I am using.
+
+That allows me to intervene deliberately. I can ask questions that go beyond “it doesn’t work.”
+I can say where something is wrong — not just that it is wrong.
+
+In some situations, I was quicker than the AI in analyzing the cause of a problem.
+Not because I am smarter, but because I knew the context.
+Because I knew which decisions had been made earlier — and why.
+
+That is the real value of this collaboration for me.
+AI accelerates writing code.
+But it does not decide which structure stays, which complexity is acceptable, or when something is “done.”
+
+I cannot delegate that responsibility — and I do not want to.
+
+Vibe coding, for me, does not mean giving up control,
+but consciously keeping it.
+
+In the end, the most important takeaway from this project might be this:
+
+> Good tools are not created through perfect prompts,
+> but through understanding, ownership,
+> and the courage to use things early.
+

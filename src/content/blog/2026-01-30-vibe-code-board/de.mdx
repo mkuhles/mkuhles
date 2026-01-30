@@ -6,10 +6,10 @@ tags: ["software-development", "ai-in-development", "ownership", "kanban", "refa
 heroImage: ./hero.png
 featured: true
 draft: false
-
 ---
-import { Image } from "astro:assets";
+import PostImage from "../../../components/blog/PostImage.astro";
 import board from "./board-idea.png";
+import firstCode from "./first-code.png";
 
 ## Ausgangspunkt: Ideen, User Stories, JSON
 
@@ -36,7 +36,7 @@ Dieses JSON war zunächst nichts weiter als ein Arbeitsformat. Eine Liste von It
 An diesem Punkt entstand der eigentliche Gedanke:
 Wenn die Arbeit bereits in strukturierter Form vorliegt, warum sollte nicht genau diese Struktur das Fundament des Tools sein?
 
-<Image src={board} alt="Board Detail" widths={[600, 1000, 1400]} />
+<PostImage src={board} alt="Board Mock up" />
 
 ## Die Idee: Ein Board, das direkt aus dem JSON lebt
 
@@ -62,6 +62,7 @@ Nicht als Vision, sondern als etwas, das man bauen kann.
 
 Ein Board, das nicht über Daten gelegt wird, sondern direkt aus ihnen entsteht.
 
+<PostImage src={firstCode} alt="Board nach dem ersten generirten code, helle Spalten mit weißen Cards und weißem Text" />
 
 ## Der erste Code – und der Blob-Moment
 

@@ -5,7 +5,7 @@ import type { Lang } from "../../../i18n/types";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import MarkdownSection from "../../../layouts/MarkdownSection.astro";
 import Section from "../../../layouts/Section.astro";
-import { Image } from "astro:assets";
+import HeroImage from "../../../components/blog/HeroImage.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -36,36 +36,13 @@ const { Content } = await post.render();
 <BaseLayout title={post.data.title} lang={lang}>
   <Section type="section-header" className="pb-0">
     {post.data.heroImage && (
-      <div class="hero-media">
-        <Image
-          src={post.data.heroImage}
-          alt={post.data.heroAlt ?? ""}
-          widths={[800, 1200, 1600]}
-          sizes="(max-width: 768px) 100vw, 900px"
-          loading="eager"
-          class="hero-img"
-        />
-      </div>
+      <HeroImage image={post.data.heroImage} alt={post.data.heroAlt ?? ""} />
     )}   
     <h1 class="mt-1 mb-0.5">{post.data.title}</h1>
     {post.data.description && (<div class="description">{post.data.description}</div>)}
   </Section>
-  <MarkdownSection>
+  <MarkdownSection className="pt-1.5">
     <Content />
   </MarkdownSection>
       
 </BaseLayout>
-
-
-<style>
-  .hero-media {
-    aspect-ratio: 16 / 7;
-    overflow: hidden;
-  }
-  .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-</style>

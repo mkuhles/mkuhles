@@ -1,21 +1,26 @@
 ---
-import { getLangFromUrl, getTranslationFunction, getRouteFromUrl, getUrlFromRoute, type RouteKey, LANGS } from "../../i18n/utils";
+import { getLangFromUrl, getTranslationFunction, getRouteFromUrl, getUrlFromRoute, getUrlFromPath, type RouteKey, LANGS } from "../../i18n/utils";
 
 const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
 const urlFromRoute = getUrlFromRoute(curLang);
+const urlFromPath = getUrlFromPath(curLang);
 const getRoute = getRouteFromUrl(curLang)
 
-const path = Astro.url.pathname.split('/').slice(2).join('/');
-const routeKey = getRoute(path) as RouteKey;
-
+const restPath = Astro.url.pathname.split('/').slice(2).join('/');
+const routeKey = getRoute(restPath) // RouteKey | undefined;
 const allLanguages = Array.from(LANGS) as (typeof LANGS)[number][];
 ---
 
 {allLanguages.map((lang) => {
     if(curLang == lang) { return ''; }
+
+    const href = routeKey
+        ? urlFromRoute(routeKey as RouteKey, lang)
+        : urlFromPath(restPath, lang);
+
     return (
-        <a class="language-switcher block px-0.5 py-0.5" href={urlFromRoute(routeKey, lang)} title={t('langSwitcher.switch', lang)}>
+        <a class="language-switcher block px-0.5 py-0.5" href={href} title={t('langSwitcher.switch', lang)}>
             {lang}
         </a>
     )

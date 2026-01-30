@@ -55,6 +55,13 @@ export function getUrlFromRoute(langUrl: Lang) {
   }
 }
 
+export function getUrlFromPath(langUrl: Lang) {
+  return function urlFromPath(path: string, lang: Lang = langUrl) {
+    const normalized = path.replace(/^\/+/, '');
+    return normalized ? `/${lang}/${normalized}` : `/${lang}/`;
+  };
+}
+
 export function getRouteFromUrl(langUrl: Lang) {
   return function route(slug: string, lang: Lang = langUrl) {
     // reverse lookup
@@ -62,6 +69,6 @@ export function getRouteFromUrl(langUrl: Lang) {
     if (entry) {
       return entry[0] as RouteKey;
     }
-    return 'home' as RouteKey;
+    return undefined;
   }
 }
