@@ -1,0 +1,171 @@
+---
+title: "Ich wollte kein Tool bauen. Ich wollte arbeiten."
+description: "Ein Erfahrungsbericht aus einem realen Entwicklungsprozess – von der Idee bis zum produktiven Einsatz."
+date: 2026-01-30
+tags: ["software-development", "ai-in-development", "ownership", "kanban", "refactoring"]
+heroImage: ./hero.png
+featured: true
+draft: false
+
+---
+import { Image } from "astro:assets";
+import board from "./board-idea.png";
+
+## Ausgangspunkt: Ideen, User Stories, JSON
+
+Ich entwickle gerade ein kleines, bewusst schlankes Kanban-Board für Work Items – mit dem Ziel, Aufgaben nicht nur zu verwalten, sondern strukturiert denken zu können.
+
+Die eigentliche Arbeit an diesem Tool begann nicht mit Code, sondern mit einem Gespräch.
+
+Ich habe mit KI eine Projektidee gebrainstormt, sie geschärft und daraus User Stories und technische Tasks ableiten lassen. Nichts Ungewöhnliches – eher ein strukturierter Denkprozess, bei dem die KI hilft, Gedanken zu ordnen und Lücken sichtbar zu machen.
+
+Relativ schnell hatte ich eine brauchbare Liste an Aufgaben. Klar formuliert, sinnvoll geschnitten, bereit zur Umsetzung.
+
+Und dann kam ein ganz praktisches Problem:
+Ich wollte diese Stories nicht manuell in ein Projektmanagement-Tool übertragen.
+
+Nicht, weil es besonders kompliziert gewesen wäre, sondern weil es sich unsinnig angefühlt hätte.
+Die User Stories waren bereits strukturiert. Sie lagen genau in der Form vor, in der ich mit ihnen arbeiten wollte.
+
+Sie jetzt per Copy & Paste in ein anderes Tool zu übertragen hätte vermutlich länger gedauert als ihre ursprüngliche Erstellung. Und am Ende hätte ich wieder zwei Repräsentationen derselben Information gepflegt.
+
+Also ließ ich mir die User Stories und Tech Tasks direkt als JSON ausgeben.
+
+Dieses JSON war zunächst nichts weiter als ein Arbeitsformat. Eine Liste von Items, mit Titeln, Beschreibungen und Metadaten. Aber genau darin lag für mich der Reiz: Die Informationen waren präzise, maschinenlesbar – und gleichzeitig vollständig genug, um damit wirklich zu arbeiten.
+
+An diesem Punkt entstand der eigentliche Gedanke:
+Wenn die Arbeit bereits in strukturierter Form vorliegt, warum sollte nicht genau diese Struktur das Fundament des Tools sein?
+
+<Image src={board} alt="Board Detail" widths={[600, 1000, 1400]} />
+
+## Die Idee: Ein Board, das direkt aus dem JSON lebt
+
+Relativ schnell war klar, dass es nicht reichen würde, die Items aus dem JSON einfach nur anzuzeigen.
+
+Die User Stories hatten bereits eine Struktur, aber sie brauchten einen Zustand. Ohne Status wäre das Ganze nur eine Liste gewesen – kein Board. Jedes Item sollte einen Status haben, mit einem sinnvollen Default wie `backlog`. Die Spalten des Boards würden nichts weiter darstellen als genau diese Statuswerte.
+
+Gleichzeitig war mir wichtig, dass das Tool einfach und schnell funktioniert.
+Ich wollte kein Backend bauen, nur um ein JSON zu bearbeiten. Und ich wollte keinen externen Dienst einbinden, nur um den Zustand zu speichern.
+
+Das JSON sollte lokal bleiben. Direkt lesbar, direkt veränderbar.
+Keine zusätzliche Infrastruktur, kein Sync, kein versteckter Zustand.
+
+Damit war auch klar: Das Board ist keine zusätzliche Abstraktion über den Daten.
+Es ist eine direkte Visualisierung der Daten selbst.
+
+Wenn ich eine Card verschiebe, ändert sich kein interner UI-Zustand, sondern der Status im JSON. Das JSON ist die Single Source of Truth. Alles andere ergibt sich daraus.
+
+Diese Entscheidung war bewusst. Sie reduziert Komplexität, verhindert doppelte Zustände und zwingt zu klaren Verantwortlichkeiten. Es gibt keinen „Board-Zustand“ und keinen „Daten-Zustand“ – es gibt nur einen.
+
+An diesem Punkt fühlte sich die Idee plötzlich sehr konkret an.
+Nicht als Vision, sondern als etwas, das man bauen kann.
+
+Ein Board, das nicht über Daten gelegt wird, sondern direkt aus ihnen entsteht.
+
+
+## Der erste Code – und der Blob-Moment
+
+Mit der Idee im Kopf und dem Datenmodell klar vor Augen habe ich mir den ersten Code generieren lassen.
+
+Die App startete. Es gab ein Board. Es gab Cards.
+Zumindest theoretisch.
+
+Praktisch sah ich nichts. Weißer Text auf weißem Hintergrund.
+
+Das war kein Drama. Kein Bug, kein tiefer Fehler – nur ein Stilproblem.
+Mein erster Gedanke war entsprechend banal: *Ändere ich schnell.*
+
+Also öffnete ich den Code.
+
+Und in diesem Moment war nicht das Styling das eigentliche Problem.
+
+Das Problem war, dass alles in einer Datei lag. UI, State, Logik, Rendering – ein monolithischer Blob.
+
+Meine spontane Reaktion war ziemlich direkt:
+
+> omg alles in einer datei??
+> 
+> das kann doch keiner pflegen
+
+Das war keine saubere Analyse und kein ausgefeilter Prompt.
+Ich war einfach überrascht.
+
+Die KI hatte genau das getan, was ich verlangt hatte: Schreibe mir schnell ein funktionierendes Board.
+Dass ich den Code später auch lesen und pflegen möchte, hatte ich ihr nicht gesagt.
+
+Ab diesem Punkt habe ich gemeinsam mit der KI refaktoriert. Schritt für Schritt.
+Dateien getrennt, Zuständigkeiten geklärt, Struktur geschaffen.
+
+Und dabei wurde mir etwas sehr deutlich: Es ist gut, dass ich verstehe, was passiert.
+
+Ich muss nicht alles selbst schreiben. Aber ich übernehme die Verantwortung dafür, was im Code passiert. Für mich ist das eine Form des permanenten Code Reviews während der Entstehung.
+
+Denn nur so kann ich die richtigen Fragen stellen und an den richtigen Stellen eingreifen.
+
+In einigen Fällen wusste ich bei Fehlern schneller als die KI, wo die Ursache lag – einfach, weil ich den Code kannte, während die KI sich noch an Schönheitsfehlern aufhielt.
+
+Genau hier verschiebt sich für mich die Rolle der KI:
+Sie ist nicht Code-Lieferant, sondern Schreibhilfe und Sparringspartner.
+
+
+## Das MVP – schneller als erwartet
+
+Nach dem Refactoring hatte ich etwas, das man benutzen konnte.
+
+Kein Prototyp im Sinne von „klickt sich nett“, sondern ein echtes Board.
+Cards ließen sich anzeigen und verschieben. Der Status änderte sich direkt im JSON.
+
+Erst in diesem Moment wurde mir bewusst, wie wenig Zeit tatsächlich vergangen war. Von der ersten Idee bis zu diesem Punkt waren es ungefähr zwei Stunden.
+
+Das hat mich selbst überrascht. Nicht, weil ich etwas besonders Komplexes gebaut hätte, sondern weil sich das Ergebnis bereits stabil anfühlte.
+
+Das lag nicht an Geschwindigkeit allein, sondern an den Entscheidungen davor:
+ein klares Datenmodell, eine Single Source of Truth, keine zusätzliche Infrastruktur.
+
+Ich musste kein Backend bauen, keine API definieren, keinen externen Dienst anbinden.
+Das Board funktionierte lokal, direkt auf dem JSON.
+
+Ab hier habe ich angefangen, das Tool tatsächlich zu nutzen.
+Neue Gedanken, neue Aufgaben, neue Ideen – alles landete direkt im Board.
+
+Das Board war damit nicht mehr nur Ergebnis der Entwicklung, sondern Teil davon.
+
+
+## Ownership & Vibe Coding
+
+Ab diesem Punkt hat sich meine Art zu arbeiten spürbar verändert.
+
+Ich habe nicht aufgehört, mir Code von der KI schreiben zu lassen.
+Aber ich habe aufgehört, ihr Entscheidungen zu überlassen.
+
+Vibe Coding bedeutet für mich nicht, möglichst gute Prompts zu formulieren.
+Es bedeutet, im Dialog zu bleiben. Gedanken auszusprechen, Reaktionen abzuwarten, nachzuschärfen.
+
+Oft habe ich keine fertige Lösung formuliert, sondern nur ein Problem beschrieben.
+Oder gesagt, was mich stört. Oder was sich falsch anfühlt.
+
+Die KI reagiert darauf mit Vorschlägen.
+Manchmal sind sie gut. Manchmal nicht.
+Aber sie sind ein Ausgangspunkt.
+
+Entscheidend ist: Ich verstehe den Code, den ich benutze.
+
+Dadurch kann ich gezielt eingreifen. Ich kann Fragen stellen, die über „geht nicht“ hinausgehen.
+Ich kann sagen, wo etwas falsch läuft – nicht nur dass es falsch ist.
+
+In einigen Situationen war ich bei der Ursachenanalyse schneller als die KI.
+Nicht, weil ich klüger bin, sondern weil ich den Kontext kannte.
+Weil ich wusste, welche Entscheidungen vorher getroffen wurden – und warum.
+
+Genau hier liegt für mich der eigentliche Wert dieser Zusammenarbeit.
+Die KI beschleunigt das Schreiben von Code.
+Aber sie entscheidet nicht, welche Struktur bleibt, welche Komplexität akzeptabel ist oder was „fertig“ bedeutet.
+Diese Verantwortung kann ich nicht delegieren – und will es auch nicht.
+
+Vibe Coding heißt für mich deshalb nicht, Kontrolle abzugeben,
+sondern sie bewusst zu behalten. Diese Art zu arbeiten hat meine Entwicklung nicht nur beschleunigt, sondern meine Entscheidungen klarer gemacht.
+
+Am Ende sind vielleicht die wichtigsten Erkenntnisse aus diesem Projekt:
+> Gute Tools entstehen nicht durch perfekte Prompts,
+> sondern durch Verständnis, Ownership und den Mut,
+> Dinge früh zu benutzen.

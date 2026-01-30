@@ -19,6 +19,10 @@
     @apply m-auto;
   }
 
+  h1 {
+    @apply text-4xl;
+    @apply mb-2;
+  }
   h2 {
     @apply text-3xl;
   }
@@ -51,6 +55,7 @@
   }
 }
 
+.section--section-header .section__content,
 .section.section--profile .section__content,
 .section.section--experience-header .section__content,
 .section.section--experience-entry .section__content,
@@ -58,6 +63,7 @@
 .prose {
   max-width: 45rem;
   margin: auto;
+  padding: 0;
 }
 .prose {
   hyphens: auto;

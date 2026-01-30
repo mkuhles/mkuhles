@@ -1,5 +1,6 @@
 {
   "home": {"de": "", "en": ""},
   "imprint": {"de": "impressum", "en": "imprint"},
-  "privacy": {"de": "datenschutz", "en": "privacy"}
+  "privacy": {"de": "datenschutz", "en": "privacy"},
+  "blog": {"de": "blog", "en": "blog"}
 }

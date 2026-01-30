@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import { langFromSlug, normalizeSlug } from "../../../i18n/blog";
+import type { Lang } from "../../../i18n/types";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import MarkdownSection from "../../../layouts/MarkdownSection.astro";
+import Section from "../../../layouts/Section.astro";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+
+  return posts
+    .map((post) => {
+      const lang = langFromSlug(post.slug);
+      if (!lang) return null;
+
+      return {
+        params: { lang, slug: normalizeSlug(post.slug, lang) },
+        props: { post },
+      };
+    })
+    .filter(Boolean);
+}
+
+const { post } = Astro.props;
+const lang = Astro.params.lang as Lang;
+
+if (langFromSlug(post.slug) !== lang) {
+  return new Response("Not found", { status: 404 });
+}
+
+const { Content } = await post.render();
+---
+
+<BaseLayout title={post.data.title} lang={lang}>
+  <Section type="section-header" className="pb-0">
+    {post.data.heroImage && (
+      <div class="hero-media">
+        <Image
+          src={post.data.heroImage}
+          alt={post.data.heroAlt ?? ""}
+          widths={[800, 1200, 1600]}
+          sizes="(max-width: 768px) 100vw, 900px"
+          loading="eager"
+          class="hero-img"
+        />
+      </div>
+    )}   
+    <h1 class="mt-1 mb-0.5">{post.data.title}</h1>
+    {post.data.description && (<div class="description">{post.data.description}</div>)}
+  </Section>
+  <MarkdownSection>
+    <Content />
+  </MarkdownSection>
+      
+</BaseLayout>
+
+
+<style>
+  .hero-media {
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+  }
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+</style>

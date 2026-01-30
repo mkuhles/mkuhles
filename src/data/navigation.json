@@ -1,6 +1,7 @@
 {
   "main": [
-    { "id": "home" }
+    { "id": "home" },
+    { "id": "blog" }
   ],
   "onepager": [
     { "id": "me" },

@@ -35,10 +35,12 @@
   @extend .section--dark;
 }
 
+.section--section-header,
 .section--experience-header {
   @extend .section--no-gradient;
 }
 
+.section--section-header,
 .section--experience-header,
 .section--experience,
 .section.section--footer {

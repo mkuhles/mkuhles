@@ -18,11 +18,15 @@
   "nav.skills": { "de": "Fähigkeiten", "en": "Skills" },
   "nav.experience": { "de": "Erfahrungen", "en": "Experiences" },
   "nav.contact": { "de": "Kontakt", "en": "Contact" },
+  "nav.blog": { "de": "Blog", "en": "Blog"},
 
 
   "today": { "de": "heute", "en": "today" },
   "experience": { "de": "Berufserfahrung", "en": "Experience" },
   "technologies": { "de": "Technologien", "en": "Technologies" },
 
-  "education": { "de": "Ausbildung", "en": "Education"}
+  "education": { "de": "Ausbildung", "en": "Education"},
+
+
+  "blog": { "de": "Blog", "en": "Blog"}
 }

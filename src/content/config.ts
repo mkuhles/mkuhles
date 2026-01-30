@@ -8,4 +8,21 @@ const sections = defineCollection({
     }),
 });
 
-export const collections = { sections };
+const blog = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string().optional(),
+      date: z.coerce.date(),
+      updated: z.coerce.date().optional(),
+      tags: z.array(z.string()).default([]),
+      draft: z.boolean().default(false),
+
+      heroImage: image().optional(),
+      heroAlt: z.string().optional(),
+    }),
+});
+
+export const collections = { sections, blog };
+

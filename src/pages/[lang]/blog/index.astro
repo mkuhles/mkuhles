@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import { getLangFromUrl, getLangStaticPaths, getTranslationFunction } from "../../../i18n/utils";
+import type { Lang } from "../../../i18n/types";
+import {langFromSlug} from "../../../i18n/blog"
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Section from "../../../layouts/Section.astro";
+import PostTeaser from "../../../components/blog/PostTeaser.astro";
+
+export const getStaticPaths = getLangStaticPaths;
+const lang = Astro.params.lang as Lang;
+
+
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+
+const all = await getCollection("blog", ({ data }) => !data.draft);
+
+const posts = all
+    .filter((p) => langFromSlug(p.slug) === lang)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title={t('blog')} lang={lang}>
+  <Section>
+    <h1>{t('blog')}</h1>
+    <ul>
+      {posts.map((post) => (
+        <li>
+          <PostTeaser post={post} />
+        </li>
+      ))}
+    </ul>
+  </Section>
+</BaseLayout>
+
+<style scoped>
+
+</style>

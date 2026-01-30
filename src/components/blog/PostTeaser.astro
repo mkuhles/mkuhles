@@ -1,0 +1,26 @@
+---
+import { map } from "astro:schema";
+import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
+import { postUrl } from "../../i18n/blog";
+
+const {post} = Astro.props;
+
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+const date = post.data.date.toLocaleDateString(curLang, { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<div class="blog-teaser">
+  <a href={postUrl(post.slug,curLang)}>{post.data.title}</a>
+  <div>
+    <time class="block" datetime={post.data.date.toISOString()}>
+      {date}
+    </time>
+    {post.data.tags && (
+      <div class="tags">
+        {post.data.tags.map((tag: string) => ( <span class="tag">{tag}</span> ))}
+      </div>
+    )}
+  </div>
+  {post.data.description ? <p>{post.data.description}</p> : null}
+</div>
