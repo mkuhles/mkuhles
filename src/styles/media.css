@@ -1,6 +1,6 @@
 @custom-media --medium-up (min-width: 768px) and (min-height: 768px);
 @custom-media --small-down (max-width: 767px) or (max-height: 767px);
-
+@custom-media --small-up (min-width: 500px);
 :root { --is-small: 0; }
 @media (--small-down) {
   :root { --is-small: 1; }

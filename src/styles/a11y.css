@@ -1,0 +1,17 @@
+:root {
+  --focus-ring-strong: rgba(0, 0, 0, 0.45);
+  --focus-ring-soft: rgba(0, 0, 0, 0.15);
+}
+
+footer,
+header {
+  --focus-ring-strong: rgba(255, 255, 255, 0.55);
+  --focus-ring-soft: rgba(255, 255, 255, 0.12);
+}
+
+*:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--focus-ring-strong),
+    0 0 0 6px var(--focus-ring-soft);
+}

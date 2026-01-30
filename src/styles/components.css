@@ -1,0 +1,17 @@
+@layer components {
+  .btn {
+    @apply border border-dashed border-c8 bg-c8 px-1 py-0.5 text-white transition-colors duration-300;
+    @apply hover:bg-white hover:text-c8;
+  }
+
+  .btn--highlight {
+    @apply border-highlight bg-transparent text-highlight;
+    @apply hover:bg-highlight hover:text-white;
+  }
+
+  .skill-circle {
+    @apply absolute rounded-full will-change-transform;
+    @apply transition-all duration-200 ease-out;
+    @apply hover:scale-110 hover:z-50 hover:shadow-lg;
+  }
+}

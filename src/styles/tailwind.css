@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+/* Reihenfolge: erst deine Layer-Dateien rein, dann utilities */
+@import "./base.css";
+@import "./components.css";
+@import "./section-layout.css";
+@import "./prose.css";
+@import "./a11y.css";
+
+@tailwind utilities;

@@ -1,0 +1,27 @@
+.prose {
+  hyphens: auto;
+}
+
+.prose h2 {
+  font-weight: 400;
+  margin-bottom: .25em;
+}
+
+.prose .project-links,
+.prose blockquote {
+  font-style: italic;
+  padding: .75rem 1.25rem;
+  margin: 2rem auto;
+  border: 1px solid var(--c8-transparent-02);
+  border-left: 3px solid var(--c8);
+
+  @media (--medium-up) {
+    max-width: 60%;
+    width: fit-content;
+  }
+}
+
+.prose .project-links p,
+.prose blockquote p {
+  margin: .75rem 0;
+}
