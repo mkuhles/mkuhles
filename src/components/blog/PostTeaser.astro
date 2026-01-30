@@ -1,26 +1,176 @@
 ---
-import { map } from "astro:schema";
 import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
 import { postUrl } from "../../i18n/blog";
+import HeroImage from "./HeroImage.astro";
+import { Image } from "astro:assets";
+import PostImage from "./PostImage.astro";
 
-const {post} = Astro.props;
+const { post } = Astro.props;
 
 const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
-const date = post.data.date.toLocaleDateString(curLang, { year: 'numeric', month: 'long', day: 'numeric' });
+
+const { date, title, tags, description, heroImage, heroAlt } = post.data;
+const href = postUrl(post.slug, curLang);
 ---
 
-<div class="blog-teaser">
-  <a href={postUrl(post.slug,curLang)}>{post.data.title}</a>
-  <div>
-    <time class="block" datetime={post.data.date.toISOString()}>
-      {date}
-    </time>
-    {post.data.tags && (
-      <div class="tags">
-        {post.data.tags.map((tag: string) => ( <span class="tag">{tag}</span> ))}
+<article class="teaser">
+  <a href={href} class="teaser__link">
+    <div class="teaser__inner">
+      {heroImage && (
+        <PostImage
+            src={heroImage}
+            alt=""
+            class="teaser__img"
+            loading="lazy"
+            ratio="10/7"
+          />
+      )}
+      <div class="teaser__content">
+        <header class="teaser__head">
+          <h2 class="teaser__title">{title}</h2>
+
+          {date && (
+            <time datetime={date.toISOString()} class="teaser__date">
+              {date.toLocaleDateString(curLang === "de" ? "de-DE" : "en-GB", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit",
+              })}
+            </time>
+          )}
+        </header>
+
+        {description && <p class="teaser__desc">{description}</p>}
+
+        {!!tags?.length && (
+          <ul class="teaser__tags" aria-label="Tags">
+            {tags.map((tag: string) => (
+              <li class="teaser__tag">{tag}</li>
+            ))}
+          </ul>
+        )}
+
+        <div class="teaser__cta">
+          <span>{t("blog.readMore")}</span>
+          <span aria-hidden="true">→</span>
+        </div>
       </div>
-    )}
-  </div>
-  {post.data.description ? <p>{post.data.description}</p> : null}
-</div>
+    </div>
+  </a>
+</article>
+
+<style scoped>
+  .teaser {
+    --bg: var(--color-eggshell);
+    --surface: var(--color-eggshell);
+    --text: var(--text-color);
+    --border: var(--c8-transparent-02);
+    --accent: var(--highlight);
+  }
+
+  .teaser__link {
+    display: block;
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    transition: background-color 140ms ease;
+    background-color: var(--surface);
+  }
+
+  :global(.teaser:last-child) .teaser__link {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .teaser__link:hover {
+    background: color-mix(in oklab, var(--surface), var(--accent) 6%);
+  }
+
+  .teaser__link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .teaser__inner {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    gap: 1rem;
+    padding: .9rem 1rem;
+    align-items: start;
+  }
+
+  @media (max-width: 640px){
+    .teaser__inner{
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    .teaser__media{
+      max-width: none;
+    }
+    .teaser__img{
+      height: 180px;
+    }
+  }
+
+  .teaser__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .teaser__title {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .teaser__date {
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  .teaser__desc {
+    margin: 0.35rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: color-mix(in oklab, var(--text), transparent 18%);
+    max-width: 70ch;
+  }
+
+  .teaser__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0.6rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+  }
+
+  .teaser__tag {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.45rem;
+    border: 1px solid var(--border);
+    color: color-mix(in oklab, var(--text), transparent 22%);
+    background-color: var(--surface);
+  }
+
+  .teaser__cta {
+    margin-top: 0.55rem;
+    font-size: 0.85rem;
+    color: color-mix(in oklab, var(--text), transparent 35%);
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+
+  .teaser__link:hover .teaser__cta {
+    color: color-mix(in oklab, var(--text), transparent 20%);
+  }
+</style>

@@ -31,6 +31,7 @@
   "blog": { "de": "Blog", "en": "Blog"},
   "project": { "de": "Projekt", "en": "Project" },
   "github-repo": { "de": "GitHub Repository", "en": "GitHub Repository" },
-  "live-url": { "de": "Live URL", "en": "Live URL" }
+  "live-url": { "de": "Live URL", "en": "Live URL" },
+  "blog.readMore": { "de": "weiter lesen", "en": "read more" } 
 
 }
