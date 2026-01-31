@@ -15,12 +15,13 @@ import Experience from "../../components/content/experience/ExperienceList.astro
 import Education from "../../components/content/education.astro";
 import Profile from "../../components/content/profile.astro";
 import Contact from "../../components/content/contact.astro";
-import OnePagerNavigation from "../../components/navigation/OnePagerNavigation.astro";
-
+import OnPageNavigation from "../../components/navigation/OnPageNavigation.astro";
+import navData from '../../data/navigation.json';
+import type { NavEntry } from "../../types/NavItem";
 
 export const getStaticPaths = getLangStaticPaths;
 const { lang } = Astro.params;
-
+const nav = (navData as any).onepager as NavEntry[];
 
 const {entry: about, Content: About} = await getPostById(`${lang}/about.md`);
 const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", className: "circle"}
@@ -33,6 +34,6 @@ const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", class
   <Experience />
   <Education />
   <ImageSection id="contact" type="about" image={image}><Contact /></ImageSection>
-  <OnePagerNavigation />
+  <OnPageNavigation nav={nav} />
 </BaseLayout>
  

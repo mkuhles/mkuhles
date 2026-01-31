@@ -1,12 +1,10 @@
 ---
-import navData from '../../data/navigation.json';
 import { getLangFromUrl, getTranslationFunction, type UiKey } from '../../i18n/utils';
 import type { NavEntry } from '../../types/NavItem';
 
-
+const {nav} = Astro.props;
 const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
-const nav = (navData as any).onepager as NavEntry[];
 ---
 
 <>
@@ -15,7 +13,9 @@ const nav = (navData as any).onepager as NavEntry[];
       {nav.map((navItem: NavEntry) => (
         <li>
           <a href={"#"+navItem.id} data-id={navItem.id}>
-            <span class="sr">{t(`nav.${navItem.id}` as UiKey)}</span>
+            <span class="onpage-nav-item">
+              <span class="label">{navItem.label ?? t(`nav.${navItem.id}` as UiKey)}</span>
+            </span>
           </a>
         </li>
       ))}
@@ -34,7 +34,7 @@ const nav = (navData as any).onepager as NavEntry[];
       <ul class="sheet-list">
         {nav.map((navItem: NavEntry) => (
           <li>
-            <a href={"#"+navItem.id} data-id={navItem.id}>{t(`nav.${navItem.id}` as UiKey)}</a>
+            <a href={"#"+navItem.id} data-id={navItem.id}>{navItem.label ?? t(`nav.${navItem.id}` as UiKey)}</a>
           </li>
         ))}
       </ul>
@@ -47,7 +47,7 @@ const nav = (navData as any).onepager as NavEntry[];
 @media (--medium-up) {
   .onpage-nav { 
     position: fixed;
-    right: 16px;
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -58,19 +58,31 @@ const nav = (navData as any).onepager as NavEntry[];
 
   /* Dots */
   .onpage-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: .5rem;
+    text-align: right;
   }
   .onpage-nav a {
-    width: 8rem;
-    padding: .5rem 1rem;
-    transform: translateX(6rem);
-    display: block;
     white-space: nowrap;
-    transition: transform .5s ease;
+    width: clamp(2.25rem, 90vw, 22rem);
+  
+    .label {
+      max-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: max-width .5s ease;
+    }
+
+    &:hover .label {
+      max-width: clamp(10rem, 85vw, 22rem);
+      background-color: var(--highlight);
+      color: var(--text-color-inv);
+    }
+  }
+  .onpage-nav-item {  
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    justify-content: flex-end;
+    padding: .5rem 1rem;
 
     &:before {
       content: ' ';
@@ -82,30 +94,26 @@ const nav = (navData as any).onepager as NavEntry[];
       width: .7rem;
       height: .7rem;
     }
-
-    &:hover {
-      transform: translateX(1rem);
+  }
+  .onpage-nav a:hover {
+    .onpage-nav-item {
       background-color: var(--highlight);
-      color: var(--text-color-inv);
-      
-      &:before {
-        border-color: var(--text-color-inv);
-      }
     }
-
-    &[aria-current="true"] {
-      &:before {
-        background-color: var(--highlight);
-      }  
-      &:hover {
-        &:before {
-          background-color: var(--text-color-inv);
-        }
-      }
+    
+    .onpage-nav-item:before {
+      border-color: var(--text-color-inv);
     }
   }
+
   .onpage-nav a[aria-current="true"] {
-    opacity: 1;
+    .onpage-nav-item:before {
+      background-color: var(--highlight);
+    }
+    &:hover {
+      .onpage-nav-item:before {
+        background-color: var(--text-color-inv);
+      }
+    }
   }
 }
 

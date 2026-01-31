@@ -6,6 +6,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import MarkdownSection from "../../../layouts/MarkdownSection.astro";
 import Section from "../../../layouts/Section.astro";
 import HeroImage from "../../../components/blog/HeroImage.astro";
+import OnPageNavigation from "../../../components/navigation/OnPageNavigation.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -30,7 +31,14 @@ if (langFromSlug(post.slug) !== lang) {
   return new Response("Not found", { status: 404 });
 }
 
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
+const nav = headings
+  .filter(h => h.depth === 2 || h.depth === 3)
+  .map(h => ({
+    id: h.slug,        // wird später zu #slug
+    label: h.text,     // Menütext
+    depth: h.depth,    // 2 oder 3 (für Einrückung/Style)
+  }));
 ---
 
 <BaseLayout title={post.data.title} lang={lang}>
@@ -44,5 +52,5 @@ const { Content } = await post.render();
   <MarkdownSection className="pt-1.5">
     <Content />
   </MarkdownSection>
-      
+  <OnPageNavigation nav={nav} />   
 </BaseLayout>
