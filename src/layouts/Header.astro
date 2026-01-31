@@ -4,13 +4,18 @@ import Navigation from "../components/navigation/Navigation.astro";
 
 import navData from '../data/navigation.json';
 import Section from "./Section.astro";
+import { getLangFromUrl, getUrlFromRoute } from "../i18n/utils";
+
+const curLang = getLangFromUrl(Astro.url);
+const urlFromRoute = getUrlFromRoute(curLang);
+
 const nav = (navData as any).main as NavEntry[];
 ---
 
 <header>
     <Section type="header" className="py-1" contentClassName="flex justify-between items-center">
       <div class="logo__wrapper">
-          <a href="/">
+          <a href={urlFromRoute("home")}>
               <img src="/images/logo.svg" alt="Website Logo" />
           </a>
       </div>
