@@ -4,12 +4,39 @@ interface Props {
   srcset?: string;
   alt?: string;
   className?: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+  sizes?: string;
+  width?: number | string;
+  height?: number | string;
+  decoding?: "async" | "sync" | "auto";
 }
-const { src, srcset, alt, className } = Astro.props;
+const {
+  src,
+  srcset,
+  alt,
+  className,
+  loading = "lazy",
+  fetchpriority,
+  sizes,
+  width,
+  height,
+  decoding = "async",
+} = Astro.props;
 ---
 <picture>
-  <source type="image/webp" srcset={srcset} />
-  <img src={src} alt={alt} loading="lazy" decoding="async" class={className} />
+  {srcset && <source type="image/webp" srcset={srcset} sizes={sizes} />}
+  <img
+    src={src}
+    alt={alt}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding={decoding}
+    sizes={sizes}
+    width={width}
+    height={height}
+    class={className}
+  />
 </picture>
 
 <style lang="scss" scoped>

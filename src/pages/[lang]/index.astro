@@ -24,16 +24,29 @@ const { lang } = Astro.params;
 const nav = (navData as any).onepager as NavEntry[];
 
 const {entry: about, Content: About} = await getPostById(`${lang}/about.md`);
-const image = {src: heroSrc, srcset: heroSrcset, alt: "Ein Bild von mir.", className: "circle"}
+const heroImage = {
+  src: heroSrc,
+  srcset: heroSrcset,
+  alt: "Ein Bild von mir.",
+  className: "circle",
+  loading: "eager",
+  fetchpriority: "high",
+  sizes: "(max-width: 640px) 50vw, (max-width: 1024px) 40vw, 40vw",
+};
+const contactImage = {
+  ...heroImage,
+  loading: "lazy",
+  fetchpriority: "auto",
+};
 ---
 
 <BaseLayout title="Home" lang={lang}>
-	<ImageSection id="me" type="about" image={image}><About /></ImageSection>
+	<ImageSection id="me" type="about" image={heroImage}><About /></ImageSection>
   <Profile />
   <Skills />
   <Experience />
   <Education />
-  <ImageSection id="contact" type="about" image={image}><Contact /></ImageSection>
+  <ImageSection id="contact" type="about" image={contactImage}><Contact /></ImageSection>
   <OnPageNavigation nav={nav} />
 </BaseLayout>
  
