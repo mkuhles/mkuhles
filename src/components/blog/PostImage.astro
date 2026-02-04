@@ -10,6 +10,7 @@ type Props = {
   loading?: "eager" | "lazy";
   class?: string;
   ratio?: string;
+  formats?: ("avif" | "webp" | "png" | "jpg" | "jpeg" | "svg")[];
 };
 
 const {
@@ -20,6 +21,7 @@ const {
   loading = "lazy",
   class: className = "",
   ratio = "16/9",
+  formats = ["avif", "webp"],
 } = Astro.props as Props;
 
 if (!src) {
@@ -31,6 +33,7 @@ if (!src) {
   <Image
     src={src}
     alt={alt}
+    formats={formats}
     widths={widths}
     sizes={sizes}
     loading={loading}

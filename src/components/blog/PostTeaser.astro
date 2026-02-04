@@ -23,6 +23,8 @@ const href = postUrl(post.slug, curLang);
             alt=""
             class="teaser__img"
             loading="lazy"
+            widths={[320, 480, 640]}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 40vw, 30vw"
             ratio="10/7"
           />
       )}

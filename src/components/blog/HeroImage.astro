@@ -8,6 +8,7 @@ const {alt, image} = Astro.props;
   <Image
     src={image}
     alt={alt ?? ""}
+    formats={["avif", "webp"]}
     widths={[640, 800, 1200, 1600]}
     sizes="(max-width: 767px) 100vw, 45rem"
     loading="eager"
