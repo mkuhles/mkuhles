@@ -1,1 +1,35 @@
-<meta http-equiv="refresh" content="0;url=/de/" />
+---
+import { LANGS } from "../i18n/config";
+
+const supported = LANGS;
+const defaultLang = "en";
+
+const langRegEx = LANGS.join('|');
+console.log(langRegEx);
+---
+
+<script is:inline>
+  (function () {
+    const path = window.location.pathname;
+    if (/^\/(de|en)(\/|$)/.test(path)) return;
+
+    // lang in local Storage
+    const saved = localStorage.getItem("lang");
+    if (saved && ["de","en"].includes(saved)) {
+      window.location.replace("/" + saved + path);
+      return;
+    }
+
+    // read Browser-language
+    const langs = navigator.languages && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language];
+
+    const best = langs
+      .map(l => (l || "").toLowerCase().split("-")[0])
+      .find(l => ["de","en"].includes(l));
+
+    const lang = best || "en";
+    window.location.replace("/" + lang + path);
+  })();
+</script>
