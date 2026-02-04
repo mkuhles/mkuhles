@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import { imagetools } from 'vite-imagetools';
 import mdx from "@astrojs/mdx";
 
 import tailwindcss from "@tailwindcss/vite";
@@ -17,7 +16,7 @@ export default defineConfig({
   },
   integrations: [mdx()],
   vite: {
-    plugins: [imagetools(), tailwindcss()],
+    plugins: [tailwindcss()],
     css: {
       transformer: "postcss",
     },
