@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import { langFromSlug, normalizeSlug } from "../../../i18n/blog";
 import type { Lang } from "../../../i18n/types";
+import { LANGS } from "../../../i18n/utils";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import MarkdownSection from "../../../layouts/MarkdownSection.astro";
 import Section from "../../../layouts/Section.astro";
@@ -31,6 +32,12 @@ if (langFromSlug(post.slug) !== lang) {
   return new Response("Not found", { status: 404 });
 }
 
+const baseSlug = normalizeSlug(post.slug, lang);
+const alternates = LANGS.map((l) => ({
+  lang: l,
+  href: `/${l}/blog/${baseSlug}`,
+}));
+
 const { Content, headings } = await post.render();
 const nav = headings
   .filter(h => h.depth === 2 || h.depth === 3)
@@ -41,7 +48,14 @@ const nav = headings
   }));
 ---
 
-<BaseLayout title={post.data.title} lang={lang}>
+<BaseLayout
+  title={post.data.title}
+  lang={lang}
+  description={post.data.description}
+  ogImage={post.data.heroImage?.src}
+  ogType="article"
+  alternates={alternates}
+>
   <Section type="section-header" className="pb-0">
     {post.data.heroImage && (
       <HeroImage image={post.data.heroImage} alt={post.data.heroAlt ?? ""} />

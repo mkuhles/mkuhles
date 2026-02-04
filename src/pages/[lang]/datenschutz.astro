@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import MarkdownSection from "../../layouts/MarkdownSection.astro";
+import { getUrlFromRoute, LANGS } from "../../i18n/utils";
 import { getPostById } from "../../scripts/content";
 
 export function getStaticPaths() {
@@ -9,8 +10,18 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const {Content} = await getPostById(`${lang}/privacy.md`);
+const urlFromRoute = getUrlFromRoute(lang);
+const alternates = LANGS.map((l) => ({
+  lang: l,
+  href: urlFromRoute("privacy", l),
+}));
 ---
 
-<BaseLayout title="Home" lang={lang}>
+<BaseLayout
+  title="Datenschutzerklärung"
+  lang={lang}
+  description="Informationen zum Datenschutz."
+  alternates={alternates}
+>
   <MarkdownSection type="privacy" className="section--gradient"><Content /></MarkdownSection>
 </BaseLayout>

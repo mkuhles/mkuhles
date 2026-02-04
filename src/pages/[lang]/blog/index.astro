@@ -1,6 +1,12 @@
 ---
 import { getCollection } from "astro:content";
-import { getLangFromUrl, getLangStaticPaths, getTranslationFunction } from "../../../i18n/utils";
+import {
+  getLangFromUrl,
+  getLangStaticPaths,
+  getTranslationFunction,
+  getUrlFromRoute,
+  LANGS,
+} from "../../../i18n/utils";
 import type { Lang } from "../../../i18n/types";
 import {langFromSlug} from "../../../i18n/blog"
 import BaseLayout from "../../../layouts/BaseLayout.astro";
@@ -13,6 +19,11 @@ const lang = Astro.params.lang as Lang;
 
 const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
+const urlFromRoute = getUrlFromRoute(lang);
+const alternates = LANGS.map((l) => ({
+  lang: l,
+  href: urlFromRoute("blog", l),
+}));
 
 const all = await getCollection("blog", ({ data }) => !data.draft);
 
@@ -21,7 +32,12 @@ const posts = all
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<BaseLayout title={t('blog')} lang={lang}>
+<BaseLayout
+  title={t('blog')}
+  lang={lang}
+  description={curLang === "de" ? "Blogbeiträge" : "Blog posts"}
+  alternates={alternates}
+>
   <Section>
     <h1>{t('blog')}</h1>
     <ul>

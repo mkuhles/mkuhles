@@ -10,7 +10,7 @@ import heroSrcset from '../../assets/images/foto-mkuhles.jpg?w=480;768;1200&form
 // @ts-expect-error Vite image query import
 import heroSrc from '../../assets/images/foto-mkuhles.jpg?w=1200&format=jpeg&as=src';
 
-import { getLangStaticPaths } from "../../i18n/utils";
+import { getLangStaticPaths, getUrlFromRoute, LANGS } from "../../i18n/utils";
 import Experience from "../../components/content/experience/ExperienceList.astro";
 import Education from "../../components/content/education.astro";
 import Profile from "../../components/content/profile.astro";
@@ -18,10 +18,18 @@ import Contact from "../../components/content/contact.astro";
 import OnPageNavigation from "../../components/navigation/OnPageNavigation.astro";
 import navData from '../../data/navigation.json';
 import type { NavEntry } from "../../types/NavItem";
+import siteData from "../../data/mkuhles.json";
 
 export const getStaticPaths = getLangStaticPaths;
 const { lang } = Astro.params;
 const nav = (navData as any).onepager as NavEntry[];
+const urlFromRoute = getUrlFromRoute(lang as any);
+const alternates = LANGS.map((l) => ({
+  lang: l,
+  href: urlFromRoute("home", l),
+}));
+const description =
+  (siteData as any)?.profile?.statement?.[lang as "de" | "en"] ?? undefined;
 
 const {entry: about, Content: About} = await getPostById(`${lang}/about.md`);
 const heroImage = {
@@ -42,7 +50,13 @@ const contactImage = {
 };
 ---
 
-<BaseLayout title="Home" lang={lang}>
+<BaseLayout
+  title="Home"
+  lang={lang}
+  description={description}
+  ogImage={heroSrc}
+  alternates={alternates}
+>
 	<ImageSection id="me" type="about" image={heroImage}><About /></ImageSection>
   <Profile />
   <Skills />
