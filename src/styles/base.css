@@ -1,25 +1,26 @@
-@layer base {
-  html {
-    font-size: var(--font-size-fix);
-    font-size: var(--font-size);
-  }
-
-  body {
-    @apply relative min-h-screen bg-c9;
-    color: var(--text-color);
-  }
-
-  .section {
-    @apply m-auto px-1 py-2;
-
-    @media (--medium-up) {
-      @apply px-2 py-4;
-    }
-  }
-
-  h1 { @apply text-4xl mb-2; }
-  h2 { @apply text-3xl; }
-  h3 { @apply text-2xl; }
-  h4 { @apply text-xl; }
-  h5 { @apply text-lg; }
+html {
+  font-size: var(--font-size-fix);
+  font-size: var(--font-size);
 }
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background: var(--c9);
+  color: var(--text-color);
+}
+
+.section {
+  margin: auto;
+  padding: 2rem 1rem;
+
+  @media (--medium-up) {
+    padding: 4rem 2rem;
+  }
+}
+
+h1 { font-size: 2.25rem; margin-bottom: 0.5rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }

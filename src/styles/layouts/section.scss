@@ -33,11 +33,18 @@
 .section.section--header,
 .section.section--footer {
   @extend .section--dark;
+  padding: 1rem;
+  
+  @media (--medium-up) {
+    padding: 1rem 2rem;
+  }
 }
 
 .section--section-header,
 .section--experience-header {
   @extend .section--no-gradient;
+
+  padding-bottom: 0;
 }
 
 .section--section-header,
