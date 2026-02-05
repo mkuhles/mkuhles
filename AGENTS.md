@@ -1,7 +1,7 @@
 ## Project Context
 - Purpose: Personal CV/portfolio and blog site for Melanie Kuhles.
 - Goals: Clear structure, maintainable code, pragmatic solutions, SEO-friendly i18n URLs.
-- Stack: Astro, MDX, SCSS, PostCSS, TypeScript.
+- Stack: Astro, MDX, CSS, PostCSS, TypeScript.
 
 ## Coding Preferences
 - Keep changes small, explicit, and easy to review.

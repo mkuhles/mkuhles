@@ -51,3 +51,11 @@ h5 { font-size: 1.125rem; }
   white-space: normal;
 }
 
+
+a {
+  color: var(--text-color);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--highlight);
+  text-underline-offset: 3px;
+}
