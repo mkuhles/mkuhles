@@ -16,7 +16,7 @@ const iconMap: Record<string, string> = {
 <>
     <div class="name">{contact.name.value}</div>
     <div class="email">
-        <a href={"mailto:"+contact.email.value}>{contact.email.value}</a>
+        <a class="email-link" href={"mailto:"+contact.email.value}>{contact.email.value}</a>
     </div>
     <div class="socials">
         {Object.entries(contact.social).map(([key, value]) => (
@@ -65,5 +65,15 @@ const iconMap: Record<string, string> = {
     .social-link:hover .social-icon {
         transform: scale(1.1);
         filter: brightness(0.9);
+    }
+    .email-link {
+        color: var(--text-color);
+        text-decoration: none;
+    }
+    .email-link:hover,
+    .email-link:focus,
+    .email-link:active {
+        color: var(--text-color);
+        text-decoration: none;
     }
 </style>

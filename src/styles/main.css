@@ -1,5 +1,6 @@
 @import "./media.css";
 
+@import "./variables.css";
 @import "./base.css";
 @import "./components.css";
 @import "./section-layout.css";

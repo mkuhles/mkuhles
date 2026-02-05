@@ -15,7 +15,7 @@ Personal website for Melanie Kuhles: CV, portfolio, and blog in one place.
 ## Tech stack
 - Astro + MDX
 - TypeScript
-- Tailwind CSS + SCSS
+- SCSS
 - PostCSS
 
 ## Development

@@ -176,16 +176,7 @@
         "de": ["größere JavaScript-Projekte", "bessere Struktur und Wartbarkeit"],
         "en": ["larger JavaScript projects", "improved structure and maintainability"]
       }
-    },
-    {
-      "name":"Tailwind",
-      "knowledge":0.4,
-      "since":2025,
-      "examples":{
-        "de": ["diese seite"],
-        "en": ["this website"]
-      }
-    }
+    } 
   ],
   "experience": [
     {

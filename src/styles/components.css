@@ -1,17 +1,36 @@
-@layer components {
-  .btn {
-    @apply border border-dashed border-c8 bg-c8 px-1 py-0.5 text-white transition-colors duration-300;
-    @apply hover:bg-white hover:text-c8;
-  }
+.btn {
+  border: 1px dashed var(--c8);
+  background: var(--c8);
+  padding: 0.25rem 0.5rem;
+  color: var(--text-color-inv);
+  transition: color 300ms ease, background-color 300ms ease;
+}
 
-  .btn--highlight {
-    @apply border-highlight bg-transparent text-highlight;
-    @apply hover:bg-highlight hover:text-white;
-  }
+.btn:hover {
+  background: var(--color-white);
+  color: var(--c8);
+}
 
-  .skill-circle {
-    @apply absolute rounded-full will-change-transform;
-    @apply transition-all duration-200 ease-out;
-    @apply hover:scale-110 hover:z-50 hover:shadow-lg;
-  }
+.btn--highlight {
+  border-color: var(--highlight);
+  background: transparent;
+  color: var(--highlight);
+}
+
+.btn--highlight:hover {
+  background: var(--highlight);
+  color: var(--color-white);
+}
+
+.skill-circle {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out, z-index 200ms ease-out;
+}
+
+.skill-circle:hover {
+  transform: scale(1.1);
+  z-index: 50;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }

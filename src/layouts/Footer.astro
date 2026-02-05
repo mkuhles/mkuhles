@@ -36,7 +36,10 @@ const currentYear = new Date().getFullYear();
       }
     }
     :global(.footer-nav) {
-      margin: 0.5rem 0;
+      ul {
+        margin: 0;
+        padding: 0;
+      }
       @media (--medium-up) {
         order: 1;
       }
@@ -48,6 +51,7 @@ const currentYear = new Date().getFullYear();
       @media (--medium-up) {
         text-align: left;
         order: 0;
+        margin: 0;
       }
     }
 </style>
