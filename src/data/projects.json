@@ -1,0 +1,18 @@
+[
+  {
+    "key": "board",
+    "title": {
+      "de": "My Board",
+      "en": "My Board"
+    },
+    "shortDescription": {
+      "de": "Ein agiles Board mit Drag & Drop und lokalem JSON‑Datei‑Backend.",
+      "en": "An agile board with drag and drop and a local JSON file backend."
+    },
+    "links": {
+      "repo": "https://github.com/mkuhles/board",
+      "live": "https://my-board.statichost.page/"
+    },
+    "logo": "/projects/my-board.svg"
+  }
+]

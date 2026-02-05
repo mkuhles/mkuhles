@@ -1,39 +1,54 @@
 ---
 import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
 
-const {repo, live} = Astro.props;
+const { repo, live, showTitle = true, title } = Astro.props;
 
 const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
+const hasLinks = Boolean(repo || live);
+const resolvedTitle = title ?? t("project");
 ---
 
-<div class="project-links">
-  <div class="project-links__title">{t('project')}</div>
-  <ul>
-    <li><a href={repo} target="_blank" rel="noopener noreferrer">{t('github-repo')}</a></li>
-    {live && (
-      <li><a href={live} target="_blank" rel="noopener noreferrer">{t('live-url')}</a></li>
+{hasLinks && (
+  <div class="project-links">
+    {showTitle && (
+      <div class="project-links__title">{resolvedTitle}</div>
     )}
-  </ul>
-</div>
+    <ul>
+      {repo && (
+        <li>
+          <a href={repo} target="_blank" rel="noopener noreferrer">
+            {t("github-repo")}
+          </a>
+        </li>
+      )}
+      {live && (
+        <li>
+          <a href={live} target="_blank" rel="noopener noreferrer">
+            {t("live-url")}
+          </a>
+        </li>
+      )}
+    </ul>
+  </div>
+)}
 
 <style scoped>
-.project-links{
+.project-links {
   margin: 1.5rem auto;
 }
 
-.project-links__title{
+.project-links__title {
   font-weight: 600;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
-.project-links ul{
+.project-links ul {
   margin: 0;
   padding-left: 1em;
-  list-style: '> ';
+  list-style: "> ";
 
   li::marker {
     color: var(--highlight);
   }
 }
-
 </style>

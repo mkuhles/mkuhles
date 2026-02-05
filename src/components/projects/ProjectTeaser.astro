@@ -1,0 +1,89 @@
+---
+import projectsData from "../../data/projects.json";
+import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
+import type { Project } from "../../types/Project";
+import ProjectLinks from "../blog/ProjectLinks.astro";
+
+const { projectKey, showImage = true } = Astro.props;
+
+const projects = projectsData as Project[];
+const project = projects.find((item) => item.key === projectKey);
+
+const curLang = getLangFromUrl(Astro.url);
+const t = getTranslationFunction(curLang);
+---
+
+{project && (
+  <section class="project-teaser" aria-label={t("project")}>
+    <div class="project-teaser__header">
+      {project.logo && (
+        <img
+          class="project-teaser__logo"
+          src={project.logo}
+          alt={t(project.title)}
+          loading="lazy"
+        />
+      )}
+      <h3 class="project-teaser__title">{t(project.title)}</h3>
+    </div>
+    {project.shortDescription && (
+      <p class="project-teaser__short-description">{t(project.shortDescription)}</p>
+    )}
+    {showImage && project.image?.src && (
+      <img
+        class="project-teaser__image"
+        src={project.image.src}
+        alt={project.image.alt ? t(project.image.alt) : ""}
+        loading="lazy"
+      />
+    )}
+    <div class="project-teaser__links">
+      <ProjectLinks repo={project.links.repo} live={project.links.live} showTitle={false} />
+    </div>
+  </section>
+)}
+
+<style scoped>
+.project-teaser {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--highlight), transparent 70%);
+  background: color-mix(in srgb, var(--accent), transparent 92%);
+}
+
+.project-teaser__title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.project-teaser__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.project-teaser__logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.project-teaser__short-description {
+  margin: 0.5rem 0 0;
+}
+
+.project-teaser__image {
+  display: block;
+  max-width: 100%;
+  margin: 1rem 0 0;
+}
+
+.project-teaser__links :global(.project-links) {
+  margin: 0.75rem 0 0;
+}
+
+.project-teaser__links :global(.project-links ul) {
+  padding-left: 1em;
+}
+</style>
