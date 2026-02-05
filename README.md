@@ -1,24 +1,37 @@
-# mkuhles - website
+# mkuhles
 
-This website is my personal CV, portfolio, and digital business card in one.
+Personal website for Melanie Kuhles: CV, portfolio, and blog in one place.
 
-It serves as a **showcase for selected projects**, experiments, and technical approaches I care about, as well as a place to publish **blog posts** around web development and related topics.
-Some sections may evolve over time — that’s intentional. This site is a living project, not a static résumé.
+## What this site is
+- A **portfolio** and **CV** with selected projects and experience.
+- A **blog** for web development topics.
+- A living site that evolves over time.
 
-The focus is on:
+## Goals
+- Clear structure and maintainable code.
+- Pragmatic, modern web development.
+- Real-world solutions over marketing polish.
 
-* clear structure and maintainable code
-* modern, pragmatic web development
-* real-world solutions rather than polished marketing pages
+## Tech stack
+- Astro + MDX
+- TypeScript
+- Tailwind CSS + SCSS
+- PostCSS
 
-If you’re here to get an impression of how I think, build, and communicate through code, you’re in the right place.
-
-
-## technical notes for me
-
-go live
+## Development
 ```bash
-npm ci
+npm install
+npm run dev
+```
+
+## Build & preview
+```bash
 npm run build
 npm run preview
 ```
+
+## Content & i18n
+- Blog posts: `src/content/blog`
+- Section content: `src/content/sections`
+- Localized routes: `src/i18n/routes.json`
+- Translations and SEO strings: `src/i18n/strings.json`
