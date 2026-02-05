@@ -22,11 +22,15 @@
     img {
       width: 70%;
       max-width: 220px;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
       margin: auto;
       
       @media (--small-up) {
         width: 100%;
         max-width: 260px;
+        height: auto;
         margin: 0;
       }
     }

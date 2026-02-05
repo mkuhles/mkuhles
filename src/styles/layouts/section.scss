@@ -79,3 +79,13 @@
     }
   }
 }
+.section--experience-header + .section--experience-entry,
+.section.post-content {
+  padding-top: 1rem; /* kleiner machen */
+}
+
+.section--experience-header {
+  h2 {
+    margin-bottom: 0;
+  }
+}

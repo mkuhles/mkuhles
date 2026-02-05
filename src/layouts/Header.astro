@@ -13,7 +13,7 @@ const nav = (navData as any).main as NavEntry[];
 ---
 
 <header>
-    <Section type="header" className="py-1" contentClassName="flex justify-between items-center">
+    <Section type="header" className="header-section" contentClassName="header-content">
       <div class="logo__wrapper">
           <a href={urlFromRoute("home")}>
               <img src="/images/logo.svg" alt="Website Logo" />
@@ -27,9 +27,20 @@ const nav = (navData as any).main as NavEntry[];
     header {
       background:var(--c9); color:var(--text-color-inv);
     }
+    :global(.header-section) {
+      padding: 0.25rem 0;
+    }
+    :global(.header-content) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
     .logo__wrapper img {
       width: 15vmin;
+      height: auto;
       border-radius: 50%;
+      display: block;
     
       @media screen and (min-width: 500px) {  
         width: 8vmin;

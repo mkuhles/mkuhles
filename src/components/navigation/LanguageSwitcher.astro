@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, getTranslationFunction, getRouteFromUrl, getUrlFromRoute, getUrlFromPath, type RouteKey, LANGS } from "../../i18n/utils";
+import NavLink from "./NavLink.astro";
 
 const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
@@ -20,16 +21,9 @@ const allLanguages = Array.from(LANGS) as (typeof LANGS)[number][];
         : urlFromPath(restPath, lang);
 
     return (
-        <a class="language-switcher" href={href} title={t('langSwitcher.switch', lang)}>
+        <NavLink href={href} title={t('langSwitcher.switch', lang)}>
             {lang}
-        </a>
+        </NavLink>
     )
 })
 }
-
-<style scoped>
-  .language-switcher {
-    display: block;
-    padding: 0.5rem 0.5rem;
-  }
-</style>

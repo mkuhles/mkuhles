@@ -63,7 +63,7 @@ const nav = headings
     <h1 class="post-title">{post.data.title}</h1>
     {post.data.description && (<div class="description">{post.data.description}</div>)}
   </Section>
-  <MarkdownSection className="pt-1.5">
+  <MarkdownSection className="post-content">
     <Content />
   </MarkdownSection>
   <OnPageNavigation nav={nav} />   
@@ -73,5 +73,8 @@ const nav = headings
   .post-title {
     margin-top: 0.25rem;
     margin-bottom: 0.125rem;
+  }
+  .post-content {
+    padding-top: 1.5rem;
   }
 </style>
