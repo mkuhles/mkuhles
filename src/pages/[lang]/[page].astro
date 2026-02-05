@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MarkdownSection from "../../layouts/MarkdownSection.astro";
+import { getTranslationFunction, getUrlFromRoute, LANGS } from "../../i18n/utils";
+import routesData from "../../i18n/routes.json";
+import type { Lang } from "../../i18n/types";
+import { getPostById } from "../../scripts/content";
+
+type PageKey = "imprint" | "privacy";
+
+export const pageKeys: PageKey[] = ["imprint", "privacy"];
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) =>
+    pageKeys.map((key) => ({
+      params: { lang, page: (routesData as any)[key][lang] },
+      props: { key },
+    }))
+  );
+}
+
+const { lang } = Astro.params as { lang: Lang; page: string };
+const { key } = Astro.props as { key: PageKey };
+
+const t = getTranslationFunction(lang);
+const urlFromRoute = getUrlFromRoute(lang);
+const alternates = LANGS.map((l) => ({
+  lang: l,
+  href: urlFromRoute(key, l),
+}));
+
+const { Content } = await getPostById(`${lang}/${key}.md`);
+---
+
+<BaseLayout
+  title={t(`seo.${key}.title`)}
+  lang={lang}
+  description={t(`seo.${key}.description`)}
+  alternates={alternates}
+>
+  <MarkdownSection type={key} className="section--gradient">
+    <Content />
+  </MarkdownSection>
+</BaseLayout>

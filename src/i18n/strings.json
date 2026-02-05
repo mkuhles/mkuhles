@@ -32,6 +32,24 @@
   "project": { "de": "Projekt", "en": "Project" },
   "github-repo": { "de": "GitHub Repository", "en": "GitHub Repository" },
   "live-url": { "de": "Live URL", "en": "Live URL" },
-  "blog.readMore": { "de": "weiter lesen", "en": "read more" } 
+  "blog.readMore": { "de": "weiter lesen", "en": "read more" },
+
+  "seo.home.title": { "de": "Startseite", "en": "Home" },
+  "seo.home.description": {
+    "de": "Ich entwickle und betreue Drupal-basierte Webanwendungen mit Fokus auf Sicherheit, Wartbarkeit und langfristige Stabilität.",
+    "en": "I develop and maintain Drupal-based web applications with a strong focus on security, maintainability, and long-term stability."
+  },
+  "seo.blog.title": { "de": "Blog", "en": "Blog" },
+  "seo.blog.description": { "de": "Blogbeiträge", "en": "Blog posts" },
+  "seo.imprint.title": { "de": "Impressum", "en": "Imprint" },
+  "seo.imprint.description": {
+    "de": "Rechtliche Angaben und Kontaktinformationen.",
+    "en": "Legal information and contact details."
+  },
+  "seo.privacy.title": { "de": "Datenschutzerklärung", "en": "Privacy Policy" },
+  "seo.privacy.description": {
+    "de": "Informationen zum Datenschutz.",
+    "en": "Information on data protection and privacy."
+  }
 
 }
