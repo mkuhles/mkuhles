@@ -10,7 +10,12 @@ import heroSrcset from '../../assets/images/foto-mkuhles.jpg?w=480;768;1200&form
 // @ts-expect-error Vite image query import
 import heroSrc from '../../assets/images/foto-mkuhles.jpg?w=1200&format=jpeg&as=src';
 
-import { getLangStaticPaths, getUrlFromRoute, LANGS } from "../../i18n/utils";
+import {
+  getLangStaticPaths,
+  getTranslationFunction,
+  getUrlFromRoute,
+  LANGS,
+} from "../../i18n/utils";
 import Experience from "../../components/content/experience/ExperienceList.astro";
 import Education from "../../components/content/education.astro";
 import Profile from "../../components/content/profile.astro";
@@ -18,18 +23,17 @@ import Contact from "../../components/content/contact.astro";
 import OnPageNavigation from "../../components/navigation/OnPageNavigation.astro";
 import navData from '../../data/navigation.json';
 import type { NavEntry } from "../../types/NavItem";
-import siteData from "../../data/mkuhles.json";
+import type { ImageSectionImage } from "../../types/ImageSectionImage";
 
 export const getStaticPaths = getLangStaticPaths;
 const { lang } = Astro.params;
 const nav = (navData as any).onepager as NavEntry[];
+const t = getTranslationFunction(lang as any);
 const urlFromRoute = getUrlFromRoute(lang as any);
 const alternates = LANGS.map((l) => ({
   lang: l,
   href: urlFromRoute("home", l),
 }));
-const description =
-  (siteData as any)?.profile?.statement?.[lang as "de" | "en"] ?? undefined;
 
 const {entry: about, Content: About} = await getPostById(`${lang}/about.md`);
 const heroImage = {
@@ -42,8 +46,8 @@ const heroImage = {
   width: 1491,
   height: 1491,
   sizes: "(max-width: 640px) 50vw, (max-width: 1024px) 40vw, 40vw",
-};
-const contactImage = {
+} satisfies ImageSectionImage;
+const contactImage: ImageSectionImage = {
   ...heroImage,
   loading: "lazy",
   fetchpriority: "auto",
@@ -51,9 +55,9 @@ const contactImage = {
 ---
 
 <BaseLayout
-  title="Home"
+  title={t("seo.home.title")}
   lang={lang}
-  description={description}
+  description={t("seo.home.description")}
   ogImage={heroSrc}
   alternates={alternates}
 >
