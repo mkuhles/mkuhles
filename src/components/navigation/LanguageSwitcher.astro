@@ -20,9 +20,16 @@ const allLanguages = Array.from(LANGS) as (typeof LANGS)[number][];
         : urlFromPath(restPath, lang);
 
     return (
-        <a class="language-switcher block px-0.5 py-0.5" href={href} title={t('langSwitcher.switch', lang)}>
+        <a class="language-switcher" href={href} title={t('langSwitcher.switch', lang)}>
             {lang}
         </a>
     )
 })
 }
+
+<style scoped>
+  .language-switcher {
+    display: block;
+    padding: 0.5rem 0.5rem;
+  }
+</style>

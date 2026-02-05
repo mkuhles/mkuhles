@@ -9,9 +9,9 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer>
-    <Section type="footer" className="py-0" contentClassName="md:flex justify-between items-center">
-        <Navigation className="footer-nav my-2" navItems={nav} />
-        <div class="my-2 text-center md:text-left order-first"><p>© {currentYear} Melanie Kuhles</p></div>
+    <Section type="footer" className="footer-section" contentClassName="footer-content">
+        <Navigation className="footer-nav" navItems={nav} />
+        <div class="footer-copy"><p>© {currentYear} Melanie Kuhles</p></div>
     </Section>
 </footer>
 
@@ -23,6 +23,31 @@ const currentYear = new Date().getFullYear();
 
       @media (--small-down) {
         padding-bottom: calc(1rem + var(--btn-min-size));
+      }
+    }
+    :global(.footer-section) {
+      padding: 0;
+    }
+    :global(.footer-content) {
+      @media (--medium-up) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    :global(.footer-nav) {
+      margin: 0.5rem 0;
+      @media (--medium-up) {
+        order: 1;
+      }
+    }
+    .footer-copy {
+      margin: 2rem 0;
+      text-align: center;
+      order: -1;
+      @media (--medium-up) {
+        text-align: left;
+        order: 0;
       }
     }
 </style>

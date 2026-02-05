@@ -10,26 +10,33 @@ const lang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(lang);
 ---
 <Section id="skills" type="skills" className="skills">
-  <div class="skill-inner flex flex-col gap-2 items-center">
+  <div class="skill-inner">
     <Scale />
     <div id="circle-container" class="circle-container">
       <div class="center-element">{t('skills.myskills')}</div>
       {skills.map( (skill) => <SkillElement skill={skill} className="circle-element"/> )}
     </div>
   </div>
-  <div class="skill-footer pt-1 flex justify-around">
+  <div class="skill-footer">
     <AgainButton id="reanimateSkills" />
   </div>
 </Section>
 
 <style>
 .skill-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
   @media (--medium-up) {
     flex-direction: row;
     justify-content: space-between;
   }
 }
 .skill-footer {
+  padding-top: 0.25rem;
+  display: flex;
+  justify-content: space-around;
   @media (--medium-up) {
     justify-content: end;
   }

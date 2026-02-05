@@ -9,13 +9,25 @@ const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
 ---
 
-<Section type="education" className="experience py-2">
-  <h2 class="mb-2">{t("education")}</h2>
+<Section type="education" className="education-section">
+  <h2 class="education-title">{t("education")}</h2>
   <ExperienceHeader
       title={t(entry.degree)} 
       subtitle={entry.institution} 
       startDate={entry.start_date} 
       endDate={entry.end_date}
-      className="mb-1"
+      className="education-header"
     />
 </Section>
+
+<style scoped>
+  .education-title {
+    margin-bottom: 0.5rem;
+  }
+  :global(.education-section .section__content) {
+    padding: 0.5rem 0;
+  }
+  :global(.education-header) {
+    margin-bottom: 0.25rem;
+  }
+</style>

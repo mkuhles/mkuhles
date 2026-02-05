@@ -8,15 +8,25 @@ import ExperienceTechnologies from "./ExperienceTechnologies.astro";
 const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
 ---
-<div class="py-1 border-t border-highlight border-dashed">
+<div class="experience-project">
     <ExperienceHeader 
         title={t(project.name)}
         startDate={project.start_date} 
         endDate={project.end_date}
         level={4}
-        className="mb-0.5" />
+        className="experience-project__header" />
     {project.description &&
       <ExperienceDescription description={project.description} />}
     {project.technologies &&
       <ExperienceTechnologies techs={project.technologies} />}
 </div>
+
+<style scoped>
+  .experience-project {
+    padding: 0.25rem 0;
+    border-top: 1px dashed var(--highlight);
+  }
+  :global(.experience-project__header) {
+    margin-bottom: 0.125rem;
+  }
+</style>

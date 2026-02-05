@@ -7,7 +7,10 @@ type ContactValue = {
 
 import {contact} from "../../data/mkuhles.json";
 
-// const contactTyped: Record<string, ContactValue> = contact;
+const iconMap: Record<string, string> = {
+    github: "/images/github.png",
+    linkedin: "/images/linkedin.png",
+};
 ---
 
 <>
@@ -15,39 +18,53 @@ import {contact} from "../../data/mkuhles.json";
     <div class="email">
         <a href={"mailto:"+contact.email.value}>{contact.email.value}</a>
     </div>
-    <div class="flex gap-1 my-1">
+    <div class="socials">
         {Object.entries(contact.social).map(([key, value]) => (
-            <div class={key}>
-                {value.url && (
-                    <a
-                        href={value.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <span class="sr-only">{value.url}</span>
-                    </a>
-                )}
-            </div>
+            value.url && (
+                <a
+                    href={value.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-link"
+                >
+                    <img
+                        src={iconMap[key]}
+                        alt=""
+                        class="social-icon"
+                    />
+                    <span class="sr-only">{value.url}</span>
+                </a>
+            )
         ))}
     </div>
 </>
 
 <style scoped>
-    .linkedin, .github {
-        a:before {
-            content: "";
-            display: inline-block;
-            width: var(--btn-min-size);height: var(--btn-min-size);
-            background-size: contain;
-            margin-right: .5em;
-            background-repeat: no-repeat;
-            background-position: center;
+    .socials {
+        display: flex;
+        gap: 0.25rem;
+        margin: 0.25rem 0;
+        justify-content: center;
+    }
+    @media (--small-up) {
+        .socials {
+            justify-content: flex-start;
         }
     }
-    .github a:before {
-        background-image: url("/images/github.png");
+    .social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
     }
-    .linkedin a:before {
-        background-image: url("/images/linkedin.png");
+    .social-icon {
+        width: 2rem;
+        height: 2rem;
+        transition: transform 150ms ease, filter 150ms ease;
+    }
+    .social-link:hover .social-icon {
+        transform: scale(1.1);
+        filter: brightness(0.9);
     }
 </style>

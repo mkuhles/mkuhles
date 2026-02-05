@@ -3,6 +3,11 @@
 .section {
   background:linear-gradient(180deg, var(--gradient-color-1) 0%, var(--gradient-color-2) 100%);
   border-bottom: 1px solid var(--color-coral);
+
+  .section__content {
+    max-width: 45rem;
+    margin: auto;
+  }
 }
 .section--dark {
   background:var(--c9); color:var(--text-color-inv);

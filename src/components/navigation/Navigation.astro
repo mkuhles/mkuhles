@@ -12,7 +12,7 @@ const { navItems, className} = Astro.props;
 ---
 
 <nav class={"navbar"+(className ? ` ${className}` : "")}>
-    <ul class={"flex justify-center md:justify-end gap-2 flex-wrap list-none"}>
+    <ul class="navbar__list">
         {navItems.map(item => (
             <NavItem navItem={item} />
         ))}
@@ -21,3 +21,18 @@ const { navItems, className} = Astro.props;
         </NavItem>
     </ul>
 </nav>
+
+<style scoped>
+  .navbar__list {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    list-style: none;
+  }
+  @media (--medium-up) {
+    .navbar__list {
+      justify-content: flex-end;
+    }
+  }
+</style>

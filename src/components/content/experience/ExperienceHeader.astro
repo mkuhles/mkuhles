@@ -20,13 +20,13 @@ const end = endDate ? new Date(endDate).toLocaleDateString(curLang, { year: 'num
 
 
 <div class={"experience__header "+className}>
-  <div class="sm:flex justify-between items-baseline">
+  <div class="experience-header__row">
     {level == 3 
       ? <h3 class="">{title}</h3> 
       : level == 4 
-        ? <h4 class="text-c11">{title}</h4> 
+        ? <h4 class="experience-header__title--accent">{title}</h4> 
         : <h5 class="">{title}</h5>}
-    <div class="justify-end">{start} - {end}</div>
+    <div class="experience-header__dates">{start} - {end}</div>
   </div>
   <div class="">{subtitle}</div>
 </div>
@@ -35,6 +35,21 @@ const end = endDate ? new Date(endDate).toLocaleDateString(curLang, { year: 'num
   .prose .experience__header {
     h3 {
       margin-bottom: 0;
+    }
+  }
+  .experience-header__row {
+    @media (--small-up) {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+  }
+  .experience-header__title--accent {
+    color: var(--c11);
+  }
+  .experience-header__dates {
+    @media (--small-up) {
+      text-align: right;
     }
   }
 </style>

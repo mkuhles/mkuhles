@@ -16,15 +16,17 @@
     margin-bottom: var(--spacing);
     
     @media (--small-up) {
-      width: 40%;
+      width: 30%;
       margin: 0;
     }
     img {
-      width: 50%;
+      width: 70%;
+      max-width: 220px;
       margin: auto;
       
       @media (--small-up) {
         width: 100%;
+        max-width: 260px;
         margin: 0;
       }
     }

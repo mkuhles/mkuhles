@@ -17,10 +17,25 @@ const target = navItem?.href ? "_blank" : undefined;
 const label = navItem ? t(`nav.${navItem.id}` as UiKey) : "";
 ---
 
-<li class="border-2 border-transparent border-b-highlight border-dashed hover:bg-c10 hover:border-highlight">
+<li class="nav-item">
 {navItem ? (
-    <a class="block px-0.5 py-0.5" href={href} target={target}>{label}</a>
+    <a class="nav-link" href={href} target={target}>{label}</a>
   ) : (
     <slot />
   )}
 </li>
+
+<style scoped>
+  .nav-item {
+    border: 2px solid transparent;
+    border-bottom: 2px dashed var(--highlight);
+  }
+  .nav-item:hover {
+    background: var(--c10);
+    border: 2px dashed var(--highlight);
+  }
+  .nav-link {
+    display: block;
+    padding: 0.5rem 0.5rem;
+  }
+</style>
