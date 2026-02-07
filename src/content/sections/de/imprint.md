@@ -1,7 +1,7 @@
 
 # IMPRESSUM
 
-## Angaben gemäß § 5 TMG**
+## Angaben gemäß § 5 DDG**
 
 <address>
 Melanie Kuhles<br/>
@@ -14,7 +14,7 @@ Deutschland<br/>
 **Telefon:** <a href="tel:033606 77 27 41">033606 77 27 41</a>
 </address>
 
-## Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
+## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
 
 **Melanie Kuhles**
 (Anschrift wie oben)
