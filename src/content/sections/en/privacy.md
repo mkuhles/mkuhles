@@ -15,29 +15,37 @@ Deutschland<br/>
 
 ## 2. Website hosting
 
-This website is hosted by a **European hosting provider**.
+This website is hosted by the STRATO AG, Otto-Ostrowski-Straße 7, 10249 Berlin, Germany.
 
-When visiting the website, technical data is processed automatically, including:
+STRATO provides the technical infrastructure required to operate and deliver this website.
+
+When visiting the website, the following technical data is processed automatically:
 
 * IP address
 * date and time of access
 * browser and operating system information
+* accessed pages / files
 
-This processing is necessary to ensure the secure and reliable operation of the website.
+This data is technically necessary to ensure the secure and reliable operation of the website and to protect against misuse.
 
-**Legal basis:**
+**Legal basis:**  
 Art. 6(1)(f) GDPR (legitimate interest).
 
-## 3. No cookies and no tracking
+## 3. Data processing within the European Union
+
+Personal data is processed exclusively within the European Union.
+No transfer of personal data to third countries takes place.
+
+## 4. No cookies and no tracking
 
 This website:
 
 * does **not** use cookies
 * does **not** use analytics or tracking tools
 * does **not** provide a contact form
-* does **not** embed external services
+* does **not** embed external services (e.g. fonts, videos, or maps)
 
-## 4. Your rights
+## 5. Your rights
 
 You have the right to:
 
@@ -46,7 +54,7 @@ You have the right to:
 * restrict or object to processing
 * lodge a complaint with a supervisory authority
 
-## 5. Contact
+## 6. Contact
 
-If you have any questions regarding data protection, feel free to contact me by email. (melanie.kuhles@oder-spree-consulting.de)
+If you have any questions regarding data protection, feel free to contact me by email.
 

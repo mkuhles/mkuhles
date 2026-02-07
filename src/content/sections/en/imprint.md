@@ -1,6 +1,6 @@
 # Imprint
 
-**Information according to § 5 TMG (German Telemedia Act)**
+**Information according to § 5 DDG (German Digital Services Act)**
 
 <address>
 Melanie Kuhles<br/>
@@ -14,7 +14,7 @@ Deutschland<br/>
 </address>
 
 
-## Responsible for content
+## Responsible for content according to § 18 para. 2 MStV (German Interstate Media Treaty)
 
 **Melanie Kuhles**
 (Address as above)

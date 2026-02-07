@@ -16,23 +16,25 @@ Deutschland<br/>
 
 ## 2. Hosting der Website
 
-Diese Website wird bei **staticHost.eu** betrieben.
-Der Anbieter stellt die technische Infrastruktur zur Verfügung, um die Website auszuliefern.
+Diese Website wird bei der STRATO AG, Otto-Ostrowski-Straße 7, 10249 Berlin, Deutschland, gehostet.
 
-Beim Besuch der Website werden automatisch technische Daten verarbeitet, zum Beispiel:
+STRATO stellt die technische Infrastruktur zur Verfügung, um die Website auszuliefern.
+
+Beim Aufruf der Website werden durch STRATO automatisch folgende technische Daten verarbeitet:
 
 * IP-Adresse
 * Datum und Uhrzeit des Zugriffs
 * Informationen zum verwendeten Browser und Betriebssystem
+* abgerufene Seiten / Dateien
 
-Diese Daten sind notwendig, damit die Website korrekt angezeigt werden kann und um die Sicherheit des Betriebs zu gewährleisten.
+Diese Daten sind technisch erforderlich, um die Website bereitzustellen, die Systemsicherheit zu gewährleisten und Angriffe abzuwehren.
 
-Die Verarbeitung erfolgt auf Grundlage von **Art. 6 Abs. 1 lit. f DSGVO** (berechtigtes Interesse an einem sicheren und zuverlässigen Betrieb der Website).
+Die Verarbeitung erfolgt auf Grundlage von
+Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und zuverlässigen Betrieb der Website).
 
 ## 3. Keine Weitergabe in Drittländer
 
-Die Website wird bei einem **europäischen Anbieter** gehostet.
-Eine Übertragung personenbezogener Daten in Länder außerhalb der EU findet nicht statt.
+Die Verarbeitung personenbezogener Daten erfolgt ausschließlich innerhalb der Europäischen Union.
 
 ## 4. Keine Cookies und kein Tracking
 
@@ -54,4 +56,4 @@ Du hast das Recht:
 
 ## 6. Kontakt zum Datenschutz
 
-Bei Fragen zum Datenschutz kannst du dich jederzeit per E-Mail an mich wenden. (melanie.kuhles@oder-spree-consulting.de)
+Bei Fragen zum Datenschutz kannst du dich jederzeit per E-Mail an mich wenden.
