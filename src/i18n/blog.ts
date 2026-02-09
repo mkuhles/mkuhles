@@ -1,4 +1,5 @@
 import type { Lang } from "./types";
+const base = import.meta.env.BASE_URL;
 
 export function langFromSlug(slug: string): Lang | null {
   const prefix = slug.split("/")[1];
@@ -13,5 +14,5 @@ export function normalizeSlug(slug: string, lang: string): string {
 }
 
 export function postUrl(slug: string, lang: string): string {
-  return `/${lang}/blog/${normalizeSlug(slug, lang)}`;
+  return `${base}${lang}/blog/${normalizeSlug(slug, lang)}`;
 }

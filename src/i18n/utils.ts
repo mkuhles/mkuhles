@@ -2,6 +2,7 @@ import stringsData from './strings.json';
 import routesData from './routes.json';
 import { defaultLang, LANGS } from './config';
 import type { TranslationEntry, TranslationList, Lang } from './types';
+const base = import.meta.env.BASE_URL;
 
 export { LANGS, defaultLang };
 
@@ -51,14 +52,14 @@ export function getTranslationListFunction(langUrl: Lang) {
 export function getUrlFromRoute(langUrl: Lang) {
   return function url(key: RouteKey, lang: Lang = langUrl) {
     const page = routesData[key]?.[lang] ?? routesData[key]?.[defaultLang as Lang];
-    return `/${lang}/${page}`;
+    return `${base}${lang}/${page}`;
   }
 }
 
 export function getUrlFromPath(langUrl: Lang) {
   return function urlFromPath(path: string, lang: Lang = langUrl) {
     const normalized = path.replace(/^\/+/, '');
-    return normalized ? `/${lang}/${normalized}` : `/${lang}/`;
+    return normalized ? `${base}${lang}/${normalized}` : `${base}${lang}/`;
   };
 }
 

@@ -21,5 +21,5 @@ export default defineConfig({
     },
   },
   site: 'https://melanie-kuhles.statichost.page',
-  base: '/'
+  base: "/melanie/",
 });

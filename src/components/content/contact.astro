@@ -7,9 +7,10 @@ type ContactValue = {
 
 import {contact} from "../../data/mkuhles.json";
 
+const base = import.meta.env.BASE_URL;
 const iconMap: Record<string, string> = {
-    github: "/images/github.png",
-    linkedin: "/images/linkedin.png",
+    github: `${base}images/github.png`,
+    linkedin: `${base}images/linkedin.png`,
 };
 ---
 
