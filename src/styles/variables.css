@@ -3,8 +3,11 @@
   --spacing: max(2vmin, 15px);
 
   --font-size-fix: 16px;
-  --font-size: max(var(--font-size-fix),2vmin);
+  --font-size: max(var(--font-size-fix),1.5vmin);
   --btn-min-size: 48px;
+  /* @media (min-width: 1200px) {
+    --font-size: max(var(--font-size-fix), 1.5vmin);
+  } */
 
   /* Color Scale (11 steps) */
   --c1: #E7E0CF;

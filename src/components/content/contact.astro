@@ -1,38 +1,34 @@
 ---
-type ContactValue = {
-    title?: string,
-    url?: string,
-    external?: boolean
-}
+import {contact} from "../../data/mkuhles";
+import type { SocialPlatform } from "../../types/MkuhlesData";
 
-import {contact} from "../../data/mkuhles.json";
-
-const iconMap: Record<string, string> = {
-    github: "/images/github.png",
-    linkedin: "/images/linkedin.png",
+const base = import.meta.env.BASE_URL;
+const iconMap: Record<SocialPlatform, string> = {
+    github: `${base}images/github.png`,
+    linkedin: `${base}images/linkedin.png`,
 };
 ---
 
 <>
-    <div class="name">{contact.name.value}</div>
+    <div class="name">{contact.full_name}</div>
     <div class="email">
-        <a class="email-link" href={"mailto:"+contact.email.value}>{contact.email.value}</a>
+        <a class="email-link" href={"mailto:"+contact.email}>{contact.email}</a>
     </div>
     <div class="socials">
-        {Object.entries(contact.social).map(([key, value]) => (
-            value.url && (
+        {contact.socials.map((social) => (
+            social.url && (
                 <a
-                    href={value.url}
+                    href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="social-link"
                 >
                     <img
-                        src={iconMap[key]}
+                        src={iconMap[social.platform]}
                         alt=""
                         class="social-icon"
                     />
-                    <span class="sr-only">{value.url}</span>
+                    <span class="sr-only">{social.url}</span>
                 </a>
             )
         ))}
@@ -55,11 +51,11 @@ const iconMap: Record<string, string> = {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: .5rem;
+        padding: .75rem;
     }
     .social-icon {
-        width: 2rem;
-        height: 2rem;
+        width: 1.75rem;
+        height: 1.75rem;
         transition: transform 150ms ease, filter 150ms ease;
     }
     .social-link:hover .social-icon {

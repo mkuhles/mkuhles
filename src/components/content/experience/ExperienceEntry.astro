@@ -5,8 +5,13 @@ import ExperienceDescription from "./ExperienceDescription.astro";
 import ExperienceHeader from "./ExperienceHeader.astro";
 import ExperienceProject from "./ExperienceProject.astro";
 import ExperienceTechnologies from "./ExperienceTechnologies.astro";
+import type { ExperienceEntryData, ExperienceProjectData } from "../../../types/MkuhlesData";
 
-const {entry} = Astro.props;
+interface Props {
+  entry: ExperienceEntryData;
+}
+
+const {entry} = Astro.props as Props;
 const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
 ---
@@ -23,7 +28,7 @@ const t = getTranslationFunction(curLang);
     <ExperienceDescription description={entry.description} />}
   {entry.projects && (
     <ul>
-      {entry.projects?.map((project:any) => (
+      {entry.projects?.map((project: ExperienceProjectData) => (
         <li><ExperienceProject project={project} /></li>
       ))}
     </ul>
@@ -31,3 +36,11 @@ const t = getTranslationFunction(curLang);
   {entry.technologies &&
     <ExperienceTechnologies techs={entry.technologies} />}
 </Section>
+
+<style scoped>
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+</style>

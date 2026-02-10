@@ -18,7 +18,7 @@ body {
   padding: 2rem 1rem;
 
   @media (--medium-up) {
-    padding: 4rem 2rem;
+    padding: 4rem;
   }
 }
 

@@ -10,13 +10,15 @@ const curLang = getLangFromUrl(Astro.url);
 const urlFromRoute = getUrlFromRoute(curLang);
 
 const nav = (navData as any).main as NavEntry[];
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <header>
     <Section type="header" className="header-section" contentClassName="header-content">
       <div class="logo__wrapper">
           <a href={urlFromRoute("home")}>
-              <img src="/images/logo.svg" alt="Website Logo" />
+              <img src={`${base}images/logo.svg`} alt="Website Logo" />
           </a>
       </div>
       <Navigation className="header-nav" navItems={nav} /> 

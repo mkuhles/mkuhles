@@ -10,12 +10,12 @@ const langRegEx = LANGS.join('|');
 <script is:inline>
   (function () {
     const path = window.location.pathname;
-    if (/^\/(de|en)(\/|$)/.test(path)) return;
+    if (/^\/melanie\/(de|en)(\/|$)/.test(path)) return;
 
     // lang in local Storage
     const saved = localStorage.getItem("lang");
     if (saved && ["de","en"].includes(saved)) {
-      window.location.replace("/" + saved + path);
+      window.location.replace("/melanie/" + saved + path);
       return;
     }
 
@@ -29,6 +29,6 @@ const langRegEx = LANGS.join('|');
       .find(l => ["de","en"].includes(l));
 
     const lang = best || "en";
-    window.location.replace("/" + lang + path);
+    window.location.replace("/melanie/" + lang + path);
   })();
 </script>

@@ -2,7 +2,7 @@
 import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
 import Section from "../../layouts/Section.astro";
 import ExperienceHeader from "./experience/ExperienceHeader.astro";
-import {education} from "../../data/mkuhles.json";
+import {education} from "../../data/mkuhles";
 
 const entry = education[0];
 const curLang = getLangFromUrl(Astro.url);

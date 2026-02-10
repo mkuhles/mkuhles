@@ -19,7 +19,7 @@
       width: 30%;
       margin: 0;
     }
-    img {
+    picture {
       width: 70%;
       max-width: 220px;
       height: auto;
@@ -32,6 +32,11 @@
         max-width: 260px;
         height: auto;
         margin: 0;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
       }
     }
   }

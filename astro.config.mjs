@@ -20,6 +20,6 @@ export default defineConfig({
       transformer: "postcss",
     },
   },
-  site: 'https://melanie-kuhles.statichost.page',
-  base: '/'
+  site: 'https://kuhles.eu',
+  base: "/melanie/",
 });
