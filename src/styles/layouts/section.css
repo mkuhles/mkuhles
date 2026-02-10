@@ -80,14 +80,6 @@
   color: var(--highlight);
 }
 
-.section--experience ul.technologies li {
-  display: inline;
-}
-
-.section--experience ul.technologies li + li:before {
-  content: ', ';
-}
-
 .section--experience-header + .section--experience-entry,
 .section.post-content {
   padding-top: 1rem; /* kleiner machen */

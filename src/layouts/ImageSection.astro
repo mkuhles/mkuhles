@@ -35,3 +35,16 @@ let { type, id = '', image, className } = Astro.props;
             <slot />
         </div>
 </Section>
+
+<style scoped>
+    .section__image {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+    }
+    @media (--medium-up) {
+        .section__image {
+            margin-bottom: 0;
+        }
+    }
+</style>

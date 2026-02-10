@@ -29,10 +29,19 @@ const t = getTranslationFunction(curLang);
 
 <style scoped>
   .experience-project {
-    padding: 1rem 0;
+    padding: 2rem 0;
     border-top: 1px dashed var(--highlight);
+
+    h4 {
+      margin-top: 0;
+    }
   }
   :global(.experience-project__header) {
     margin-bottom: 0.125rem;
+  }
+
+  :global(li:first-child) .experience-project {
+    padding-top: 1rem;
+    border-top: none;
   }
 </style>

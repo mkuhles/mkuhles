@@ -13,7 +13,7 @@ const t = getTranslationFunction(curLang);
     <h5 class="technologies__title">{t("technologies")}:</h5>
     <ul class="technologies">
     {techs.map((tech: string) => (
-        <li>{t(tech)}</li>
+        <li>{tech}</li>
     ))}
     </ul>
 </> 
@@ -22,5 +22,26 @@ const t = getTranslationFunction(curLang);
   .technologies__title {
     font-weight: 600;
     margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  ul.technologies {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  
+    li {
+      display: inline;
+
+
+      &:not(:last-child) {
+        &::after {
+          content: ', ';
+        }
+      }
+    }
   }
 </style>
