@@ -1,20 +1,17 @@
 {
   "contact": {
-    "name": {
-      "value": "Melanie Kuhles"
-    },
-    "email": {
-      "value": "melanie.kuhles@oder-spree-consulting.de",
-      "url": "mailto:melanie.kuhles@oder-spree-consulting.de" 
-    },
-    "social": {
-      "github": {
+    "full_name": "Melanie Kuhles",
+    "email": "melanie.kuhles@oder-spree-consulting.de",
+    "socials": [
+      {
+        "platform": "github",
         "url": "https://github.com/mkuhles"
       },
-      "linkedin": {
+      {
+        "platform": "linkedin",
         "url": "https://www.linkedin.com/in/melanie-kuhles/"
       }
-    }
+    ]
   },
   "profile": {
     "title": { "de": "Schwerpunkt und Profil", "en": "Focus and Profile"},
@@ -125,7 +122,7 @@
     },
     {
       "name":"vue.js",
-      "knowledge":0.5,
+      "knowledge":0.4,
       "since": 2019,
       "examples": {
         "de": ["Vendor-Widget vollständig refaktoriert und funktional an projektspezifische Anforderungen angepasst"],
@@ -134,7 +131,7 @@
     },
     {
       "name":"astrojs",
-      "knowledge":0.5,
+      "knowledge":0.6,
       "since":2025,
       "examples":{
         "de": ["diese seite", "Vereinswebseite"],

@@ -1,10 +1,3 @@
----
-type ContactValue = {
-    title?: string,
-    url?: string,
-    external?: boolean
-}
-
 import {contact} from "../../data/mkuhles.json";
 
 const base = import.meta.env.BASE_URL;
@@ -15,25 +8,25 @@ const iconMap: Record<string, string> = {
 ---
 
 <>
-    <div class="name">{contact.name.value}</div>
+    <div class="name">{contact.full_name}</div>
     <div class="email">
-        <a class="email-link" href={"mailto:"+contact.email.value}>{contact.email.value}</a>
+        <a class="email-link" href={"mailto:"+contact.email}>{contact.email}</a>
     </div>
     <div class="socials">
-        {Object.entries(contact.social).map(([key, value]) => (
-            value.url && (
+        {contact.socials.map((social) => (
+            social.url && (
                 <a
-                    href={value.url}
+                    href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="social-link"
                 >
                     <img
-                        src={iconMap[key]}
+                        src={iconMap[social.platform]}
                         alt=""
                         class="social-icon"
                     />
-                    <span class="sr-only">{value.url}</span>
+                    <span class="sr-only">{social.url}</span>
                 </a>
             )
         ))}
