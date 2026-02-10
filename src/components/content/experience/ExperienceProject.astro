@@ -1,9 +1,15 @@
 ---
-const { project } = Astro.props;
 import { getLangFromUrl, getTranslationFunction } from "../../../i18n/utils";
 import ExperienceDescription from "./ExperienceDescription.astro";
 import ExperienceHeader from "./ExperienceHeader.astro";
 import ExperienceTechnologies from "./ExperienceTechnologies.astro";
+import type { ExperienceProjectData } from "../../../types/MkuhlesData";
+
+interface Props {
+  project: ExperienceProjectData;
+}
+
+const { project } = Astro.props as Props;
 
 const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);

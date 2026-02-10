@@ -1,7 +1,9 @@
-import {contact} from "../../data/mkuhles.json";
+---
+import {contact} from "../../data/mkuhles";
+import type { SocialPlatform } from "../../types/MkuhlesData";
 
 const base = import.meta.env.BASE_URL;
-const iconMap: Record<string, string> = {
+const iconMap: Record<SocialPlatform, string> = {
     github: `${base}images/github.png`,
     linkedin: `${base}images/linkedin.png`,
 };
