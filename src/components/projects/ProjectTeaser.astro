@@ -11,35 +11,47 @@ const project = projects.find((item) => item.key === projectKey);
 
 const curLang = getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
+const base = import.meta.env.BASE_URL;
+
+function withBase(url?: string) {
+  if (!url) return "";
+  if (/^(?:[a-z]+:)?\/\//i.test(url) || url.startsWith("data:")) return url;
+  if (url.startsWith("/")) return `${base}${url.slice(1)}`;
+  return url;
+}
 ---
 
 {project && (
   <section class="project-teaser" aria-label={t("project")}>
-    <div class="project-teaser__header">
-      {project.logo && (
-        <img
-          class="project-teaser__logo"
-          src={project.logo}
-          alt={t(project.title)}
-          loading="lazy"
-        />
-      )}
-      <h3 class="project-teaser__title">{t(project.title)}</h3>
+    <div class="project-teaser__top">
+      <div>
+        <div class="project-teaser__header">
+          {project.logo && (
+            <img
+              class="project-teaser__logo"
+              src={withBase(project.logo)}
+              alt={t(project.title)}
+              loading="lazy"
+            />
+          )}
+          <h3 class="project-teaser__title">{t(project.title)}</h3>
+        </div>
+        {project.shortDescription && (
+          <p class="project-teaser__short-description">{t(project.shortDescription)}</p>
+        )}
+      </div>
+      <div class="project-teaser__links">
+        <ProjectLinks repo={project.links.repo} live={project.links.live} showTitle={false} />
+      </div>
     </div>
-    {project.shortDescription && (
-      <p class="project-teaser__short-description">{t(project.shortDescription)}</p>
-    )}
     {showImage && project.image?.src && (
       <img
         class="project-teaser__image"
-        src={project.image.src}
+        src={withBase(project.image.src)}
         alt={project.image.alt ? t(project.image.alt) : ""}
         loading="lazy"
       />
     )}
-    <div class="project-teaser__links">
-      <ProjectLinks repo={project.links.repo} live={project.links.live} showTitle={false} />
-    </div>
   </section>
 )}
 
@@ -49,6 +61,20 @@ const t = getTranslationFunction(curLang);
   padding: 1.25rem 1.5rem;
   border: 1px solid color-mix(in srgb, var(--highlight), transparent 70%);
   background: color-mix(in srgb, var(--accent), transparent 92%);
+}
+
+.project-teaser__top {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.project-teaser__top > :first-child {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .project-teaser__title {
@@ -70,20 +96,37 @@ const t = getTranslationFunction(curLang);
 }
 
 .project-teaser__short-description {
-  margin: 0.5rem 0 0;
+  margin: 0.25rem 0 0;
 }
 
 .project-teaser__image {
   display: block;
+  width: 100%;
   max-width: 100%;
-  margin: 1rem 0 0;
-}
-
-.project-teaser__links :global(.project-links) {
   margin: 0.75rem 0 0;
 }
 
+.project-teaser__links :global(.project-links) {
+  margin: 0;
+}
+
 .project-teaser__links :global(.project-links ul) {
+  margin: 0;
   padding-left: 1em;
+}
+
+.project-teaser__links {
+  align-self: start;
+}
+
+@media (--small-down) {
+  .project-teaser__top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .project-teaser__links {
+    align-self: flex-start;
+  }
 }
 </style>

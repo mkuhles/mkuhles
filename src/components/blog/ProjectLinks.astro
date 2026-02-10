@@ -35,9 +35,17 @@ const resolvedTitle = title ?? t("project");
 
 <style scoped>
 .project-links {
-  margin: 1.5rem auto;
+  font-style: italic;
+  padding: .5rem .625rem;
+  border: 1px solid var(--c8-transparent-02);
+  background-color: var(--c8-transparent-02);
+  font-size: .875rem;
+  
+  @media (--medium-up) {
+    width: fit-content;
+    max-width: 12.5rem;
+  }
 }
-
 .project-links__title {
   font-weight: 600;
   margin-bottom: 0.5rem;

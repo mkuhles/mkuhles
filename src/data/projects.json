@@ -11,8 +11,15 @@
     },
     "links": {
       "repo": "https://github.com/mkuhles/board",
-      "live": "https://my-board.statichost.page/"
+      "live": "https://kuhles.eu/my-board/"
     },
-    "logo": "/projects/my-board.svg"
+    "logo": "/projects/my-board.svg",
+    "image": {
+      "src": "/projects/Screenshot-my-board.png",
+      "alt": {
+        "de": "Screenshot von My Board",
+        "en": "Screenshot of My Board"
+      }
+    }
   }
 ]
