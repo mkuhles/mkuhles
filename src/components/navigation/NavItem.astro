@@ -1,15 +1,17 @@
 ---
 import { getLangFromUrl, getUrlFromRoute, getTranslationFunction } from "../../i18n/utils";
 import type { NavEntry } from "../../types/NavItem";
+import type { Lang } from "../../i18n/types";
 import type { UiKey } from "../../i18n/utils";
 import NavLink from "./NavLink.astro";
 
 interface Props {
-    navItem?: NavEntry
+    navItem?: NavEntry;
+    lang?: Lang;
 }
 
-const { navItem } = Astro.props;
-const curLang = getLangFromUrl(Astro.url);
+const { navItem, lang } = Astro.props;
+const curLang = lang ?? getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
 const getUrl = getUrlFromRoute(curLang);
 ---

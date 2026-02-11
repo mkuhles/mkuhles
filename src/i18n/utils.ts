@@ -15,7 +15,10 @@ export function getLangStaticPaths() {
 }
 
 export function getLangFromUrl(url: URL) {
-  const [, lang] = url.pathname.split('/');
+  const pathWithoutBase = url.pathname.startsWith(base)
+    ? url.pathname.slice(base.length)
+    : url.pathname.replace(/^\/+/, '');
+  const [lang] = pathWithoutBase.split('/');
   if (typeof lang === 'string' && LANGS.includes(lang as Lang)) return lang as Lang;
   return defaultLang;
 }

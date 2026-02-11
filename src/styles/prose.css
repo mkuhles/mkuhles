@@ -15,7 +15,7 @@
   border-left: 3px solid var(--c8);
 
   @media (--medium-up) {
-    max-width: 60%;
+    max-width: 80%;
     width: fit-content;
   }
 }

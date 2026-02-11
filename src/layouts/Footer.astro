@@ -1,16 +1,18 @@
 ---
 import type { NavEntry } from "../types/NavItem.ts";
 import Navigation from "../components/navigation/Navigation.astro";
+import type { Lang } from "../i18n/types";
 
 import navData from '../data/navigation.json';
 import Section from "./Section.astro";
 const nav = (navData as any).footer as NavEntry[];
 const currentYear = new Date().getFullYear();
+const { lang } = Astro.props as { lang: Lang };
 ---
 
 <footer>
     <Section type="footer" className="footer-section" contentClassName="footer-content">
-        <Navigation className="footer-nav" navItems={nav} />
+        <Navigation className="footer-nav" navItems={nav} lang={lang} />
         <div class="footer-copy"><p>© {currentYear} Melanie Kuhles</p></div>
     </Section>
 </footer>

@@ -2,22 +2,24 @@
 import NavItem from "./NavItem.astro";
 import type { NavEntry } from "../../types/NavItem";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import type { Lang } from "../../i18n/types";
 
 interface Props {
     className: string,
     navItems: NavEntry[],
+    lang: Lang,
 };
 
-const { navItems, className} = Astro.props;
+const { navItems, className, lang } = Astro.props;
 ---
 
 <nav class={"navbar"+(className ? ` ${className}` : "")}>
     <ul class="navbar__list">
         {navItems.map(item => (
-            <NavItem navItem={item} />
+            <NavItem navItem={item} lang={lang} />
         ))}
-        <NavItem>
-            <LanguageSwitcher />
+        <NavItem lang={lang}>
+            <LanguageSwitcher lang={lang} />
         </NavItem>
     </ul>
 </nav>

@@ -4,10 +4,11 @@ import Navigation from "../components/navigation/Navigation.astro";
 
 import navData from '../data/navigation.json';
 import Section from "./Section.astro";
-import { getLangFromUrl, getUrlFromRoute } from "../i18n/utils";
+import { getUrlFromRoute } from "../i18n/utils";
+import type { Lang } from "../i18n/types";
 
-const curLang = getLangFromUrl(Astro.url);
-const urlFromRoute = getUrlFromRoute(curLang);
+const { lang } = Astro.props as { lang: Lang; pageTitle?: string };
+const urlFromRoute = getUrlFromRoute(lang);
 
 const nav = (navData as any).main as NavEntry[];
 
@@ -21,7 +22,7 @@ const base = import.meta.env.BASE_URL;
               <img src={`${base}images/logo.svg`} alt="Website Logo" />
           </a>
       </div>
-      <Navigation className="header-nav" navItems={nav} /> 
+      <Navigation className="header-nav" navItems={nav} lang={lang} /> 
     </Section>
 </header>
 

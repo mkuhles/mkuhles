@@ -15,7 +15,7 @@ export interface ContactData {
 
 export interface ProfileData {
   title: TranslationEntry;
-  statement: TranslationEntry;
+  statement: TranslationList;
   bullets: TranslationEntry[];
 }
 

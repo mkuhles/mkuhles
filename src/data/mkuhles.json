@@ -16,25 +16,31 @@
   "profile": {
     "title": { "de": "Schwerpunkt und Profil", "en": "Focus and Profile"},
     "statement": {
-      "de": "Ich entwickle und betreue Drupal-basierte Webanwendungen mit besonderem Fokus auf sichere, wartbare und langfristig stabile Lösungen.",
-      "en": "I develop and maintain Drupal-based web applications with a strong focus on security, maintainability, and long-term stability."
+      "de": ["Ich entwickle und betreue produktive Webanwendungen mit Schwerpunkt auf Symfony-basierten Backends und modernen JavaScript-Frontends (React).",
+            "Mein Fokus liegt auf sauberer Architektur, wartbarem Code und sicheren, langfristig stabilen Systemen."],
+      "en": ["I develop and maintain productive web applications with a focus on Symfony-based backends and modern JavaScript frontends (React).",
+            "My focus is on clean architecture, maintainable code, and secure, long-term stable systems."]
     },
     "bullets": [
       {
-        "de": "Entwicklung, Erweiterung und Wartung von Drupal-Websites und -Plattformen",
-        "en": "Development, extension, and maintenance of Drupal websites and platforms"
+        "de": "Entwicklung, Weiterentwicklung und Betrieb von Webanwendungen mit Symfony (PHP) und React",
+        "en": "Development, extension, and maintenance of web applications with Symfony (PHP) and React"
       },
       {
-        "de": "Schwerpunkt auf sicherer Webentwicklung, sauberen Rollen- & Rechtemodellen und Update-Strategien",
-        "en": "Strong focus on secure web development, clean role and permission models, and reliable update strategies"
+        "de": "API-basierte Architekturen, Integration externer Dienste und strukturierte Frontend-Anbindungen",
+        "en": "Strong focus on API-based architectures, integration of external services, and structured frontend integrations"
       },
       {
-        "de": "Erfahrung mit individuellen Modulen, Template-Anpassungen und der Integration externer Dienste",
-        "en": "Experience with custom modules, template customization, and integration of external services"
+        "de": "Langjährige Erfahrung mit Drupal für komplexe Plattformen, individuelle Module und Migrationen",
+        "en": "Extensive experience with Drupal for complex platforms, custom modules, and migrations"
       },
       {
-        "de": "Ergänzend: kleinere Frontend-, React- und Astro-Projekte zur eigenen Weiterentwicklung",
-        "en": "Additionally, smaller frontend, React, and Astro projects for personal learning and continuous improvement"
+        "de": "Fokus auf Sicherheit, Wartbarkeit und nachhaltige Update-Strategien",
+        "en": "Focus on security, maintainability, and sustainable update strategies"
+      },
+      {
+        "de": "Ergänzend: gezielte Eigenprojekte und Prototypen zur Evaluation neuer Technologien (z. B. Astro)",
+        "en": "Additionally: targeted personal projects and prototypes for evaluating new technologies (e.g. Astro)"
       }
     ]
   },

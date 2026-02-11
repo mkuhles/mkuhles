@@ -1,14 +1,21 @@
 ---
 import { getLangFromUrl, getTranslationFunction, getRouteFromUrl, getUrlFromRoute, getUrlFromPath, type RouteKey, LANGS } from "../../i18n/utils";
+import type { Lang } from "../../i18n/types";
 import NavLink from "./NavLink.astro";
 
-const curLang = getLangFromUrl(Astro.url);
+const { lang } = Astro.props as { lang?: Lang };
+const curLang = lang ?? getLangFromUrl(Astro.url);
 const t = getTranslationFunction(curLang);
 const urlFromRoute = getUrlFromRoute(curLang);
 const urlFromPath = getUrlFromPath(curLang);
 const getRoute = getRouteFromUrl(curLang)
 
-const restPath = Astro.url.pathname.split('/').slice(2).join('/');
+const base = import.meta.env.BASE_URL;
+const pathWithoutBase = Astro.url.pathname.startsWith(base)
+  ? Astro.url.pathname.slice(base.length)
+  : Astro.url.pathname.replace(/^\/+/, "");
+const normalizedPath = pathWithoutBase.replace(/^\/+|\/+$/g, "");
+const restPath = normalizedPath.split("/").slice(1).join("/");
 const routeKey = getRoute(restPath) // RouteKey | undefined;
 const allLanguages = Array.from(LANGS) as (typeof LANGS)[number][];
 ---

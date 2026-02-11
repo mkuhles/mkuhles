@@ -1,0 +1,524 @@
+---
+title: "Probearbeiten vorbereiten"
+description: "Drupal 11 lokal aufsetzen, Konfiguration exportieren, View bauen, Sub-Theme erstellen und ein kleines Custom-Modul mit Route + 404-Logik umsetzen."
+date: 2026-02-11
+tags: ["software-development", "work-trail"]
+heroImage: ./hero.png
+# featured: true
+draft: false
+# project: "board"
+---
+import PostImage from "../../../components/blog/PostImage.astro";
+import install from "./drupal-install-screen.png";
+import initial_commit from "./initial-commit.png";
+import fields from "./fields.png";
+
+Morgen habe ich ein Probearbeiten. Da ich etwas nervös war, wollte ich mich so gut es ging darauf vorbereiten.
+Deshalb habe ich mir von ChatGPT eine Probe-Aufgabe (Drupal 11, Site-Building + kleines Backend-Modul) erstellen lassen.
+
+## Aufgabenstellung von ChatGPT
+
+> Hier sind zwei Beispiel‑Aufgaben, die in einem vierstündigen Probe‑Arbeitstag mit Drupal 10/11 sowohl Frontend‑ als auch Backend‑Fähigkeiten testen könnten.  Die Aufgaben orientieren sich an aktuellen Übungsaufgaben aus der Drupal‑Community und offiziellen Dokumentationen und zielen darauf ab, typische Arbeitsabläufe zu demonstrieren.
+>
+> ### Beispielaufgabe 1 – Site‑Building & Frontend‑Theming (ca. 2 Stunden)
+> 
+> **Aufgabe:** Richte eine lokale Drupal‑11‑Umgebung ein, erstelle einen neuen Inhaltstyp „Fahrzeug“ und passe die Darstellung über ein Sub‑Theme an.
+>
+>1. **Lokale Installation & Versionierung:**
+>
+>   * Klone ein Git‑Repository oder erstelle ein neues. Installiere Drupal 11 lokal (z. B. mit DDEV oder Composer) und führe eine Standard‑Installation durch.
+>   * Nutze Git, um dein Projekt zu versionieren und Änderungen regelmäßig zu committen.
+>
+> 2. **Konfiguration exportieren:**
+>
+>   * Aktiviere Drush und setze den Ordner für Konfigurationsexporte auf `../config/sync`. Exportiere deine Konfiguration in regelmäßigen Abständen und commite sie ins Repository.
+>
+> 3. **Inhaltstyp „Fahrzeug“ und Taxonomie anlegen:**
+>
+>   * Lege den Inhaltstyp „Fahrzeug“ mit den Feldern „Erscheinungsdatum“ (Datum) und „Preis“ (Zahl) an.  Optional kann ein Bilderfeld (Media) hinzugefügt werden, um Fahrzeug‑Bilder zu speichern.
+>   * Erstelle eine Taxonomie „Marke“ (Vokabular „brand“) und ordne Marken wie Ferrari, Mercedes und McLaren zu.  Verknüpfe diese Taxonomie mit dem Inhaltstyp.
+>
+> 4. **Ansicht erstellen:**
+>
+>   * Erstelle eine View, die die Fahrzeuge in einer Tabellenansicht nach Erscheinungsdatum sortiert anzeigt.
+>   * Füge einen exponierten Filter hinzu, damit Benutzer Fahrzeuge ab einem bestimmten Datum filtern können.
+>
+> 5. **Sub‑Theme erstellen und Template überschreiben:**
+>
+>   * Installiere das Core‑Theme „Bartik“ und erstelle davon ein Sub‑Theme.  Laut Drupal‑Dokumentation definierst du ein Sub‑Theme wie ein normales Theme und gibst im `.info.yml`‑File den Schlüssel `base theme` an.  Die Starterkit‑Funktion oder Drush (`drush generate theme`) kann ein Grundgerüst erzeugen.
+>   * Kopiere die Regions‑Definitionen des Eltern‑Themes in dein Sub‑Theme, damit Block‑Positionen vererbt werden.
+>   * Überschreibe das Twig‑Template für den Inhaltstyp „Fahrzeug“ (zum Beispiel `node--vehicle.html.twig`), um die Felder Erscheinungsdatum und Preis individuell zu formatieren (z. B. Währungsformat oder Datumsausgabe).
+>
+>6. **Navigation und Blöcke:**
+>
+>   * Baue ein Hauptmenü und ordne es einer Region zu.  Lege einen Copyright‑Block und Social‑Links an (Anlehnung an die Frontend‑Übung, bei der Menüs und Blöcke mit Inhalten gefüllt werden sollen).
+>
+>Diese Aufgabe prüft grundlegendes Site‑Building, den Umgang mit Konfigurations‑Exporten, die Erstellung einer View und das Anlegen eines Sub‑Themes.
+>
+> ### Beispielaufgabe 2 – Backend‑Modul mit eigener Route und 404‑Logik (ca. 2 Stunden)
+>
+> **Aufgabe:** Entwickle ein eigenes Modul, das eine benutzerdefinierte Seite ausliefert und unter bestimmten Bedingungen einen 404‑Fehler zurückgibt.
+>
+> 1. **Modul‑Skeleton:**
+>
+>   * Erstelle in `modules/custom/vehicle_checker` die Dateien `vehicle_checker.info.yml` (mit Name, Typ = „module“ und Core‑Version) und `vehicle_checker.routing.yml`.  Laut Drupal‑Doku bestehen einfache Seiten aus zwei Schritten: man legt im Routing‑YAML eine Route mit Pfad und Controller‑Zuweisung an und implementiert dann einen Controller.
+>   * Definiere eine Route wie `vehicle_checker.detail` mit dem Pfad `/vehicle-check/{node}` und weise als Controller `VehicleCheckerController::detail` zu.  Setze als Requirement eine Berechtigung wie `access content`.
+>
+> 2. **Controller implementieren:**
+> 
+>   * Erstelle die Klasse `VehicleCheckerController` in `src/Controller` und erbe von `ControllerBase`.  Die Methode `detail()` sollte ein Fahrzeug‑Node anhand der Parameter laden und einen rendbaren Array zurückgeben.  Wenn das Fahrzeug ein Erscheinungsjahr 2020 hat, soll die Methode einen 404‑Fehler auslösen (z. B. über `throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException()`), andernfalls die Fahrzeugdaten rendern.  Die Doku zeigt, dass der Controller ein Array mit `#markup` zurückgibt; entsprechend kann ein Twig‑Template genutzt werden, um die Daten auszugeben.
+>
+> 3. **Cache und Fehlerbehandlung:**
+>
+>   * Achte darauf, dass die Seite gecacht wird (z. B. mit `#cache`‑Einträgen), und teste die 404‑Logik mit verschiedenen Erscheinungsdaten.
+>   * Baue optional einen Block: Erstelle eine Klasse mit dem Attribut `#[Block]`, `id` und `admin_label`.  Ein Beispiel zeigt, wie eine Block‑Klasse `HelloBlock` in `src/Plugin/Block/HelloBlock.php` definiert wird; die Methode `build()` gibt einen Text zurück.  Nach dem Löschen des Caches kann der Block im Block‑Layout platziert werden.
+>
+> 4. **Modul testen:**
+>
+>   * Aktiviere das Modul über die Admin‑Oberfläche oder Drush, leere den Cache und rufe die neue Route `/vehicle-check/{node}` auf.  Überprüfe, dass Fahrzeuge mit Erscheinungsjahr ≠ 2020 korrekt angezeigt werden und solche von 2020 eine 404‑Meldung erzeugen.
+>
+> Diese Aufgabe testet das Verständnis für das Routing‑System und Controller in Drupal 10/11 sowie das Entwickeln von Eigenlogik im Backend.  Die beiden Aufgaben zusammen spiegeln typische Anforderungen wider, die bei Probe‑Arbeitsaufträgen für Drupal‑Entwickler*innen gestellt werden.
+
+Den Chat mache ich bewusst zu – heute einmal „oldschool“: lesen, umsetzen, selber denken. Ich bediene mich für Installation der Erklärung von DDEV selbst: [DDEV CMS Quickstarts: Drupal](https://docs.ddev.com/en/stable/users/quickstart/#craft-cms).
+
+## Installation und der erste Commit
+
+Die ersten Schritte sind, das Projekt mit `ddev` aufzusetzen:
+
+```bash
+mkdir cars && cd cars
+ddev config --project-type=drupal11 --docroot=web
+ddev start
+ddev composer create-project "drupal/recommended-project:^11"
+ddev launch
+```
+
+Danach erscheint direkt der Drupal-Installer im Browser.
+
+<PostImage src={install} alt="Screenshot of the drupal installscreen (Choose language)" />
+
+Laut Aufgabestellung soll ich `drush` installieren. Das ist sowieso praktisch unverzichtbar, wenn man mit Drupal effizient arbeiten möchte.
+
+```bash
+ddev composer require drush/drush
+```
+
+Zum Beispiel können wir uns mit `drush` die Installation im Browser sparen. Da gibt es einen Shortcut.
+
+```bash
+ddev drush site:install --account-name=admin --account-pass=admin -y
+```
+
+Jetzt einfach `ddev launch $(ddev drush uli)` und schon sind wir als Admin in unserer lokalen Installation von Drupal 11 eingeloggt. Nicht wundern `uli` heißt nicht Uli, sondern steht für „user login“ und erzeugt einen One-Time-Login-Link.
+
+Weiter im Text: Die Konfiguration soll exportiert werden. Wir haben zwar noch nichts konfiguriert. In der Anweisung steht allerdings häufig committen. Also committen wir unsern Initialzustand.
+Jetzt brauchen wir unsere IDE. Ich starte VSCode direkt im Projectverzeichnis:
+
+```bash
+code .
+```
+
+In der Datei `web/sites/default/settings.php` suchen wir `config_sync_directory` und setzen unser Config-Verzeichnis laut Aufgabe auf `../config/sync`. Wichtig ist, dass das Verzeichnis außerhalb des Webroots liegt, weil Konfiguration sonst (je nach Setup) versehentlich im Webroot landen könnte – das will wirklich niemand.
+
+So dem ersten Export steht nichts mehr im Wege:
+
+```bash
+➜  cars: ddev drush cex
+ [success] Configuration successfully exported to ../config/sync.
+../config/sync
+➜  cars: find config/sync -type f | wc -l
+178
+```
+
+Dafür, dass wir noch nichts gemacht haben ist das eine hohe Zahl sagt ihr? Es werden eben alle Konfigurationen, die man in Drupal machen kann gesync, sodass man denselben Zustand der einen Drupal-Instanz auf eine andere übertragen kann. `drupal/recommended-project` hat eben schon recht viele Konfigurationen ab Werk (Blöcke, Views, die Content-Types Article und Page).
+
+Jetzt zum nächsten Schritt: der erste Commit. Ich gehe davon aus, dass ihr wisst, wie ihr Git benutzt. Vieles machen die IDEs ja auch schon selbst.
+Worauf ihr aber achten müssen, ist, dass wir jetzt nicht einfach alle Dateien committen. Ich versioniere weder `vendor/` noch `web/core/`, weil beides über `composer.lock` exakt reproduzierbar ist und im Repo nur Ballast wäre. Das gehört also ins `.gitignore`.
+IDE-Dateien haben auch in unserem Repository nichts zu suchen.
+
+Aber wir haben auch Geheimnisse im Verzeichnisbaum. Ich richte mein Repo normalerweise so ein, dass ich eine lokale Settings-Datei anlege, die die Geheimnisse und Umgebungsspezifischen Einstellungen enthält. Diese importiere ich in die allgemeine settings.php (`web/sites/default/settings.php`). So kann die allgemeine `settings.php` mit versioniert werden. Da ich im Moment nicht live gehen möchte und `ddev` bereits seine Konfigurationen separat in eine ignorierte Datei gelegt hat, muss ich hier erstmal nichts weiter beachten.
+
+Am Ende sieht meine `.gitignore` so aus:
+```
+/vendor/
+/.vscode/
+/.idea/
+/.ddev/
+
+/web/sites/*/files
+/web/sites/*/public
+/web/sites/*/private
+
+/web/core/
+```
+
+Ihr könnt aber auch die `web/example.gitignore` aus `drupal/recommended-project` verwenden.
+
+<PostImage src={initial_commit} alt="Screenshot meines initialen Commits, 206 Dateien werden commitet." />
+
+Jetzt sind es nur noch 206 Dateien statt ursprünglich über 10.000.
+
+In einem echten Projekt würde der Build via CI erfolgen (`composer install --no-dev --optimize-autoloader`).
+Core und Vendor sind reproduzierbar über composer.lock.
+
+## Inhaltstyp „Fahrzeug“ und Taxonomie anlegen
+
+So jetzt geht es aber in den Browser. Wir wollen einen Content-Type erstellen. Im Menü gehe ich den Weg `Manage > Structure > Content-Types > Add Content-Type`.
+
+Ich wähle den Name `Cars`, tippe eine kurze Beschreibung und klicke auf `Save and manage fields`. Dann erzeuge ich die Felder geforderten Felder mit sprechenden Namen. Das Image-Feld aus Core verwende ich wieder.
+
+Jetzt erzeuge ich die Taxonomie "Brand" (`Structure > Taxonomy > Add vocabulary`) und füge die die gewünschten Beispielterme (Ferrari, Mercedes und McLaren) hinzu. 
+
+Zurück im Content-Type füge ich ein Entity Reference Field auf die Taxonomy "Brand" hinzu und nenne es ebenfalls Brand.
+
+<PostImage src={fields} alt="Screenshot der angelegten fields. (field_brand: Entity reference, field_image: Image, field_price: Number (decimal), field_release_date: Date)" />
+
+## Die View oder auch Ansicht
+
+(`Structure > Views > Add view`)
+view name cars
+Show `Content` of type: `Cars` sorted by: `Unsorted`
+Create a page
+title: Cars
+page display settings: Display format: `Table` of fields
+
+Ich lasse alle Felder, die zum Inhaltstyp gehören ausgeben. Filterkriterien `Published` und `type == Cars` lasse ich wie voreingestellt, weil das genau das ist, was wir brauchen. Zusätzlich füge ich einen exponierten Filter „Release Date (ab)“ hinzu, damit man Fahrzeuge ab einem Datum filtern kann.
+
+Um Inhalt in der Tabelle zu haben, erstelle ich ein paar Autos.
+
+## Subtheme
+
+```bash
+➜  cars ddev drush generate theme
+
+ Welcome to theme generator!
+–––––––––––––––––––––––––––––
+
+ Theme name:
+ ➤ cars-subtheme
+
+ Theme machine name [cars_subtheme]:
+ ➤
+
+ Base theme [claro]:
+ ➤ olivero
+
+ Description [A flexible theme with a responsive, mobile-first layout.]:
+ ➤ cars subtheme
+
+ Package [Custom]:
+ ➤
+
+ Would you like to create breakpoints? [No]:
+ ➤
+
+ Would you like to create theme settings form? [No]:
+ ➤
+
+ The following directories and files have been created or updated:
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+ • /var/www/html/web/themes/cars_subtheme/css
+ • /var/www/html/web/themes/cars_subtheme/images
+ • /var/www/html/web/themes/cars_subtheme/templates/block
+ • /var/www/html/web/themes/cars_subtheme/templates/field
+ • /var/www/html/web/themes/cars_subtheme/templates/menu
+ • /var/www/html/web/themes/cars_subtheme/templates/node
+ • /var/www/html/web/themes/cars_subtheme/templates/page
+ • /var/www/html/web/themes/cars_subtheme/templates/view
+ • /var/www/html/web/themes/cars_subtheme/cars_subtheme.info.yml
+ • /var/www/html/web/themes/cars_subtheme/cars_subtheme.libraries.yml
+ • /var/www/html/web/themes/cars_subtheme/cars_subtheme.theme
+ • /var/www/html/web/themes/cars_subtheme/logo.svg
+ • /var/www/html/web/themes/cars_subtheme/package.json
+ • /var/www/html/web/themes/cars_subtheme/css/base/elements.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/block.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/breadcrumb.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/buttons.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/field.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/form.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/header.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/menu.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/messages.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/node.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/sidebar.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/table.css
+ • /var/www/html/web/themes/cars_subtheme/css/component/tabs.css
+ • /var/www/html/web/themes/cars_subtheme/css/layout/layout.css
+ • /var/www/html/web/themes/cars_subtheme/css/theme/print.css
+ • /var/www/html/web/themes/cars_subtheme/js/cars-subtheme.js
+ ```
+
+Drush erzeugt für uns ein sub-theme skeleton. In meinem Subtheme übernehme ich die Regions aus dem Base-Theme in der cars_subtheme.info.yml, damit bestehende Block-Placements nicht „verschwinden“.
+
+ ```drush
+ ➜  cars git:(main) ✗ ddev drush thin cars_subtheme
+The following module(s) and themes(s) will be installed: cars_subtheme
+
+ ┌ Do you want to continue? ────────────────────────────────────┐
+ │ Yes                                                          │
+ └──────────────────────────────────────────────────────────────┘
+
+ [success] Successfully installed theme: cars_subtheme
+```
+
+
+## Custom Module
+
+In der Aufgabe ist explizit ein Modul gefordert. Warum ist das auch sinnvoll? Mit einem Theme könnte man die Logik auch erreichen. Aber die 404-Logik liegt bewusst im Modul und nicht im Theme – Business-Logik gehört nicht ins Theme-Layer.
+
+Wieder lasse ich für das Modul drush ein Skeleton bauen.
+
+```bash
+➜  cars git:(main) ✗ ddev drush generate module
+
+ Welcome to module generator!
+––––––––––––––––––––––––––––––
+
+ Module name:
+ ➤ vehicle Checker
+
+ Module machine name [vehicle_checker]:
+ ➤
+
+ Module description:
+ ➤
+ The value is required.
+
+ Module description:
+ ➤ a simple test module
+
+ Package [Custom]:
+ ➤
+
+ Dependencies (comma separated):
+ ➤
+
+ Would you like to create module file? [No]:
+ ➤
+
+ Would you like to create install file? [No]:
+ ➤
+
+ Would you like to create README.md file? [No]:
+ ➤ yes
+
+ The following directories and files have been created or updated:
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+ • /var/www/html/web/modules/vehicle_checker/README.md
+ • /var/www/html/web/modules/vehicle_checker/vehicle_checker.info.yml
+```
+
+Die `.routing.yml` ergänzt und wie auch bei Symfony mit Routing-Konfiguration gefüllt:
+
+```yml
+vehicle_checker.detail:
+  path: '/vehicle-check/{node}'
+  defaults: 
+    _controller: '\Drupal\vehicle_checker\Controller\VehicleCheckerController::detail' 
+    _title: 'Vehicle Checker'
+  requirements: 
+    _permission: 'access content'
+  options:
+    parameters:
+      node:
+        type: entity:node
+```
+
+Durch Param-Converter (`entity:node`) vermeide ich manuelles Laden und bekomme automatisch Zugriffskontrolle und Cache-Metadaten.
+
+## Controller implementieren
+
+Da wir im Routing den `{node}`-Parameter als `entity:node` typisiert haben, bekommen wir im Controller direkt ein Node-Objekt injiziert.
+
+Datei:
+`web/modules/custom/vehicle_checker/src/Controller/VehicleCheckerController.php`
+
+```php
+<?php
+
+namespace Drupal\vehicle_checker\Controller;
+
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\node\NodeInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+class VehicleCheckerController extends ControllerBase {
+
+  public function detail(NodeInterface $node) {
+
+    // Sicherheit: Nur für den richtigen Content-Type.
+    if ($node->bundle() !== 'cars') {
+      throw new NotFoundHttpException();
+    }
+
+    // Feld auslesen (Machine Name ggf. anpassen).
+    $release_date = $node->get('field_release_date')->value;
+
+    if ($release_date) {
+      $year = date('Y', strtotime($release_date));
+
+      // Wenn Erscheinungsjahr 2020 → 404
+      if ($year === '2020') {
+        throw new NotFoundHttpException();
+      }
+    }
+
+    return [
+      '#theme' => 'vehicle_checker_detail',
+      '#node' => $node,
+      '#cache' => [
+        'contexts' => ['route'],
+        'tags' => $node->getCacheTags(),
+      ],
+    ];
+  }
+
+}
+```
+
+Wichtig:
+
+* `bundle()` muss deinem Content-Type-Machine-Name entsprechen (`cars` oder `vehicle` – je nachdem, was du wirklich angelegt hast).
+* `field_release_date` ggf. anpassen.
+* Durch Übergabe der Node-Cache-Tags wird die Seite automatisch invalidiert, wenn das Fahrzeug aktualisiert wird.
+
+## Twig-Template für die Ausgabe
+
+Damit wir nicht einfach nur `#markup` zurückgeben, legen wir ein kleines Twig-Template an.
+
+Datei:
+`web/modules/custom/vehicle_checker/templates/vehicle-checker-detail.html.twig`
+
+```twig
+<article class="vehicle-checker-detail">
+  <h1>{{ node.label }}</h1>
+
+  <p><strong>Preis:</strong>
+    {{ node.field_price.value|number_format(2, ',', '.') }} €
+  </p>
+
+  <p><strong>Erscheinungsdatum:</strong>
+    {{ node.field_release_date.value|date("d.m.Y") }}
+  </p>
+
+  {% if node.field_brand.entity %}
+    <p><strong>Marke:</strong>
+      {{ node.field_brand.entity.label }}
+    </p>
+  {% endif %}
+</article>
+```
+
+## Theme-Hook registrieren
+
+Damit Drupal weiß, welches Template zu `vehicle_checker_detail` gehört, ergänzen wir in
+`vehicle_checker.module`:
+
+```php
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function vehicle_checker_theme($existing, $type, $theme, $path) {
+  return [
+    'vehicle_checker_detail' => [
+      'variables' => [
+        'node' => NULL,
+      ],
+      'template' => 'vehicle-checker-detail',
+    ],
+  ];
+}
+```
+
+Danach:
+
+```bash
+ddev drush cr
+```
+
+## Test der 404-Logik
+
+Jetzt kann die Route getestet werden:
+
+```
+/vehicle-check/1
+```
+
+* Hat das Fahrzeug ein Erscheinungsjahr ≠ 2020 → Detailansicht erscheint.
+* Ist das Jahr 2020 → Drupal liefert sauber eine 404-Seite.
+
+Damit ist sowohl Routing als auch Controller-Logik geprüft.
+
+## Node-Template im Subtheme überschreiben
+
+Für die Aufgabe sollte zusätzlich das Node-Template überschrieben werden.
+
+Dazu kopiere ich das Core-Template in mein Subtheme:
+
+```
+web/themes/cars_subtheme/templates/node/node--cars.html.twig
+```
+
+Dort kann ich z.B. Preis und Datum gezielt formatieren:
+
+```twig
+{% if node.field_price.value %}
+  <div class="vehicle-price">
+    {{ node.field_price.value|number_format(2, ',', ' ') }} €
+  </div>
+{% endif %}
+
+{% if node.field_release_date.value %}
+  <div class="vehicle-release">
+    {{ node.field_release_date.value|date("d.m.Y") }}
+  </div>
+{% endif %}
+```
+
+Cache leeren:
+
+```bash
+ddev drush cr
+```
+
+## Modul verschieben
+
+Mir ist noch aufgefallen, dass ich vorhin das Modul im falschen Ordner angelegt habe.
+Es ist jetzt direkt unter `web/modules`. Ich werde es verschieben. Aber Achtung einfach
+so geht das nicht, wenn das Modul schon installiert war und die Routen geöffnet wurden.
+
+```bash
+ddev drush pm:uninstall vehicle_checker -y
+mv web/modules/vehicle_checker web/modules/custom
+ddev drush en vehicle_checker
+ddev drush cr
+
+# Falls Drupal die Route noch nicht findet:
+ddev stop && ddev start
+ddev drush cr
+```
+
+Damit Drupal die Routen neu einliest, reicht meistens `drush cr`. Wenn nicht: Container neu starten.
+
+## Fazit
+
+Als Übung für ein Probearbeiten ist das ziemlich realistisch.
+Man zeigt:
+
+* sauberes Setup mit DDEV + Composer
+* strukturiertes Arbeiten mit Config-Export
+* Site-Building (Content-Type, Taxonomie, Views)
+* Theming (Subtheme + Twig-Override)
+* Backend-Verständnis (Routing, Controller, 404-Logik, Cache)
+
+In einem echten Projekt würde ich:
+
+* Business-Regeln nicht hart codieren („2020“) sondern konfigurierbar machen.
+* Tests ergänzen (Kernel-Test für die 404-Logik).
+* Die Route ggf. über AccessCheck lösen statt Exception.
+
+In vier Stunden ist das machbar – vorausgesetzt, man hat die Drupal-Workflows schon ein paar Mal gemacht.
+
+Und ganz ehrlich: Das Gefühl, eine komplette kleine Anwendung von Installation bis Custom-Modul einmal durchgezogen zu haben, nimmt vor einem Probearbeiten deutlich den Druck.

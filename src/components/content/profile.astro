@@ -1,15 +1,20 @@
 ---
-import { getLangFromUrl, getTranslationFunction } from "../../i18n/utils";
+import { getLangFromUrl, getTranslationFunction, getTranslationListFunction } from "../../i18n/utils";
 import Section from "../../layouts/Section.astro";
 import {profile} from "../../data/mkuhles";
 
 const curLang = getLangFromUrl(Astro.url);
+const translateList = getTranslationListFunction(curLang);
 const t = getTranslationFunction(curLang);
+
+const statement = translateList(profile.statement);
 ---
 
 <Section id="profile" type="profile" className="profile-section">
     <h2 class="profile-title">{t(profile.title)}</h2>
-    <div class="profile-statement">{t(profile.statement)}</div>
+    <div class="profile-statement">
+      {statement.map((line) => <p>{line}</p>)}
+    </div>
     <ul class="ul-orange">
         {profile.bullets.map((bullet) => (
             <li>{t(bullet)}</li>

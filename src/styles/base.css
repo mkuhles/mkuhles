@@ -59,3 +59,9 @@ a {
   text-decoration-color: var(--highlight);
   text-underline-offset: 3px;
 }
+
+pre.astro-code {
+  padding: 1rem;
+  background: var(--c8);
+  overflow-x: auto;
+}
