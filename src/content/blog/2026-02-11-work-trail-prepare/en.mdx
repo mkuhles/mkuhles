@@ -444,19 +444,6 @@ After that:
 ddev drush cr
 ```
 
-## Test the 404 logic
-
-Now the route can be tested:
-
-```
-/vehicle-check/1
-```
-
-* If the vehicle’s release year is not 2020 → the detail page is displayed.
-* If the year is 2020 → Drupal returns a clean 404 page.
-
-That verifies both the routing and the controller logic.
-
 ## Override the node template in the subtheme
 
 For the task, the node template should also be overridden.
