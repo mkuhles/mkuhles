@@ -45,7 +45,7 @@ Only anonymized, aggregated access data is collected, for example:
 * Number of page views
 * Referrers (which website visitors came from)
 * Browser and device type used
-*Country (based on technical information)
+* Country (based on technical information)
 
 The tool does not use cookies and does not create user profiles.
 No personal data is stored or analyzed. Individual users cannot be identified.
@@ -58,11 +58,9 @@ All data processing takes place exclusively within the European Union.
 
 This website:
 
-does not use cookies
-
-does not provide a contact form
-
-does not integrate any external services other than counter.dev (e.g., Google Fonts or videos)
+* does not use cookies
+* does not provide a contact form
+* does not integrate any external services other than counter.dev (e.g., Google Fonts or videos)
 
 ## 6. Your rights
 
