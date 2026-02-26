@@ -21,5 +21,42 @@
         "en": "Screenshot of My Board"
       }
     }
+  },
+  {
+    "key": "mkuhles",
+    "title": {
+      "de": "mkuhles.eu",
+      "en": "mkuhles.eu"
+    },
+    "shortDescription": {
+      "de": "Meine persönliche Website, die ich mit Astro gebaut habe.",
+      "en": "My personal website, which I built with Astro."
+    },
+    "links": {
+      "repo": "https://github.com/mkuhles/mkuhles",
+      "live": "https://kuhles.eu/melanie"
+    },
+    "logo": "/projects/mkuhles.svg",
+    "image": {
+      "src": "/projects/Screenshot-mkuhles.png",
+      "alt": {
+        "de": "Screenshot von mkuhles.eu",
+        "en": "Screenshot of mkuhles.eu"
+      }
+    }
+  },
+  {
+    "key": "cars-drupal",
+    "title": {
+      "de": "Cars Drupal Demo",
+      "en": "Cars Drupal Demo"
+    },
+    "shortDescription": {
+      "de": "Drupal-Demoprojekt mit Custom Theme (cars_subtheme) und Custom Modul (vehicle_checker) zur Ausgabe von Fahrzeug-Content (Liste und Detail) inklusive Datums- und Preisdarstellung.",
+      "en": "Drupal demo project with a custom theme (cars_subtheme) and custom module (vehicle_checker) to render vehicle content (list and detail), including date and price display."
+    },
+    "links": {
+      "repo": "https://github.com/mkuhles/cars"
+    }
   }
 ]

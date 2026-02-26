@@ -6,8 +6,9 @@ tags: ["software-development", "work-trail"]
 heroImage: ./hero.png
 # featured: true
 draft: false
-# project: "board"
+project: "cars-drupal"
 ---
+import ProjectTeaser from "../../../components/projects/ProjectTeaser.astro"
 import PostImage from "../../../components/blog/PostImage.astro";
 import install from "./drupal-install-screen.png";
 import initial_commit from "./initial-commit.png";
@@ -250,7 +251,7 @@ Um Inhalt in der Tabelle zu haben, erstelle ich ein paar Autos.
 
 Drush erzeugt für uns ein sub-theme skeleton. In meinem Subtheme übernehme ich die Regions aus dem Base-Theme in der cars_subtheme.info.yml, damit bestehende Block-Placements nicht „verschwinden“.
 
- ```drush
+ ```bash
  ➜  cars git:(main) ✗ ddev drush thin cars_subtheme
 The following module(s) and themes(s) will be installed: cars_subtheme
 
@@ -509,3 +510,5 @@ In einem echten Projekt würde ich:
 In vier Stunden ist das machbar – vorausgesetzt, man hat die Drupal-Workflows schon ein paar Mal gemacht.
 
 Und ganz ehrlich: Das Gefühl, eine komplette kleine Anwendung von Installation bis Custom-Modul einmal durchgezogen zu haben, nimmt vor einem Probearbeiten deutlich den Druck.
+
+<ProjectTeaser projectKey={frontmatter.project} />

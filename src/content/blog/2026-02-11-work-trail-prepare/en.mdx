@@ -6,9 +6,9 @@ tags: ["software-development", "work-trail"]
 heroImage: ./hero.png
 # featured: true
 draft: false
-# project: "board"
+project: "cars-drupal"
 ---
-
+import ProjectTeaser from "../../../components/projects/ProjectTeaser.astro"
 import PostImage from "../../../components/blog/PostImage.astro";
 import install from "./drupal-install-screen.png";
 import initial_commit from "./initial-commit.png";
@@ -258,7 +258,7 @@ To have some content in the table, I create a few cars.
 
 Drush generates a sub-theme skeleton. In my subtheme I copy the Regions from the base theme into `cars_subtheme.info.yml` so existing block placements don’t “disappear”.
 
-```drush
+```bash
 ➜  cars git:(main) ✗ ddev drush thin cars_subtheme
 The following module(s) and themes(s) will be installed: cars_subtheme
 
@@ -514,3 +514,4 @@ This is doable in four hours — assuming you’ve run through the Drupal workfl
 
 And honestly: doing a complete end-to-end run from installation to custom module once takes a lot of pressure off before a trial day.
 
+<ProjectTeaser projectKey={frontmatter.project} />
