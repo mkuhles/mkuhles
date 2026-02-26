@@ -36,16 +36,33 @@ Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und zuverl�
 
 Die Verarbeitung personenbezogener Daten erfolgt ausschließlich innerhalb der Europäischen Union.
 
-## 4. Keine Cookies und kein Tracking
+## 4. Webanalyse (counter.dev)
+
+Diese Website nutzt das datenschutzfreundliche Analyse-Tool counter.dev, um die Nutzung der Website statistisch auszuwerten.
+
+Dabei werden ausschließlich anonymisierte, aggregierte Zugriffsdaten erfasst, zum Beispiel:
+
+* Anzahl der Seitenaufrufe
+* Referrer (von welcher Website Besucher kommen)
+* verwendeter Browser und Gerätetyp
+* Land (auf Basis technischer Informationen)
+
+Das Tool setzt keine Cookies und erstellt keine Nutzerprofile.
+Personenbezogene Daten werden nicht gespeichert oder ausgewertet. Eine Identifizierung einzelner Personen findet nicht statt.
+
+Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Analyse und Optimierung der Website).
+
+Die Datenverarbeitung erfolgt ausschließlich innerhalb der Europäischen Union.
+
+## 5. Keine Cookies
 
 Diese Website:
 
 * setzt **keine Cookies**
-* verwendet **kein Tracking oder Analyse-Tools**
 * enthält **kein Kontaktformular**
-* bindet **keine externen Dienste** (z. B. Google Fonts oder Videos) ein
+* bindet außer counter.dev **keine externen Dienste** (z. B. Google Fonts oder Videos) ein
 
-## 5. Deine Rechte
+## 6. Deine Rechte
 
 Du hast das Recht:
 
@@ -54,6 +71,6 @@ Du hast das Recht:
 * die Verarbeitung einzuschränken oder ihr zu widersprechen
 * dich bei einer Datenschutzaufsichtsbehörde zu beschweren
 
-## 6. Kontakt zum Datenschutz
+## 7. Kontakt zum Datenschutz
 
 Bei Fragen zum Datenschutz kannst du dich jederzeit per E-Mail an mich wenden.

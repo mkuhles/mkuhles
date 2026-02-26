@@ -36,16 +36,35 @@ Art. 6(1)(f) GDPR (legitimate interest).
 Personal data is processed exclusively within the European Union.
 No transfer of personal data to third countries takes place.
 
-## 4. No cookies and no tracking
+## 4. Web Analytics (counter.dev)
+
+This website uses the privacy-friendly analytics tool counter.dev to statistically evaluate the use of the website.
+
+Only anonymized, aggregated access data is collected, for example:
+
+* Number of page views
+* Referrers (which website visitors came from)
+* Browser and device type used
+*Country (based on technical information)
+
+The tool does not use cookies and does not create user profiles.
+No personal data is stored or analyzed. Individual users cannot be identified.
+
+Processing is carried out on the basis of Art. 6(1)(f) GDPR (legitimate interest in analyzing and optimizing the website).
+
+All data processing takes place exclusively within the European Union.
+
+## 5. No Cookies
 
 This website:
 
-* does **not** use cookies
-* does **not** use analytics or tracking tools
-* does **not** provide a contact form
-* does **not** embed external services (e.g. fonts, videos, or maps)
+does not use cookies
 
-## 5. Your rights
+does not provide a contact form
+
+does not integrate any external services other than counter.dev (e.g., Google Fonts or videos)
+
+## 6. Your rights
 
 You have the right to:
 
@@ -54,7 +73,7 @@ You have the right to:
 * restrict or object to processing
 * lodge a complaint with a supervisory authority
 
-## 6. Contact
+## 7. Contact
 
 If you have any questions regarding data protection, feel free to contact me by email.
 
