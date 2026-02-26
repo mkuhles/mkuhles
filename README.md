@@ -30,6 +30,23 @@ npm run build
 npm run preview
 ```
 
+## SFTP deploy
+```bash
+npm run build
+cp scripts/.deploy-sftp.env.example scripts/.deploy-sftp.env
+./scripts/deploy-sftp.sh
+```
+
+Optional override examples:
+```bash
+./scripts/deploy-sftp.sh --dry-run
+./scripts/deploy-sftp.sh --host example.com --user username --remote-dir /path/to/webroot/melanie
+```
+
+The script reads host/user/target config from `scripts/.deploy-sftp.env`,
+always prompts for the SFTP password interactively, uploads `dist/`,
+and mirrors with delete.
+
 ## Content & i18n
 - Blog posts: `src/content/blog`
 - Section content: `src/content/sections`
