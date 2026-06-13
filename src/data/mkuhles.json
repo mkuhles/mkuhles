@@ -184,11 +184,36 @@
   "experience": [
     {
       "role": {
+        "de": "Softwareentwickler",
+        "en": "Software Developer"
+      },
+      "company": "Outermedia GmbH",
+      "start_date": "2026-03",
+      "end_date": null,
+      "description": [
+        {
+          "de": "Softwareentwickler für Drupal und React",
+          "en": "Software Developer for Drupal and React"
+        },
+        {
+          "de": "Updates von Drupal 10 auf Drupal 11 inklusive Refaktorierung von Modulen und Themes sowie Implementierung neuer Features.",
+          "en": "Updates from Drupal 10 to Drupal 11 including refactoring of modules and themes as well as implementation of new features."
+        }
+      ],
+      "technologies": [
+        "Drupal 11",
+        "TypeScript",
+        "React",
+        "Unit Testing"
+      ]
+    },
+    {
+      "role": {
         "de": "Sabbatical / Familienzeit & private Projekte",
         "en": "Sabbatical / Family Time & Private Projects"
       },
       "start_date": "2025-03",
-      "end_date": null,
+      "end_date": "2026-02",
       "description": [
         {
           "de": "Geplantes Sabbatical mit Fokus auf Familie.",
